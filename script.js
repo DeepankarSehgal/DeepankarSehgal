@@ -1,10 +1,3 @@
-// DARK MODE
-const toggle = document.getElementById("themeToggle");
-toggle.onclick = () => {
-  document.body.classList.toggle("dark");
-};
-
-// MODAL VIDEO PLAYER
 const modal = document.getElementById("videoModal");
 const modalVideo = document.getElementById("modalVideo");
 const closeBtn = document.querySelector(".close");
