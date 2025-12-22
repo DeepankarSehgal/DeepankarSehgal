@@ -10,29 +10,74 @@ body.dark {
   color: #e5e7eb;
 }
 
+/* NAV */
 .navbar {
   display: flex;
   justify-content: space-between;
   padding: 1rem 2rem;
-  background: rgba(2,6,23,.85);
   position: sticky;
   top: 0;
+  background: rgba(2,6,23,.9);
+  backdrop-filter: blur(10px);
+  z-index: 10;
 }
 
+.navbar a {
+  margin-left: 1rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* HERO */
 .hero {
-  height: 70vh;
+  height: 90vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
+.hero-title {
+  font-size: 3rem;
+  animation: slideDown 1s ease forwards;
+}
+
+.hero-subtitle {
+  opacity: 0;
+  margin-top: 1rem;
+  animation: fadeIn 1.5s ease forwards;
+  animation-delay: .4s;
+}
+
+/* SECTIONS */
 .section {
   max-width: 1200px;
   margin: auto;
   padding: 4rem 2rem;
 }
 
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all .8s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* SKILLS */
+.skills span {
+  display: inline-block;
+  background: #1e293b;
+  padding: .6rem .9rem;
+  margin: .3rem;
+  border-radius: 8px;
+}
+
+/* EXPERIENCE */
 .card {
   background: #1e293b;
   padding: 1.2rem;
@@ -40,6 +85,7 @@ body.dark {
   border-radius: 12px;
 }
 
+/* PROJECTS */
 .projects-wrapper {
   display: flex;
   justify-content: center;
@@ -49,8 +95,8 @@ body.dark {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
-  width: 100%;
   max-width: 1100px;
+  width: 100%;
 }
 
 .project-card {
@@ -76,6 +122,7 @@ body.dark {
   text-align: center;
 }
 
+/* MODAL */
 .modal {
   display: none;
   position: fixed;
@@ -106,4 +153,20 @@ body.dark {
   right: 0;
   font-size: 30px;
   cursor: pointer;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 2rem;
+}
+
+/* ANIMATIONS */
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
 }

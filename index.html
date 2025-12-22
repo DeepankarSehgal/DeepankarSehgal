@@ -1,28 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Deepankar Sehgal | Unity & XR Developer</title>
-<link rel="stylesheet" href="style.css"/>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body class="dark">
 
 <header class="navbar">
-  <h1>Deepankar Sehgal</h1>
+  <h1 class="logo">Deepankar Sehgal</h1>
   <nav>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
     <a href="#experience">Experience</a>
     <a href="#projects">Projects</a>
-    <a href="assets/Deepankar_UnityDeveloper_CV.pdf" target="_blank">Resume</a>
+    <a href="#contact">Contact</a>
+    <a href="assets/Deepankar_UnityDeveloper_CV.pdf" target="_blank" class="resume-btn">Resume</a>
   </nav>
 </header>
 
+<!-- HERO -->
 <section class="hero">
-  <h2>Unity & XR Developer</h2>
-  <p>Games • Multiplayer • AR / VR</p>
+  <h2 class="hero-title">Unity & XR Developer</h2>
+  <p class="hero-subtitle">Games • Multiplayer • AR / VR • Web3</p>
 </section>
 
+<!-- ABOUT -->
+<section id="about" class="section reveal">
+  <h2>About Me</h2>
+  <p>
+    Unity Developer with 4+ years of experience building Games, Multiplayer systems,
+    and immersive AR/VR applications across Mobile, PC, WebGL, and VR platforms.
+  </p>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="section reveal">
+  <h2>Skills</h2>
+  <div class="skills">
+    <span>Unity 3D</span>
+    <span>C#</span>
+    <span>XR Toolkit</span>
+    <span>AR / VR</span>
+    <span>Photon (PUN2)</span>
+    <span>PlayFab</span>
+    <span>Firebase</span>
+    <span>Web3</span>
+    <span>Git</span>
+    <span>Performance Optimization</span>
+  </div>
+</section>
 <!-- ================= EXPERIENCE ================= -->
 <section id="experience" class="section">
   <h2>Experience</h2>
@@ -99,87 +128,116 @@
   </div>
 </section>
 
-<!-- ================= PROJECTS ================= -->
-<section id="projects" class="section">
+<section id="projects" class="section reveal">
   <h2>Game & XR Project Showcase</h2>
 
   <div class="projects-wrapper">
     <div class="project-grid">
 
       <!-- YOUTUBE -->
-      <div class="project-card" data-video="https://www.youtube.com/embed/jB3Dg2dtQW0">
-        <img src="https://img.youtube.com/vi/jB3Dg2dtQW0/hqdefault.jpg">
+      <div class="project-card"
+           data-video="https://www.youtube.com/embed/jB3Dg2dtQW0">
+        <iframe src="https://www.youtube.com/embed/jB3Dg2dtQW0"
+                loading="lazy"></iframe>
         <span>Unity Gameplay Showcase</span>
       </div>
 
-      <div class="project-card" data-video="https://www.youtube.com/embed/dj_jWsqDBSA">
-        <img src="https://img.youtube.com/vi/dj_jWsqDBSA/hqdefault.jpg">
+      <div class="project-card"
+           data-video="https://www.youtube.com/embed/dj_jWsqDBSA">
+        <iframe src="https://www.youtube.com/embed/dj_jWsqDBSA"
+                loading="lazy"></iframe>
         <span>XR / Game Demo</span>
       </div>
 
-      <div class="project-card" data-video="https://www.youtube.com/embed/-VInUgHpBTk">
-        <img src="https://img.youtube.com/vi/-VInUgHpBTk/hqdefault.jpg">
+      <div class="project-card"
+           data-video="https://www.youtube.com/embed/-VInUgHpBTk">
+        <iframe src="https://www.youtube.com/embed/-VInUgHpBTk"
+                loading="lazy"></iframe>
         <span>Multiplayer Systems Demo</span>
       </div>
 
-      <div class="project-card" data-video="https://www.youtube.com/embed/mf6ibnYrnAU">
-        <img src="https://img.youtube.com/vi/mf6ibnYrnAU/hqdefault.jpg">
+      <div class="project-card"
+           data-video="https://www.youtube.com/embed/mf6ibnYrnAU">
+        <iframe src="https://www.youtube.com/embed/mf6ibnYrnAU"
+                loading="lazy"></iframe>
         <span>Unity Project Demo</span>
       </div>
 
-      <div class="project-card" data-video="https://www.youtube.com/embed/jrj3QT4mOyM">
-        <img src="https://img.youtube.com/vi/jrj3QT4mOyM/hqdefault.jpg">
+      <div class="project-card"
+           data-video="https://www.youtube.com/embed/jrj3QT4mOyM">
+        <iframe src="https://www.youtube.com/embed/jrj3QT4mOyM"
+                loading="lazy"></iframe>
         <span>Gameplay Feature Demo</span>
       </div>
 
       <!-- GOOGLE DRIVE -->
-      <div class="project-card" data-video="https://drive.google.com/file/d/1F2w_4IDRDqc9thsApauARSBn1ndZZNvc/preview">
-        <img src="assets/drive-thumb.png">
+      <div class="project-card"
+           data-video="https://drive.google.com/file/d/1F2w_4IDRDqc9thsApauARSBn1ndZZNvc/preview">
+        <iframe src="https://drive.google.com/file/d/1F2w_4IDRDqc9thsApauARSBn1ndZZNvc/preview"
+                loading="lazy"></iframe>
         <span>XR Training Simulation</span>
       </div>
 
-      <div class="project-card" data-video="https://drive.google.com/file/d/1NEj9m6oPL8kMdRJ_getv2W0pL2xu4FJ8/preview">
-        <img src="assets/drive-thumb.png">
+      <div class="project-card"
+           data-video="https://drive.google.com/file/d/1NEj9m6oPL8kMdRJ_getv2W0pL2xu4FJ8/preview">
+        <iframe src="https://drive.google.com/file/d/1NEj9m6oPL8kMdRJ_getv2W0pL2xu4FJ8/preview"
+                loading="lazy"></iframe>
         <span>AR Experience</span>
       </div>
 
-      <div class="project-card" data-video="https://drive.google.com/file/d/1oeNAinVpS1Cg0AN6HsgAmsE9Rj3zCdbI/preview">
-        <img src="assets/drive-thumb.png">
+      <div class="project-card"
+           data-video="https://drive.google.com/file/d/1oeNAinVpS1Cg0AN6HsgAmsE9Rj3zCdbI/preview">
+        <iframe src="https://drive.google.com/file/d/1oeNAinVpS1Cg0AN6HsgAmsE9Rj3zCdbI/preview"
+                loading="lazy"></iframe>
         <span>VR Gameplay Demo</span>
       </div>
 
-      <div class="project-card" data-video="https://drive.google.com/file/d/1zJCi4QBff7G6eV_Heav7oHG_HtjanuCn/preview">
-        <img src="assets/drive-thumb.png">
+      <div class="project-card"
+           data-video="https://drive.google.com/file/d/1zJCi4QBff7G6eV_Heav7oHG_HtjanuCn/preview">
+        <iframe src="https://drive.google.com/file/d/1zJCi4QBff7G6eV_Heav7oHG_HtjanuCn/preview"
+                loading="lazy"></iframe>
         <span>Enterprise XR Project</span>
       </div>
 
-      <div class="project-card" data-video="https://drive.google.com/file/d/1oJ2sEXtZp7IDF6LlwkE6-JBUGZsOFOCO/preview">
-        <img src="assets/drive-thumb.png">
+      <div class="project-card"
+           data-video="https://drive.google.com/file/d/1oJ2sEXtZp7IDF6LlwkE6-JBUGZsOFOCO/preview">
+        <iframe src="https://drive.google.com/file/d/1oJ2sEXtZp7IDF6LlwkE6-JBUGZsOFOCO/preview"
+                loading="lazy"></iframe>
         <span>Unity Prototype</span>
       </div>
 
-      <div class="project-card" data-video="https://drive.google.com/file/d/16WpHsbFVJUDk53VKdaEiTefHv16UHHWc/preview">
-        <img src="assets/drive-thumb.png">
+      <div class="project-card"
+           data-video="https://drive.google.com/file/d/16WpHsbFVJUDk53VKdaEiTefHv16UHHWc/preview">
+        <iframe src="https://drive.google.com/file/d/16WpHsbFVJUDk53VKdaEiTefHv16UHHWc/preview"
+                loading="lazy"></iframe>
         <span>Gameplay Systems Demo</span>
       </div>
 
-      <div class="project-card" data-video="https://drive.google.com/file/d/1LwCNfPA3Ei0pzery_6nVf5EQ9rHzYXDa/preview">
-        <img src="assets/drive-thumb.png">
+      <div class="project-card"
+           data-video="https://drive.google.com/file/d/1LwCNfPA3Ei0pzery_6nVf5EQ9rHzYXDa/preview">
+        <iframe src="https://drive.google.com/file/d/1LwCNfPA3Ei0pzery_6nVf5EQ9rHzYXDa/preview"
+                loading="lazy"></iframe>
         <span>VR Interaction Demo</span>
       </div>
 
-      <div class="project-card" data-video="https://drive.google.com/file/d/1J_e9sJSUJzPayB1L6iot7TxjM8mk7jEt/preview">
-        <img src="assets/drive-thumb.png">
+      <div class="project-card"
+           data-video="https://drive.google.com/file/d/1J_e9sJSUJzPayB1L6iot7TxjM8mk7jEt/preview">
+        <iframe src="https://drive.google.com/file/d/1J_e9sJSUJzPayB1L6iot7TxjM8mk7jEt/preview"
+                loading="lazy"></iframe>
         <span>Simulation Project</span>
       </div>
 
-      <div class="project-card" data-video="https://drive.google.com/file/d/1s0XCPoaX5fyXZD2rPUmxeFS8uQlXnYNv/preview">
-        <img src="assets/drive-thumb.png">
+      <div class="project-card"
+           data-video="https://drive.google.com/file/d/1s0XCPoaX5fyXZD2rPUmxeFS8uQlXnYNv/preview">
+        <iframe src="https://drive.google.com/file/d/1s0XCPoaX5fyXZD2rPUmxeFS8uQlXnYNv/preview"
+                loading="lazy"></iframe>
         <span>XR Feature Demo</span>
       </div>
 
-      <div class="project-card" data-video="https://drive.google.com/file/d/1UlJ5SeT0yf5Hy3pZNv-kMjZEFS9TX4tc/preview">
-        <img src="assets/drive-thumb.png">
+      <div class="project-card"
+           data-video="https://drive.google.com/file/d/1UlJ5SeT0yf5Hy3pZNv-kMjZEFS9TX4tc/preview">
+        <iframe src="https://drive.google.com/file/d/1UlJ5SeT0yf5Hy3pZNv-kMjZEFS9TX4tc/preview"
+                loading="lazy"></iframe>
         <span>Advanced Unity Project</span>
       </div>
 
@@ -187,7 +245,19 @@
   </div>
 </section>
 
-<!-- ================= MODAL ================= -->
+<!-- CONTACT -->
+<section id="contact" class="section reveal">
+  <h2>Contact</h2>
+  <p>📧 deepankarsehgal3@gmail.com</p>
+  <p>📞 8968457228</p>
+  <p>
+    <a href="https://www.linkedin.com/in/deepankar-sehgal/" target="_blank">
+      LinkedIn Profile
+    </a>
+  </p>
+</section>
+
+<!-- MODAL -->
 <div id="videoModal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
