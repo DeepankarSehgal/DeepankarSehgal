@@ -1,16 +1,16 @@
-## Hi there 👋
+# Deepankar Sehgal - Portfolio
 
-<!--
-**DeepankarSehgal/DeepankarSehgal** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+Modern animated portfolio built with HTML, CSS, and JavaScript.
 
-Here are some ideas to get you started:
+## Features
+- Dark / Light mode
+- YouTube playlist showcase
+- Resume integration
+- Responsive design
+- GitHub Pages ready
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## Deployment
+1. Push this repo to GitHub
+2. Go to Settings → Pages
+3. Select main branch → root
+4. Open the generated URL 🚀
