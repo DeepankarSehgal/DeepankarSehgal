@@ -1,7 +1,7 @@
 /* ==========================================================================
-   DEEPANKAR SEHGAL - INTERACTIVE GAMING ENGINE & SCRIPT
-   Features: Cyber Canvas, Sound Synthesizer, Custom Cursor, Arcade Hub (3 Games),
-   Interactive Terminal, 3D Tilt Effects
+   DEEPANKAR SEHGAL - DARK MODE INTERACTIVE PORTFOLIO ENGINE
+   Features: Matrix Code Stream Canvas, Sound Synth, Multi-Game Arcade Hub,
+   3D Perspective Tilt, Interactive Dev Console, Cursor Spotlight
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -161,17 +161,16 @@ document.addEventListener('DOMContentLoaded', () => {
       if (sound.enabled) {
         sfxToggleBtn.classList.remove('muted');
         sfxIcon.className = 'fa-solid fa-volume-high';
-        sfxText.textContent = 'SFX: ON';
+        sfxText.textContent = 'SFX';
         sound.playClick();
       } else {
         sfxToggleBtn.classList.add('muted');
         sfxIcon.className = 'fa-solid fa-volume-xmark';
-        sfxText.textContent = 'SFX: OFF';
+        sfxText.textContent = 'OFF';
       }
     });
   }
 
-  // Attach sounds to elements with data-sound
   document.querySelectorAll('[data-sound="hover"]').forEach(el => {
     el.addEventListener('mouseenter', () => sound.playHover());
   });
@@ -180,10 +179,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ==========================================
-     2. CUSTOM CYBER CROSSHAIR CURSOR & 3D CARD TILT
+     2. CUSTOM CURSOR & RADIAL SPOTLIGHT
      ========================================== */
-  const cursorDot = document.getElementById('cursor-dot');
-  const cursorRing = document.getElementById('cursor-ring');
+  const cursorDot = document.querySelector('.cursor-dot');
+  const cursorRing = document.querySelector('.cursor-ring');
+  const cursorSpotlight = document.getElementById('cursor-glow-spotlight');
 
   let mouseX = -100, mouseY = -100;
   let ringX = -100, ringY = -100;
@@ -195,11 +195,15 @@ document.addEventListener('DOMContentLoaded', () => {
       cursorDot.style.left = `${mouseX}px`;
       cursorDot.style.top = `${mouseY}px`;
     }
+    if (cursorSpotlight) {
+      cursorSpotlight.style.left = `${mouseX}px`;
+      cursorSpotlight.style.top = `${mouseY}px`;
+    }
   });
 
   function renderCursor() {
-    ringX += (mouseX - ringX) * 0.2;
-    ringY += (mouseY - ringY) * 0.2;
+    ringX += (mouseX - ringX) * 0.25;
+    ringY += (mouseY - ringY) * 0.25;
 
     if (cursorRing) {
       cursorRing.style.left = `${ringX}px`;
@@ -209,7 +213,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   renderCursor();
 
-  // Hover state for cursor
   const interactiveTargets = document.querySelectorAll('a, button, .project-card, .skill-card, .term-chip');
   interactiveTargets.forEach(el => {
     el.addEventListener('mouseenter', () => cursorRing && cursorRing.classList.add('active'));
@@ -217,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // 3D Card Tilt Effect
-  const tiltableCards = document.querySelectorAll('.project-card, .skill-card, .quest-card, .stat-card');
+  const tiltableCards = document.querySelectorAll('.project-card, .skill-card, .exp-card, .stat-card');
   tiltableCards.forEach(card => {
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
@@ -226,21 +229,21 @@ document.addEventListener('DOMContentLoaded', () => {
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
 
-      const rotateX = ((y - centerY) / centerY) * -10;
-      const rotateY = ((x - centerX) / centerX) * 10;
+      const rotateX = ((y - centerY) / centerY) * -8;
+      const rotateY = ((x - centerX) / centerX) * 8;
 
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
     });
 
     card.addEventListener('mouseleave', () => {
-      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0)';
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
     });
   });
 
   /* ==========================================
-     3. INTERACTIVE BACKGROUND CANVAS
+     3. INTERACTIVE MATRIX CODE STREAM CANVAS (NO CONNECTED DOTS!)
      ========================================== */
-  const canvas = document.getElementById('cyber-canvas');
+  const canvas = document.getElementById('cyber-matrix-canvas');
   if (canvas) {
     const ctx = canvas.getContext('2d');
     let width = canvas.width = window.innerWidth;
@@ -251,87 +254,57 @@ document.addEventListener('DOMContentLoaded', () => {
       height = canvas.height = window.innerHeight;
     });
 
-    const particles = [];
-    const particleCount = Math.min(Math.floor(width / 18), 70);
+    const tokens = ['UNITY', 'C#', 'XR', 'VR', 'SLOTS', 'PUN2', 'PLAYFAB', 'WEB3', '60FPS', 'PHYSICS', 'SHADER', '01'];
+    const columns = Math.floor(width / 35);
+    const drops = [];
 
-    for (let i = 0; i < particleCount; i++) {
-      particles.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.8,
-        vy: (Math.random() - 0.5) * 0.8,
-        size: Math.random() * 2 + 1,
-        color: Math.random() > 0.5 ? 'rgba(0, 243, 255, ' : 'rgba(168, 85, 247, '
+    for (let i = 0; i < columns; i++) {
+      drops.push({
+        x: i * 35 + 10,
+        y: Math.random() * -height,
+        speed: 1.2 + Math.random() * 2,
+        token: tokens[Math.floor(Math.random() * tokens.length)],
+        fontSize: Math.floor(10 + Math.random() * 4),
+        opacity: 0.1 + Math.random() * 0.25,
+        color: Math.random() > 0.4 ? 'rgba(0, 243, 255, ' : 'rgba(168, 85, 247, '
       });
     }
 
-    function animateCanvas() {
+    function animateMatrixStream() {
       ctx.clearRect(0, 0, width, height);
 
-      // Grid lines
-      ctx.strokeStyle = 'rgba(0, 243, 255, 0.03)';
-      ctx.lineWidth = 1;
-      const gridSize = 60;
+      for (let i = 0; i < drops.length; i++) {
+        const d = drops[i];
 
-      for (let x = 0; x < width; x += gridSize) {
-        ctx.beginPath();
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, height);
-        ctx.stroke();
-      }
-      for (let y = 0; y < height; y += gridSize) {
-        ctx.beginPath();
-        ctx.moveTo(0, y);
-        ctx.lineTo(width, y);
-        ctx.stroke();
-      }
-
-      // Particles
-      for (let i = 0; i < particles.length; i++) {
-        const p1 = particles[i];
-        p1.x += p1.vx;
-        p1.y += p1.vy;
-
-        if (p1.x < 0 || p1.x > width) p1.vx *= -1;
-        if (p1.y < 0 || p1.y > height) p1.vy *= -1;
-
-        ctx.fillStyle = p1.color + '0.7)';
-        ctx.beginPath();
-        ctx.arc(p1.x, p1.y, p1.size, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Mouse connection
-        const dxMouse = mouseX - p1.x;
-        const dyMouse = mouseY - p1.y;
-        const distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
-
-        if (distMouse < 150) {
-          ctx.strokeStyle = p1.color + (1 - distMouse / 150) * 0.4 + ')';
-          ctx.beginPath();
-          ctx.moveTo(p1.x, p1.y);
-          ctx.lineTo(mouseX, mouseY);
-          ctx.stroke();
+        // Move vertical stream
+        d.y += d.speed;
+        if (d.y > height + 50) {
+          d.y = Math.random() * -100 - 50;
+          d.token = tokens[Math.floor(Math.random() * tokens.length)];
         }
 
-        for (let j = i + 1; j < particles.length; j++) {
-          const p2 = particles[j];
-          const dx = p1.x - p2.x;
-          const dy = p1.y - p2.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
+        // Mouse Displace Repulsion Wave
+        const dx = mouseX - d.x;
+        const dy = mouseY - d.y;
+        const dist = Math.hypot(dx, dy);
+        let offsetX = 0;
 
-          if (dist < 120) {
-            ctx.strokeStyle = p1.color + (1 - dist / 120) * 0.25 + ')';
-            ctx.beginPath();
-            ctx.moveTo(p1.x, p1.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.stroke();
-          }
+        if (dist < 140) {
+          const pushForce = (140 - dist) / 140;
+          offsetX = (dx / dist) * pushForce * -45;
+          ctx.fillStyle = 'rgba(0, 243, 255, 0.7)';
+          ctx.font = `bold ${d.fontSize + 3}px 'Space Grotesk', monospace`;
+        } else {
+          ctx.fillStyle = d.color + d.opacity + ')';
+          ctx.font = `${d.fontSize}px 'Space Grotesk', monospace`;
         }
+
+        ctx.fillText(d.token, d.x + offsetX, d.y);
       }
 
-      requestAnimationFrame(animateCanvas);
+      requestAnimationFrame(animateMatrixStream);
     }
-    animateCanvas();
+    animateMatrixStream();
   }
 
   /* ==========================================
@@ -360,10 +333,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const trimmed = cmd.trim().toLowerCase();
     sound.playClick();
 
-    // Log input command
     const cmdLine = document.createElement('p');
     cmdLine.className = 'term-line cmd';
-    cmdLine.textContent = `DEEPANKAR.OS > ${cmd}`;
+    cmdLine.textContent = `DEEPANKAR.DEV > ${cmd}`;
     termOutput.appendChild(cmdLine);
 
     const resLine = document.createElement('p');
@@ -371,30 +343,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     switch (trimmed) {
       case 'help':
-        resLine.innerHTML = 'Available commands: <span class="highlight">skills</span>, <span class="highlight">projects</span>, <span class="highlight">quests</span>, <span class="highlight">play</span>, <span class="highlight">cv</span>, <span class="highlight">clear</span>';
+        resLine.innerHTML = 'Available commands: <span class="highlight">skills</span>, <span class="highlight">projects</span>, <span class="highlight">experience</span>, <span class="highlight">play</span>, <span class="highlight">cv</span>, <span class="highlight">clear</span>';
         break;
       case 'skills':
-        resLine.innerHTML = 'Executing /skills... Scrolling to Tech Loadout section.';
+        resLine.innerHTML = 'Scrolling to Skills & Tech Stack...';
         document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' });
         break;
       case 'projects':
-        resLine.innerHTML = 'Executing /projects... Scrolling to Mission Archives.';
+        resLine.innerHTML = 'Scrolling to Project Showcase...';
         document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
         break;
-      case 'quests':
       case 'experience':
-        resLine.innerHTML = 'Executing /quests... Scrolling to Career Quest Log.';
+      case 'quests':
+        resLine.innerHTML = 'Scrolling to Work Experience...';
         document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' });
         break;
       case 'play':
       case 'game':
       case 'arcade':
-        resLine.innerHTML = 'Executing /play... Launching Cyber Arcade Hub.';
+        resLine.innerHTML = 'Launching Mini-Game Hub...';
         openArcade();
         break;
       case 'cv':
       case 'resume':
-        resLine.innerHTML = 'Executing /cv... Opening PDF Resume in new tab.';
+        resLine.innerHTML = 'Opening Resume PDF in new tab...';
         window.open('assets/Deepankar_UnityDeveloper_CV.pdf', '_blank');
         break;
       case 'clear':
@@ -485,7 +457,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const arcadeCanvas = document.getElementById('arcade-canvas');
   const memoryBoard = document.getElementById('memory-game-board');
 
-  let currentGame = 'defender'; // 'defender', 'dodger', 'memory'
+  let currentGame = 'defender';
   let gameRunning = false;
   let gameScore = 0;
   let highScore = localStorage.getItem('cyber_highscore_' + currentGame) || 0;
@@ -524,21 +496,21 @@ document.addEventListener('DOMContentLoaded', () => {
     if (gameType === 'memory') {
       arcadeCanvas.style.display = 'none';
       memoryBoard.classList.remove('hidden');
-      if (gameStartTitle) gameStartTitle.textContent = 'MEMORY CORE';
-      if (gameStartDesc) gameStartDesc.textContent = 'FLIP & MATCH THE UNITY, VR & SLOT SYMBOL PAIRS!';
-      if (gameHintText) gameHintText.innerHTML = '<i class="fa-solid fa-hand-pointer"></i> CLICK CARDS TO FLIP & MATCH';
+      if (gameStartTitle) gameStartTitle.textContent = 'Memory Core';
+      if (gameStartDesc) gameStartDesc.textContent = 'Flip & match Unity, VR & Slot game symbol pairs!';
+      if (gameHintText) gameHintText.innerHTML = '<i class="fa-solid fa-hand-pointer"></i> Click cards to flip & match';
     } else if (gameType === 'dodger') {
       arcadeCanvas.style.display = 'block';
       memoryBoard.classList.add('hidden');
-      if (gameStartTitle) gameStartTitle.textContent = 'NEON DODGER';
-      if (gameStartDesc) gameStartDesc.textContent = 'MOVE MOUSE / TOUCH LEFT & RIGHT TO DODGE LASER BARRIERS!';
-      if (gameHintText) gameHintText.innerHTML = '<i class="fa-solid fa-arrows-left-right"></i> MOVE MOUSE LEFT / RIGHT TO DODGE';
+      if (gameStartTitle) gameStartTitle.textContent = 'Neon Dodger';
+      if (gameStartDesc) gameStartDesc.textContent = 'Move mouse left & right to dodge falling laser barriers!';
+      if (gameHintText) gameHintText.innerHTML = '<i class="fa-solid fa-arrows-left-right"></i> Move mouse left / right to dodge';
     } else {
       arcadeCanvas.style.display = 'block';
       memoryBoard.classList.add('hidden');
-      if (gameStartTitle) gameStartTitle.textContent = 'CYBER DEFENDER';
-      if (gameStartDesc) gameStartDesc.textContent = 'CLICK / TAP INCOMING BUG NODES BEFORE THEY BREACH THE DEFENSE SHIELD!';
-      if (gameHintText) gameHintText.innerHTML = '<i class="fa-solid fa-mouse"></i> AIM & CLICK TO SHOOT';
+      if (gameStartTitle) gameStartTitle.textContent = 'Cyber Defender';
+      if (gameStartDesc) gameStartDesc.textContent = 'Click / tap incoming bug nodes before they breach the defense shield!';
+      if (gameHintText) gameHintText.innerHTML = '<i class="fa-solid fa-mouse"></i> Aim & click to shoot';
     }
   }
 
@@ -586,7 +558,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (startGameBtn) startGameBtn.addEventListener('click', startGame);
     if (restartGameBtn) restartGameBtn.addEventListener('click', startGame);
 
-    // Defender Shoot Listener
     arcadeCanvas.addEventListener('click', (e) => {
       if (!gameRunning || currentGame !== 'defender') return;
       sound.playShoot();
@@ -623,7 +594,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function gameLoop() {
       if (!gameRunning) return;
 
-      actx.fillStyle = '#04060d';
+      actx.fillStyle = '#060911';
       actx.fillRect(0, 0, arcadeCanvas.width, arcadeCanvas.height);
 
       // GAME 1: CYBER DEFENDER
@@ -668,7 +639,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // GAME 2: NEON DODGER
       else if (currentGame === 'dodger') {
-        // Draw Player Ship
         actx.fillStyle = '#00f3ff';
         actx.shadowColor = '#00f3ff';
         actx.shadowBlur = 15;
@@ -701,7 +671,6 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         }
 
-        // Move Obstacles
         for (let i = obstacles.length - 1; i >= 0; i--) {
           const o = obstacles[i];
           o.y += o.speed;
@@ -712,7 +681,6 @@ document.addEventListener('DOMContentLoaded', () => {
           actx.fillRect(o.x, o.y, o.width, o.height);
           actx.shadowBlur = 0;
 
-          // Check Collision with Player
           if (
             o.y + o.height >= arcadeCanvas.height - 40 &&
             o.y <= arcadeCanvas.height - 10 &&
@@ -730,7 +698,6 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         }
 
-        // Move Powerups
         for (let i = powerups.length - 1; i >= 0; i--) {
           const p = powerups[i];
           p.y += p.speed;
@@ -754,7 +721,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      // Draw Explosions
       for (let i = explosions.length - 1; i >= 0; i--) {
         const ex = explosions[i];
         ex.x += ex.vx;
@@ -790,7 +756,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (gameOverOverlay) gameOverOverlay.classList.remove('hidden');
     }
 
-    // GAME 3: MEMORY CORE PUZZLE
     function initMemoryGame() {
       if (!memoryBoard) return;
       memoryBoard.innerHTML = '';
@@ -865,9 +830,9 @@ document.addEventListener('DOMContentLoaded', () => {
     copyBtn.addEventListener('click', () => {
       navigator.clipboard.writeText(emailText.textContent.trim()).then(() => {
         sound.playClick();
-        if (copyStatus) copyStatus.textContent = 'COPIED!';
+        if (copyStatus) copyStatus.textContent = 'Copied!';
         setTimeout(() => {
-          if (copyStatus) copyStatus.textContent = 'COPY';
+          if (copyStatus) copyStatus.textContent = 'Copy';
         }, 2000);
       });
     });
@@ -880,7 +845,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (responseEl) {
       responseEl.style.color = '#00ff66';
-      responseEl.innerHTML = `<i class="fa-solid fa-check"></i> TRANSMISSION RECEIVED FROM [${name.toUpperCase()}]. COMMS OPEN!`;
+      responseEl.innerHTML = `<i class="fa-solid fa-circle-check"></i> Message received from ${name}. I will get back to you shortly!`;
     }
     document.getElementById('contact-form').reset();
   };
