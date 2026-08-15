@@ -1,13 +1,93 @@
 /* ==========================================================================
-   DEEPANKAR SEHGAL - DARK MODE INTERACTIVE PORTFOLIO ENGINE
-   Features: Matrix Code Stream Canvas, Sound Synth, Multi-Game Arcade Hub,
-   3D Perspective Tilt, Interactive Dev Console, Cursor Spotlight
+   DEEPANKAR SEHGAL - NASTY GAME CATALOG (nasty2x.in) ENGINE
+   Features: Canvas Reveal Effect, Real-Time Search & Filters, Game Detail Modals,
+   WebAudio Synth & Ambient Audio Equalizer, 3-in-1 Arcade Hub
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
 
   /* ==========================================
-     1. WEBAUDIO SYNTHESIZER SOUND SYSTEM
+     1. ACETERNITY UI STYLE CANVAS REVEAL EFFECT
+     ========================================== */
+  const canvas = document.getElementById('canvas-reveal');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    let mouseX = -1000, mouseY = -1000;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      initGrid();
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    const dots = [];
+    const spacing = 32;
+
+    function initGrid() {
+      dots.length = 0;
+      const cols = Math.ceil(width / spacing);
+      const rows = Math.ceil(height / spacing);
+
+      for (let i = 0; i < cols; i++) {
+        for (let j = 0; j < rows; j++) {
+          dots.push({
+            x: i * spacing + spacing / 2,
+            y: j * spacing + spacing / 2,
+            baseRadius: 1.5,
+            color: (i + j) % 3 === 0 ? 'rgba(6, 182, 212, ' : (i + j) % 3 === 1 ? 'rgba(139, 92, 246, ' : 'rgba(16, 185, 129, '
+          });
+        }
+      }
+    }
+    initGrid();
+
+    function renderCanvasReveal() {
+      ctx.clearRect(0, 0, width, height);
+
+      for (let i = 0; i < dots.length; i++) {
+        const d = dots[i];
+        const dist = Math.hypot(mouseX - d.x, mouseY - d.y);
+        const radiusLimit = 160;
+
+        if (dist < radiusLimit) {
+          const factor = (1 - dist / radiusLimit);
+          const r = d.baseRadius + factor * 3.5;
+          const alpha = 0.15 + factor * 0.7;
+
+          ctx.fillStyle = d.color + alpha + ')';
+          ctx.beginPath();
+          ctx.arc(d.x, d.y, r, 0, Math.PI * 2);
+          ctx.fill();
+
+          if (factor > 0.6) {
+            ctx.shadowColor = d.color + '0.8)';
+            ctx.shadowBlur = 8;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+          }
+        } else {
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+          ctx.beginPath();
+          ctx.arc(d.x, d.y, d.baseRadius, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      requestAnimationFrame(renderCanvasReveal);
+    }
+    renderCanvasReveal();
+  }
+
+  /* ==========================================
+     2. WEBAUDIO SYNTHESIZER & AMBIENT ENGINE
      ========================================== */
   class SoundEngine {
     constructor() {
@@ -18,9 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
     init() {
       if (!this.ctx) {
         const AudioCtx = window.AudioContext || window.webkitAudioContext;
-        if (AudioCtx) {
-          this.ctx = new AudioCtx();
-        }
+        if (AudioCtx) this.ctx = new AudioCtx();
       }
       if (this.ctx && this.ctx.state === 'suspended') {
         this.ctx.resume();
@@ -31,23 +109,18 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!this.enabled) return;
       this.init();
       if (!this.ctx) return;
-
       try {
         const osc = this.ctx.createOscillator();
         const gain = this.ctx.createGain();
-
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(600, this.ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(1000, this.ctx.currentTime + 0.05);
-
-        gain.gain.setValueAtTime(0.03, this.ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.05);
-
+        osc.frequency.setValueAtTime(550, this.ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(900, this.ctx.currentTime + 0.04);
+        gain.gain.setValueAtTime(0.02, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.04);
         osc.connect(gain);
         gain.connect(this.ctx.destination);
-
         osc.start();
-        osc.stop(this.ctx.currentTime + 0.05);
+        osc.stop(this.ctx.currentTime + 0.04);
       } catch (e) {}
     }
 
@@ -55,118 +128,41 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!this.enabled) return;
       this.init();
       if (!this.ctx) return;
-
       try {
         const osc = this.ctx.createOscillator();
         const gain = this.ctx.createGain();
-
         osc.type = 'triangle';
-        osc.frequency.setValueAtTime(1200, this.ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(300, this.ctx.currentTime + 0.08);
-
-        gain.gain.setValueAtTime(0.08, this.ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.08);
-
+        osc.frequency.setValueAtTime(1100, this.ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(300, this.ctx.currentTime + 0.07);
+        gain.gain.setValueAtTime(0.06, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.07);
         osc.connect(gain);
         gain.connect(this.ctx.destination);
-
         osc.start();
-        osc.stop(this.ctx.currentTime + 0.08);
-      } catch (e) {}
-    }
-
-    playShoot() {
-      if (!this.enabled) return;
-      this.init();
-      if (!this.ctx) return;
-
-      try {
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-
-        osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(800, this.ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(150, this.ctx.currentTime + 0.12);
-
-        gain.gain.setValueAtTime(0.1, this.ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.12);
-
-        osc.connect(gain);
-        gain.connect(this.ctx.destination);
-
-        osc.start();
-        osc.stop(this.ctx.currentTime + 0.12);
-      } catch (e) {}
-    }
-
-    playExplode() {
-      if (!this.enabled) return;
-      this.init();
-      if (!this.ctx) return;
-
-      try {
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-
-        osc.type = 'square';
-        osc.frequency.setValueAtTime(200, this.ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(40, this.ctx.currentTime + 0.15);
-
-        gain.gain.setValueAtTime(0.12, this.ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.15);
-
-        osc.connect(gain);
-        gain.connect(this.ctx.destination);
-
-        osc.start();
-        osc.stop(this.ctx.currentTime + 0.15);
-      } catch (e) {}
-    }
-
-    playPowerup() {
-      if (!this.enabled) return;
-      this.init();
-      if (!this.ctx) return;
-
-      try {
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(400, this.ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(1200, this.ctx.currentTime + 0.2);
-
-        gain.gain.setValueAtTime(0.1, this.ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.2);
-
-        osc.connect(gain);
-        gain.connect(this.ctx.destination);
-
-        osc.start();
-        osc.stop(this.ctx.currentTime + 0.2);
+        osc.stop(this.ctx.currentTime + 0.07);
       } catch (e) {}
     }
   }
 
   const sound = new SoundEngine();
 
-  // Sound Toggle Button
-  const sfxToggleBtn = document.getElementById('sfx-toggle');
-  const sfxIcon = document.getElementById('sfx-icon');
-  const sfxText = document.getElementById('sfx-text');
+  // Audio Equalizer Button Toggle
+  const audioVizBtn = document.getElementById('audio-viz-btn');
+  const audioBtnText = document.getElementById('audio-btn-text');
+  let audioActive = true;
 
-  if (sfxToggleBtn) {
-    sfxToggleBtn.addEventListener('click', () => {
-      sound.enabled = !sound.enabled;
-      if (sound.enabled) {
-        sfxToggleBtn.classList.remove('muted');
-        sfxIcon.className = 'fa-solid fa-volume-high';
-        sfxText.textContent = 'SFX';
+  if (audioVizBtn) {
+    audioVizBtn.addEventListener('click', () => {
+      audioActive = !audioActive;
+      sound.enabled = audioActive;
+
+      if (audioActive) {
+        audioVizBtn.classList.remove('muted');
+        if (audioBtnText) audioBtnText.textContent = 'AUDIO ON';
         sound.playClick();
       } else {
-        sfxToggleBtn.classList.add('muted');
-        sfxIcon.className = 'fa-solid fa-volume-xmark';
-        sfxText.textContent = 'OFF';
+        audioVizBtn.classList.add('muted');
+        if (audioBtnText) audioBtnText.textContent = 'MUTED';
       }
     });
   }
@@ -179,150 +175,342 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ==========================================
-     2. CUSTOM CURSOR & RADIAL SPOTLIGHT
+     3. THEME SWITCHER (DARK / LIGHT)
      ========================================== */
-  const cursorDot = document.querySelector('.cursor-dot');
-  const cursorRing = document.querySelector('.cursor-ring');
-  const cursorSpotlight = document.getElementById('cursor-glow-spotlight');
+  const themeToggleBtn = document.getElementById('theme-toggle-btn');
+  const themeIcon = document.getElementById('theme-icon');
 
-  let mouseX = -100, mouseY = -100;
-  let ringX = -100, ringY = -100;
-
-  window.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    if (cursorDot) {
-      cursorDot.style.left = `${mouseX}px`;
-      cursorDot.style.top = `${mouseY}px`;
-    }
-    if (cursorSpotlight) {
-      cursorSpotlight.style.left = `${mouseX}px`;
-      cursorSpotlight.style.top = `${mouseY}px`;
-    }
-  });
-
-  function renderCursor() {
-    ringX += (mouseX - ringX) * 0.25;
-    ringY += (mouseY - ringY) * 0.25;
-
-    if (cursorRing) {
-      cursorRing.style.left = `${ringX}px`;
-      cursorRing.style.top = `${ringY}px`;
-    }
-    requestAnimationFrame(renderCursor);
+  const savedTheme = localStorage.getItem('nasty_theme') || 'dark';
+  if (savedTheme === 'light') {
+    document.documentElement.classList.remove('dark');
+    document.documentElement.classList.add('light');
+    if (themeIcon) themeIcon.className = 'fa-solid fa-sun';
   }
-  renderCursor();
 
-  const interactiveTargets = document.querySelectorAll('a, button, .project-card, .skill-card, .term-chip');
-  interactiveTargets.forEach(el => {
-    el.addEventListener('mouseenter', () => cursorRing && cursorRing.classList.add('active'));
-    el.addEventListener('mouseleave', () => cursorRing && cursorRing.classList.remove('active'));
-  });
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => {
+      sound.playClick();
+      const isLight = document.documentElement.classList.contains('light');
 
-  // 3D Card Tilt Effect
-  const tiltableCards = document.querySelectorAll('.project-card, .skill-card, .exp-card, .stat-card');
-  tiltableCards.forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-
-      const rotateX = ((y - centerY) / centerY) * -8;
-      const rotateY = ((x - centerX) / centerX) * 8;
-
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
-    });
-
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
-    });
-  });
-
-  /* ==========================================
-     3. INTERACTIVE MATRIX CODE STREAM CANVAS (NO CONNECTED DOTS!)
-     ========================================== */
-  const canvas = document.getElementById('cyber-matrix-canvas');
-  if (canvas) {
-    const ctx = canvas.getContext('2d');
-    let width = canvas.width = window.innerWidth;
-    let height = canvas.height = window.innerHeight;
-
-    window.addEventListener('resize', () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    });
-
-    const tokens = ['UNITY', 'C#', 'XR', 'VR', 'SLOTS', 'PUN2', 'PLAYFAB', 'WEB3', '60FPS', 'PHYSICS', 'SHADER', '01'];
-    const columns = Math.floor(width / 35);
-    const drops = [];
-
-    for (let i = 0; i < columns; i++) {
-      drops.push({
-        x: i * 35 + 10,
-        y: Math.random() * -height,
-        speed: 1.2 + Math.random() * 2,
-        token: tokens[Math.floor(Math.random() * tokens.length)],
-        fontSize: Math.floor(10 + Math.random() * 4),
-        opacity: 0.1 + Math.random() * 0.25,
-        color: Math.random() > 0.4 ? 'rgba(0, 243, 255, ' : 'rgba(168, 85, 247, '
-      });
-    }
-
-    function animateMatrixStream() {
-      ctx.clearRect(0, 0, width, height);
-
-      for (let i = 0; i < drops.length; i++) {
-        const d = drops[i];
-
-        // Move vertical stream
-        d.y += d.speed;
-        if (d.y > height + 50) {
-          d.y = Math.random() * -100 - 50;
-          d.token = tokens[Math.floor(Math.random() * tokens.length)];
-        }
-
-        // Mouse Displace Repulsion Wave
-        const dx = mouseX - d.x;
-        const dy = mouseY - d.y;
-        const dist = Math.hypot(dx, dy);
-        let offsetX = 0;
-
-        if (dist < 140) {
-          const pushForce = (140 - dist) / 140;
-          offsetX = (dx / dist) * pushForce * -45;
-          ctx.fillStyle = 'rgba(0, 243, 255, 0.7)';
-          ctx.font = `bold ${d.fontSize + 3}px 'Space Grotesk', monospace`;
-        } else {
-          ctx.fillStyle = d.color + d.opacity + ')';
-          ctx.font = `${d.fontSize}px 'Space Grotesk', monospace`;
-        }
-
-        ctx.fillText(d.token, d.x + offsetX, d.y);
+      if (isLight) {
+        document.documentElement.classList.remove('light');
+        document.documentElement.classList.add('dark');
+        if (themeIcon) themeIcon.className = 'fa-solid fa-moon';
+        localStorage.setItem('nasty_theme', 'dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light');
+        if (themeIcon) themeIcon.className = 'fa-solid fa-sun';
+        localStorage.setItem('nasty_theme', 'light');
       }
-
-      requestAnimationFrame(animateMatrixStream);
-    }
-    animateMatrixStream();
+    });
   }
 
   /* ==========================================
-     4. SCROLL REVEAL
+     4. REAL-TIME SEARCH & FILTER ENGINE
      ========================================== */
-  const revealElements = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('active');
+  const searchInput = document.getElementById('game-search-input');
+  const clearSearchBtn = document.getElementById('clear-search-btn');
+  const filterPills = document.querySelectorAll('.filter-pill');
+  const gameCards = document.querySelectorAll('.game-card');
+  const catalogCountText = document.getElementById('catalog-count-text');
+
+  let activeFilter = 'all';
+  let searchQuery = '';
+
+  function filterCatalog() {
+    let visibleCount = 0;
+
+    gameCards.forEach(card => {
+      const category = card.dataset.category || '';
+      const keywords = (card.dataset.keywords || '').toLowerCase();
+      const titleText = card.querySelector('.card-title')?.textContent.toLowerCase() || '';
+      const snippetText = card.querySelector('.card-snippet')?.textContent.toLowerCase() || '';
+
+      const matchesCategory = (activeFilter === 'all') || category.includes(activeFilter);
+      const matchesSearch = !searchQuery || 
+                            keywords.includes(searchQuery) || 
+                            titleText.includes(searchQuery) || 
+                            snippetText.includes(searchQuery);
+
+      if (matchesCategory && matchesSearch) {
+        card.style.display = 'flex';
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
       }
     });
-  }, { threshold: 0.15 });
 
-  revealElements.forEach(el => observer.observe(el));
+    if (catalogCountText) {
+      catalogCountText.textContent = `Showing ${visibleCount} of 11 Games`;
+    }
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value.trim().toLowerCase();
+      if (clearSearchBtn) {
+        clearSearchBtn.classList.toggle('hidden', searchQuery.length === 0);
+      }
+      filterCatalog();
+    });
+  }
+
+  if (clearSearchBtn) {
+    clearSearchBtn.addEventListener('click', () => {
+      sound.playClick();
+      if (searchInput) searchInput.value = '';
+      searchQuery = '';
+      clearSearchBtn.classList.add('hidden');
+      filterCatalog();
+    });
+  }
+
+  filterPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      sound.playClick();
+      filterPills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      activeFilter = pill.dataset.filter;
+      filterCatalog();
+    });
+  });
 
   /* ==========================================
-     5. INTERACTIVE TERMINAL ENGINE
+     5. NASTY GAME DETAIL MODAL SYSTEM (11 REAL PROJECTS)
+     ========================================== */
+  const gameDetailData = {
+    1: {
+      rank: "#01 TOP RANK",
+      score: "9.9 / 10",
+      tag: "VR SIMULATION",
+      platform: "UNITY3D • OCULUS",
+      title: "Interactive VR Environment & Gameplay System",
+      desc: "Immersive Virtual Reality environment navigation, physics interactions, diegetic UI, and spatial hand tracking in Unity.",
+      video: "https://drive.google.com/file/d/1oJ2sEXtZp7IDF6LlwkE6-JBUGZsOFOCO/preview",
+      specs: [
+        "VR environment physics interaction & object manipulation",
+        "Spatial raycasting & diegetic VR UI navigation",
+        "Optimized Oculus Quest standalone 72/90 FPS rendering"
+      ],
+      store: ""
+    },
+    2: {
+      rank: "#02 AA STEAM RELEASE",
+      score: "9.8 / 10",
+      tag: "AA STEAM TITLE",
+      platform: "PC • STEAM",
+      title: "Crimson Tactics: The Rise of The White Banner",
+      desc: "AA turn-based tactical RPG developed at Black March Studios. Features strategic grid combat, spell AI logic, and Steam release.",
+      video: "https://www.youtube.com/embed/jB3Dg2dtQW0?autoplay=1",
+      specs: [
+        "Turn-based tactics grid pathfinding & spell calculation",
+        "Boss AI state machines & combat camera flow",
+        "Published on PC Steam Store"
+      ],
+      store: "https://store.steampowered.com/app/1480810/CrimsonTacticsTheRiseofTheWhite_Banner/"
+    },
+    3: {
+      rank: "#03 5M+ PLAYERS",
+      score: "9.7 / 10",
+      tag: "WEB3 & MULTIPLAYER",
+      platform: "PUN2 • PLAYFAB",
+      title: "YungAlgo Web3 Multiplayer Suite",
+      desc: "Architected 5 shippable titles scaling to over 5,000,000 active users during the Linea Park campaign with Photon PUN2 & PlayFab.",
+      video: "https://drive.google.com/file/d/1UlJ5SeT0yf5Hy3pZNv-kMjZEFS9TX4tc/preview",
+      specs: [
+        "Scaled room matchmaking & state sync for 5M+ players",
+        "Solana / Linea crypto wallet authentication & NFT verification",
+        "Photon PUN2 real-time low-latency multiplayer"
+      ],
+      store: ""
+    },
+    4: {
+      rank: "#04 ENTERPRISE XR",
+      score: "9.6 / 10",
+      tag: "AR / VR",
+      platform: "META QUEST 2/3",
+      title: "Simulanis Industrial XR Simulator",
+      desc: "Enterprise safety and procedural VR training simulations built at Simulanis using XR Interaction Toolkit for Meta Oculus Quest.",
+      video: "https://drive.google.com/file/d/1zJCi4QBff7G6eV_Heav7oHG_HtjanuCn/preview",
+      specs: [
+        "Realistic hand grabbing & tool physics in VR",
+        "Industrial checklist step verification engine",
+        "Meta Quest 2 & 3 standalone APK optimization"
+      ],
+      store: ""
+    },
+    5: {
+      rank: "#05 VR PHYSICS",
+      score: "9.5 / 10",
+      tag: "AR / VR",
+      platform: "OCULUS QUEST",
+      title: "XR Interaction & Spatial Physics",
+      desc: "Spatial hand-tracking, tactile object grabbing, curved canvas menus, and physics-based interactions.",
+      video: "https://www.youtube.com/embed/dj_jWsqDBSA?autoplay=1",
+      specs: [
+        "Oculus SDK integration with hand gesture detection",
+        "Spatial raycasting & diegetic VR UI elements"
+      ],
+      store: ""
+    },
+    6: {
+      rank: "#06 MULTIPLAYER",
+      score: "9.4 / 10",
+      tag: "PHOTON PUN2",
+      platform: "REALTIME NETWORKING",
+      title: "Photon PUN2 Multiplayer Engine",
+      desc: "Real-time room matchmaking lobbies, player transform synchronization, RPC calls, and network state management.",
+      video: "https://www.youtube.com/embed/-VInUgHpBTk?autoplay=1",
+      specs: [
+        "Lag compensation & smooth transform interpolation",
+        "Custom lobby search & room creation flow"
+      ],
+      store: ""
+    },
+    7: {
+      rank: "#07 GRAPHICS & LIGHTING",
+      score: "9.4 / 10",
+      tag: "MOBILE & PC",
+      platform: "HIGH FPS",
+      title: "3D Environment Lighting Showcase",
+      desc: "3D environment rendering, baked global illumination, particle weather systems, and sound effects.",
+      video: "https://www.youtube.com/embed/mf6ibnYrnAU?autoplay=1",
+      specs: [
+        "Occlusion culling & GPU instancing for smooth 60 FPS",
+        "Volumetric fog & realistic lightmaps"
+      ],
+      store: ""
+    },
+    8: {
+      rank: "#08 COMBAT AI",
+      score: "9.3 / 10",
+      tag: "AI SYSTEMS",
+      platform: "GAMEPLAY LOGIC",
+      title: "Enemy AI & Combat Mechanics",
+      desc: "Enemy AI state machines, line-of-sight detection, weapon recoil algorithms, and hit reaction physics.",
+      video: "https://www.youtube.com/embed/jrj3QT4mOyM?autoplay=1",
+      specs: [
+        "Finite State Machine (FSM) enemy decision making",
+        "Dynamic hitboxes & ragdoll physics transitions"
+      ],
+      store: ""
+    },
+    9: {
+      rank: "#09 AR FOUNDATION",
+      score: "9.3 / 10",
+      tag: "AR FOUNDATION",
+      platform: "MOBILE AR",
+      title: "Mobile AR Plane Detection",
+      desc: "Augmented reality surface detection, raycasting, and interactive 3D model placement using AR Foundation.",
+      video: "https://drive.google.com/file/d/1NEj9m6oPL8kMdRJ_getv2W0pL2xu4FJ8/preview",
+      specs: [
+        "ARCore & ARKit plane tracking algorithms",
+        "Touch gesture 3D object rotation & scale control"
+      ],
+      store: ""
+    },
+    10: {
+      rank: "#10 VR CINEMA",
+      score: "9.2 / 10",
+      tag: "VR CINEMA",
+      platform: "GOOGLE PLAY STORE",
+      title: "Irusu VR Cinema & Educational App",
+      desc: "360° video playback, drive-in theater modes, and multiplayer anatomy education app published on Google Play.",
+      video: "https://drive.google.com/file/d/1oeNAinVpS1Cg0AN6HsgAmsE9Rj3zCdbI/preview",
+      specs: [
+        "360° video texture rendering & spatial audio",
+        "Published on Google Play Store"
+      ],
+      store: "https://play.google.com/store/apps/details?id=com.lrusu.HumanAnatomyPro"
+    },
+    11: {
+      rank: "#11 VR CURVED UI",
+      score: "9.1 / 10",
+      tag: "VR UI CANVAS",
+      platform: "CURVED CANVAS",
+      title: "Curved VR UI & Eye Selection",
+      desc: "Diegetic VR user interfaces, curved canvas rendering, and gaze/pointer menu selection.",
+      video: "https://drive.google.com/file/d/1LwCNfPA3Ei0pzery_6nVf5EQ9rHzYXDa/preview",
+      specs: [
+        "Diegetic 3D UI panel positioning in virtual space",
+        "Gaze timer & VR controller laser pointer"
+      ],
+      store: ""
+    }
+  };
+
+  const gameDetailModal = document.getElementById('gameDetailModal');
+  const closeDetailBtn = document.querySelector('.close-detail');
+
+  const mRank = document.getElementById('m-rank');
+  const mScore = document.getElementById('m-score');
+  const mTag = document.getElementById('m-tag');
+  const mPlatform = document.getElementById('m-platform');
+  const mTitle = document.getElementById('m-title');
+  const mDesc = document.getElementById('m-desc');
+  const mVideoIframe = document.getElementById('m-video-iframe');
+  const mSpecsList = document.getElementById('m-specs-list');
+  const mStoreBtn = document.getElementById('m-store-btn');
+
+  gameCards.forEach(card => {
+    card.addEventListener('click', () => {
+      sound.playClick();
+      const id = card.dataset.id;
+      const data = gameDetailData[id];
+
+      if (data && gameDetailModal) {
+        if (mRank) mRank.textContent = data.rank;
+        if (mScore) mScore.innerHTML = `<i class="fa-solid fa-star"></i> ${data.score}`;
+        if (mTag) mTag.textContent = data.tag;
+        if (mPlatform) mPlatform.textContent = data.platform;
+        if (mTitle) mTitle.textContent = data.title;
+        if (mDesc) mDesc.textContent = data.desc;
+        if (mVideoIframe) mVideoIframe.src = data.video;
+
+        if (mSpecsList) {
+          mSpecsList.innerHTML = '';
+          data.specs.forEach(spec => {
+            const li = document.createElement('li');
+            li.textContent = spec;
+            mSpecsList.appendChild(li);
+          });
+        }
+
+        if (mStoreBtn) {
+          if (data.store) {
+            mStoreBtn.href = data.store;
+            mStoreBtn.classList.remove('hidden');
+          } else {
+            mStoreBtn.classList.add('hidden');
+          }
+        }
+
+        gameDetailModal.style.display = 'flex';
+      }
+    });
+  });
+
+  if (closeDetailBtn) {
+    closeDetailBtn.addEventListener('click', () => {
+      if (gameDetailModal) {
+        gameDetailModal.style.display = 'none';
+        if (mVideoIframe) mVideoIframe.src = '';
+      }
+    });
+  }
+
+  if (gameDetailModal) {
+    gameDetailModal.addEventListener('click', (e) => {
+      if (e.target === gameDetailModal) {
+        gameDetailModal.style.display = 'none';
+        if (mVideoIframe) mVideoIframe.src = '';
+      }
+    });
+  }
+
+  /* ==========================================
+     6. INTERACTIVE CONSOLE ENGINE
      ========================================== */
   const termInput = document.getElementById('term-input');
   const termOutput = document.getElementById('term-output');
@@ -346,16 +534,17 @@ document.addEventListener('DOMContentLoaded', () => {
         resLine.innerHTML = 'Available commands: <span class="highlight">skills</span>, <span class="highlight">projects</span>, <span class="highlight">experience</span>, <span class="highlight">play</span>, <span class="highlight">cv</span>, <span class="highlight">clear</span>';
         break;
       case 'skills':
-        resLine.innerHTML = 'Scrolling to Skills & Tech Stack...';
+        resLine.innerHTML = 'Scrolling to Tech Loadout...';
         document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' });
         break;
       case 'projects':
-        resLine.innerHTML = 'Scrolling to Project Showcase...';
-        document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+      case 'showcase':
+        resLine.innerHTML = 'Scrolling to Ranked Game Showcase...';
+        document.getElementById('showcase')?.scrollIntoView({ behavior: 'smooth' });
         break;
       case 'experience':
       case 'quests':
-        resLine.innerHTML = 'Scrolling to Work Experience...';
+        resLine.innerHTML = 'Scrolling to Experience Tiers...';
         document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' });
         break;
       case 'play':
@@ -392,56 +581,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   termChips.forEach(chip => {
     chip.addEventListener('click', () => {
-      const cmd = chip.dataset.cmd;
-      executeCommand(cmd);
+      executeCommand(chip.dataset.cmd);
     });
   });
 
   /* ==========================================
-     6. VIDEO MODAL ENGINE
-     ========================================== */
-  const videoModal = document.getElementById('videoModal');
-  const modalVideo = document.getElementById('modalVideo');
-  const closeVideoBtns = document.querySelectorAll('.close');
-
-  document.querySelectorAll('.project-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const videoUrl = card.dataset.video;
-      if (videoUrl && videoModal && modalVideo) {
-        sound.playClick();
-        videoModal.style.display = 'flex';
-        modalVideo.src = videoUrl.includes('youtube') ? videoUrl + '?autoplay=1' : videoUrl;
-      }
-    });
-  });
-
-  closeVideoBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      if (videoModal && modalVideo) {
-        videoModal.style.display = 'none';
-        modalVideo.src = '';
-      }
-    });
-  });
-
-  if (videoModal) {
-    videoModal.addEventListener('click', (e) => {
-      if (e.target === videoModal) {
-        videoModal.style.display = 'none';
-        modalVideo.src = '';
-      }
-    });
-  }
-
-  /* ==========================================
-     7. MULTI-GAME ARCADE HUB ENGINE (3 GAMES)
+     7. MULTI-GAME ARCADE HUB ENGINE
      ========================================== */
   const arcadeModal = document.getElementById('arcadeModal');
   const arcadeLaunchBtn = document.getElementById('arcade-launch-btn');
-  const heroGameBtn = document.getElementById('hero-game-btn');
   const closeArcadeBtn = document.getElementById('close-arcade');
-
   const gameSelectBtns = document.querySelectorAll('.game-tab-btn');
+
   const gameStartOverlay = document.getElementById('game-start-overlay');
   const gameOverOverlay = document.getElementById('game-over-overlay');
   const startGameBtn = document.getElementById('start-game-btn');
@@ -460,7 +611,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentGame = 'defender';
   let gameRunning = false;
   let gameScore = 0;
-  let highScore = localStorage.getItem('cyber_highscore_' + currentGame) || 0;
+  let highScore = localStorage.getItem('nasty_highscore_' + currentGame) || 0;
   if (gameHighScoreEl) gameHighScoreEl.textContent = highScore;
 
   function openArcade() {
@@ -475,7 +626,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (arcadeLaunchBtn) arcadeLaunchBtn.addEventListener('click', openArcade);
-  if (heroGameBtn) heroGameBtn.addEventListener('click', openArcade);
   if (closeArcadeBtn) closeArcadeBtn.addEventListener('click', closeArcade);
 
   function switchGame(gameType) {
@@ -486,7 +636,7 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.toggle('active', btn.dataset.game === gameType);
     });
 
-    highScore = localStorage.getItem('cyber_highscore_' + currentGame) || 0;
+    highScore = localStorage.getItem('nasty_highscore_' + currentGame) || 0;
     if (gameHighScoreEl) gameHighScoreEl.textContent = highScore;
     if (gameScoreEl) gameScoreEl.textContent = '0';
 
@@ -521,7 +671,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // GAME ENGINE
   if (arcadeCanvas) {
     const actx = arcadeCanvas.getContext('2d');
     let targets = [];
@@ -560,7 +709,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     arcadeCanvas.addEventListener('click', (e) => {
       if (!gameRunning || currentGame !== 'defender') return;
-      sound.playShoot();
+      sound.playClick();
 
       const rect = arcadeCanvas.getBoundingClientRect();
       const clickX = (e.clientX - rect.left) * (arcadeCanvas.width / rect.width);
@@ -571,18 +720,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const dist = Math.hypot(clickX - t.x, clickY - t.y);
 
         if (dist < t.radius + 10) {
-          sound.playExplode();
           gameScore += 10;
           if (gameScoreEl) gameScoreEl.textContent = gameScore;
 
           for (let p = 0; p < 12; p++) {
             explosions.push({
-              x: t.x,
-              y: t.y,
+              x: t.x, y: t.y,
               vx: (Math.random() - 0.5) * 6,
               vy: (Math.random() - 0.5) * 6,
-              life: 1,
-              color: t.color
+              life: 1, color: t.color
             });
           }
           targets.splice(i, 1);
@@ -597,9 +743,8 @@ document.addEventListener('DOMContentLoaded', () => {
       actx.fillStyle = '#060911';
       actx.fillRect(0, 0, arcadeCanvas.width, arcadeCanvas.height);
 
-      // GAME 1: CYBER DEFENDER
       if (currentGame === 'defender') {
-        actx.strokeStyle = 'rgba(0, 243, 255, 0.6)';
+        actx.strokeStyle = 'rgba(6, 182, 212, 0.6)';
         actx.lineWidth = 2;
         actx.beginPath();
         actx.moveTo(0, arcadeCanvas.height - 20);
@@ -614,7 +759,7 @@ document.addEventListener('DOMContentLoaded', () => {
             y: -20,
             speed: 1.2 + Math.random() * 1.5 + (gameScore / 100),
             radius: 16,
-            color: Math.random() > 0.3 ? '#00f3ff' : '#ff0055'
+            color: Math.random() > 0.3 ? '#06b6d4' : '#ec4899'
           });
         }
 
@@ -635,12 +780,9 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
           }
         }
-      }
-
-      // GAME 2: NEON DODGER
-      else if (currentGame === 'dodger') {
-        actx.fillStyle = '#00f3ff';
-        actx.shadowColor = '#00f3ff';
+      } else if (currentGame === 'dodger') {
+        actx.fillStyle = '#06b6d4';
+        actx.shadowColor = '#06b6d4';
         actx.shadowBlur = 15;
         actx.beginPath();
         actx.moveTo(playerX, arcadeCanvas.height - 40);
@@ -675,8 +817,8 @@ document.addEventListener('DOMContentLoaded', () => {
           const o = obstacles[i];
           o.y += o.speed;
 
-          actx.fillStyle = '#ff0055';
-          actx.shadowColor = '#ff0055';
+          actx.fillStyle = '#ec4899';
+          actx.shadowColor = '#ec4899';
           actx.shadowBlur = 10;
           actx.fillRect(o.x, o.y, o.width, o.height);
           actx.shadowBlur = 0;
@@ -702,8 +844,8 @@ document.addEventListener('DOMContentLoaded', () => {
           const p = powerups[i];
           p.y += p.speed;
 
-          actx.fillStyle = '#00ff66';
-          actx.shadowColor = '#00ff66';
+          actx.fillStyle = '#10b981';
+          actx.shadowColor = '#10b981';
           actx.shadowBlur = 12;
           actx.beginPath();
           actx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
@@ -711,7 +853,6 @@ document.addEventListener('DOMContentLoaded', () => {
           actx.shadowBlur = 0;
 
           if (Math.hypot(playerX - p.x, (arcadeCanvas.height - 25) - p.y) < p.radius + 18) {
-            sound.playPowerup();
             gameScore += 25;
             if (gameScoreEl) gameScoreEl.textContent = gameScore;
             powerups.splice(i, 1);
@@ -744,14 +885,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function endGame() {
       gameRunning = false;
-      sound.playExplode();
-
       if (gameScore > highScore) {
         highScore = gameScore;
-        localStorage.setItem('cyber_highscore_' + currentGame, highScore);
+        localStorage.setItem('nasty_highscore_' + currentGame, highScore);
         if (gameHighScoreEl) gameHighScoreEl.textContent = highScore;
       }
-
       if (finalScoreEl) finalScoreEl.textContent = gameScore;
       if (gameOverOverlay) gameOverOverlay.classList.remove('hidden');
     }
@@ -787,7 +925,6 @@ document.addEventListener('DOMContentLoaded', () => {
               const [c1, c2] = flippedCards;
 
               if (c1.dataset.icon === c2.dataset.icon) {
-                sound.playPowerup();
                 c1.classList.add('matched');
                 c2.classList.add('matched');
                 flippedCards = [];
@@ -796,9 +933,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 matchedCount += 2;
 
                 if (matchedCount === deck.length) {
-                  setTimeout(() => {
-                    endGame();
-                  }, 500);
+                  setTimeout(() => { endGame(); }, 500);
                 }
               } else {
                 setTimeout(() => {
@@ -820,8 +955,17 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ==========================================
-     8. COMMS & EMAIL COPY
+     8. SCROLL REVEAL & COMMS
      ========================================== */
+  const revealElements = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('active');
+    });
+  }, { threshold: 0.12 });
+
+  revealElements.forEach(el => observer.observe(el));
+
   const copyBtn = document.getElementById('copy-email-btn');
   const copyStatus = document.getElementById('copy-status');
   const emailText = document.getElementById('email-text');
@@ -831,9 +975,7 @@ document.addEventListener('DOMContentLoaded', () => {
       navigator.clipboard.writeText(emailText.textContent.trim()).then(() => {
         sound.playClick();
         if (copyStatus) copyStatus.textContent = 'Copied!';
-        setTimeout(() => {
-          if (copyStatus) copyStatus.textContent = 'Copy';
-        }, 2000);
+        setTimeout(() => { if (copyStatus) copyStatus.textContent = 'Copy'; }, 2000);
       });
     });
   }
@@ -844,7 +986,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const responseEl = document.getElementById('form-response');
 
     if (responseEl) {
-      responseEl.style.color = '#00ff66';
+      responseEl.style.color = '#10b981';
       responseEl.innerHTML = `<i class="fa-solid fa-circle-check"></i> Message received from ${name}. I will get back to you shortly!`;
     }
     document.getElementById('contact-form').reset();
