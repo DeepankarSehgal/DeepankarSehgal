@@ -1,6 +1,6 @@
 /* ==========================================================================
-   DEEPANKAR SEHGAL · 3D COASTAL WORKBENCH PORTFOLIO
-   Design: Modern Coastal Architecture Studio, Ocean Vista & 3D Interactive Desk
+   DEEPANKAR SEHGAL · 3D WORKBENCH PORTFOLIO · BENGALURU, INDIA
+   Design: Modern Tech Architecture Studio, Bengaluru City Skyline & Running Traffic Vista
    ========================================================================== */
 
 :root {
@@ -10,8 +10,8 @@
   --paper-trans: rgba(248, 250, 246, 0.85);
   --paper-solid: #f4f6f0;
   --line: rgba(18, 28, 23, 0.12);
-  --accent: #0284c7;        /* Coastal Ocean Cyan */
-  --accent-warm: #d95b26;   /* Coastal Sunset Coral */
+  --accent: #0284c7;        /* Tech Sapphire Cyan */
+  --accent-warm: #d95b26;   /* Sunset Amber Coral */
   --wall: #d9e3dc;
   --display: "Bricolage Grotesque", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --body: "Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -795,6 +795,21 @@ body.dusk .device-pill:hover {
   transform: translateY(-1px);
   box-shadow: 0 4px 14px rgba(2, 132, 199, 0.3);
   outline: none;
+}
+
+.linkbtn.steam {
+  background: linear-gradient(135deg, #171a21 0%, #1b2838 50%, #2a475e 100%);
+  color: #c7d5e0;
+  border: 1px solid #66c0f4;
+  box-shadow: 0 4px 16px rgba(102, 192, 244, 0.25);
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.linkbtn.steam:hover {
+  background: #66c0f4;
+  color: #171a21;
+  box-shadow: 0 6px 22px rgba(102, 192, 244, 0.45);
 }
 
 .contact-box {

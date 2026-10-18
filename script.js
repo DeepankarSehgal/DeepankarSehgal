@@ -6,10 +6,10 @@
  * - Real-Time Day/Night Sun Synchronization based on Indian Standard Time (IST)
  * - Live Bengaluru Weather & US AQI Integration (Open-Meteo API)
  * - Continuous Live Video Streaming across PC Monitor, VR Stereo Display, and Mobile Phone
- * - Tropical Beach Shoreline with Animated Beach Volleyball, Players, Umbrellas & Palm Trees
+ * - Running Bengaluru Highway Traffic, Electronic City Elevated Flyover & Namma Metro Viaduct
  * - 100% Reliable 3D Device & Prop Click Raycasting (VR, PC, Mobile, Notes, Lamp, Speakers, Mug)
- * - 9 VR & XR Projects, 8 PC & Steam AA Projects, 5 Mobile & Web3 Projects
- * - Procedural Ocean Surf Audio Synthesizer (Web Audio API)
+ * - 9 VR & XR Projects, 8 PC & Steam AA Projects (including Crimson Tactics official Steam gameplay trailer & store link)
+ * - Procedural Bengaluru City Ambient Audio Synthesizer (Web Audio API)
  */
 
 (function () {
@@ -174,17 +174,18 @@
       platform: 'Windows PC · AA Title Releases',
       projects: [
         {
-          clip: 'stadpc',
-          name: 'Crimson Tactics: The White Banner',
+          clip: 'crimson',
+          name: 'Crimson Tactics: The Rise of The White Banner',
           kind: 'AA Turn-Based Tactical RPG',
-          blurb: 'A commercial AA tactical turn-based RPG released on Steam PC by Black March Studios. Features a grid battle system, elevation-based tactical advantages, complex spell mechanics, and responsive enemy AI.',
-          note: 'Engineered battle grid pathfinding, turn initiative queues, inventory management, and tactical combat AI.',
+          store: 'https://store.steampowered.com/app/1480810/Crimson_Tactics_The_Rise_of_The_White_Banner/',
+          blurb: 'A commercial AA tactical turn-based RPG released on Steam PC by Black March Studios. Features a grid battle system, elevation-based tactical advantages, complex spell mechanics, mounted combat, and responsive enemy AI.',
+          note: 'Engineered battle grid pathfinding, turn initiative queues, inventory management, Steamworks SDK integration, and tactical combat AI.',
           teardown: [
-            "Crimson Tactics required deep algorithmic precision. Combat takes place on a high-resolution 3D grid where elevation, terrain friction, facing direction, and weapon range govern hit probability and critical damage.",
+            "Crimson Tactics required deep algorithmic precision. Combat takes place on a high-resolution 3D grid where elevation, terrain friction, facing direction, mounted units, and weapon range govern hit probability and critical damage.",
             "I developed the tactical AI decision tree. Instead of brute-forcing every potential move on the board, the AI calculates heatmaps based on threat ranges, unit squishiness, and elemental affinities, making battles feel punishingly intelligent without stuttering the framerate.",
             "Integrated Steamworks SDK for Cloud Saves, Achievements, and Steam Deck controller mapping."
           ],
-          tags: ['Unity', 'Steam AA Release', 'Tactical AI', 'Grid Pathfinding', 'C#']
+          tags: ['Unity', 'Steam AA Release', 'Tactical AI', 'Grid Pathfinding', 'C#', 'Steam Deck']
         },
         {
           clip: 'stadpc',
@@ -652,7 +653,7 @@
   backWallGroup.add(glassMesh);
 
   /* ==========================================================================
-     BEACH SHORELINE, ANIMATED VOLLEYBALL, PEOPLE & OCEAN VISTA
+     BENGALURU SKY DOME & ATMOSPHERIC LIGHTING
      ========================================================================== */
 
   var skyUniforms = {
@@ -697,371 +698,549 @@
   var skyMesh = new THREE.Mesh(skyGeo, skyMat);
   scene.add(skyMesh);
 
-  /* Golden Sand Beach Terrain outside the window */
-  var sandMat = new THREE.MeshStandardMaterial({
-    color: srgb(0xe8d2b0), // Warm golden sand
-    roughness: 0.96,
+  /* ==========================================================================
+     RUNNING BENGALURU TRAFFIC, ELEVATED FLYOVER, NAMMA METRO & TECH CITY SKYLINE
+     ========================================================================== */
+
+  var bengaluruGroup = new THREE.Group();
+  scene.add(bengaluruGroup);
+
+  var trafficVehicles = [];
+  var cityBeacons = [];
+  var cityStreetLights = [];
+  var cityNightMats = [];
+
+  // Ground base terrain (Bengaluru Deccan plateau greenery & soil)
+  var groundMat = new THREE.MeshStandardMaterial({
+    color: srgb(0x2a3e26),
+    roughness: 0.95,
     metalness: 0.02
   });
+  var groundMesh = new THREE.Mesh(new THREE.PlaneGeometry(600, 300), groundMat);
+  groundMesh.rotation.x = -Math.PI / 2;
+  groundMesh.position.set(0, -5.1, -140);
+  groundMesh.receiveShadow = true;
+  bengaluruGroup.add(groundMesh);
 
-  var beachGeo = new THREE.PlaneGeometry(800, 180, 48, 48);
-  var beachMesh = new THREE.Mesh(beachGeo, sandMat);
-  beachMesh.rotation.x = -Math.PI / 2 + 0.03; // Gentle slope toward sea
-  beachMesh.position.set(0, -6.1, -85);
-  beachMesh.receiveShadow = true;
-  scene.add(beachMesh);
-
-  /* Shoreline Wave Foam Line (Advances and retreats) */
-  var foamMat = new THREE.MeshBasicMaterial({
-    color: 0xffffff,
-    transparent: true,
-    opacity: 0.45,
-    side: THREE.DoubleSide
+  // Ground Arterial Highway (Hosur Road / Outer Ring Road 6-Lane Corridor)
+  var roadMat = new THREE.MeshStandardMaterial({
+    color: srgb(0x1e2429),
+    roughness: 0.88,
+    metalness: 0.1
   });
-  var foamRibbon = new THREE.Mesh(new THREE.PlaneGeometry(800, 4.5), foamMat);
-  foamRibbon.rotation.x = -Math.PI / 2;
-  foamRibbon.position.set(0, -6.45, -165);
-  scene.add(foamRibbon);
+  var roadMesh = new THREE.Mesh(new THREE.PlaneGeometry(450, 18), roadMat);
+  roadMesh.rotation.x = -Math.PI / 2;
+  roadMesh.position.set(0, -5.02, -22);
+  roadMesh.receiveShadow = true;
+  bengaluruGroup.add(roadMesh);
 
-  /* Gerstner Waves Real-Time Water Shader beyond the beach */
-  var oceanUniforms = {
-    time: { value: 0 },
-    waterDeep: { value: new THREE.Color(0x052842) },
-    waterShallow: { value: new THREE.Color(0x0e7490) },
-    sunDir: { value: skyUniforms.sunDir.value },
-    sunColor: { value: new THREE.Color(0xffedd5) },
-    skyHorColor: { value: skyUniforms.bottomColor.value }
-  };
+  // Central Green Divider Median with Curbs
+  var curbMat = new THREE.MeshStandardMaterial({ color: srgb(0x94a3b8), roughness: 0.7 });
+  var medianCurb = new THREE.Mesh(new THREE.BoxGeometry(450, 0.22, 1.4), curbMat);
+  medianCurb.position.set(0, -4.95, -22);
+  bengaluruGroup.add(medianCurb);
 
-  var oceanGeo = new THREE.PlaneGeometry(4500, 2600, 128, 128);
-  var oceanMat = new THREE.ShaderMaterial({
-    uniforms: oceanUniforms,
-    vertexShader: [
-      'uniform float time;',
-      'varying vec3 vWorldPos;',
-      'varying vec3 vNormal;',
-      'varying float vWaveHeight;',
-      'vec3 gerstnerWave(vec2 dir, float steepness, float wavelength, vec2 pos, inout vec3 tangent, inout vec3 binormal) {',
-      '  float k = 2.0 * 3.14159 / wavelength;',
-      '  float c = sqrt(9.8 / k);',
-      '  vec2 d = normalize(dir);',
-      '  float f = k * (dot(d, pos) - c * time * 0.8);',
-      '  float a = steepness / k;',
-      '  tangent += vec3(-d.x * d.x * (steepness * sin(f)), d.x * (steepness * cos(f)), -d.x * d.y * (steepness * sin(f)));',
-      '  binormal += vec3(-d.x * d.y * (steepness * sin(f)), d.y * (steepness * cos(f)), -d.y * d.y * (steepness * sin(f)));',
-      '  return vec3(d.x * (a * cos(f)), a * sin(f), d.y * (a * cos(f)));',
-      '}',
-      'void main() {',
-      '  vec3 pos = position;',
-      '  vec3 tangent = vec3(1.0, 0.0, 0.0);',
-      '  vec3 binormal = vec3(0.0, 0.0, 1.0);',
-      '  vec3 p = pos;',
-      '  p += gerstnerWave(vec2(1.0, 0.3), 0.22, 60.0, pos.xy, tangent, binormal);',
-      '  p += gerstnerWave(vec2(0.7, 0.7), 0.18, 35.0, pos.xy, tangent, binormal);',
-      '  p += gerstnerWave(vec2(-0.2, 1.0), 0.12, 18.0, pos.xy, tangent, binormal);',
-      '  vec3 norm = normalize(cross(binormal, tangent));',
-      '  vWaveHeight = p.z - pos.z;',
-      '  vec4 worldPos = modelMatrix * vec4(p, 1.0);',
-      '  vWorldPos = worldPos.xyz;',
-      '  vNormal = normalize((modelMatrix * vec4(norm, 0.0)).xyz);',
-      '  gl_Position = projectionMatrix * viewMatrix * worldPos;',
-      '}'
-    ].join('\n'),
-    fragmentShader: [
-      'uniform vec3 waterDeep;',
-      'uniform vec3 waterShallow;',
-      'uniform vec3 sunDir;',
-      'uniform vec3 sunColor;',
-      'uniform vec3 skyHorColor;',
-      'varying vec3 vWorldPos;',
-      'varying vec3 vNormal;',
-      'varying float vWaveHeight;',
-      'void main() {',
-      '  vec3 viewDir = normalize(cameraPosition - vWorldPos);',
-      '  vec3 norm = normalize(vNormal);',
-      '  float fresnel = pow(1.0 - max(dot(viewDir, norm), 0.0), 3.5);',
-      '  vec3 baseWater = mix(waterDeep, waterShallow, fresnel * 0.75 + smoothstep(-1.0, 2.0, vWaveHeight) * 0.25);',
-      '  vec3 refDir = reflect(-sunDir, norm);',
-      '  float specSharp = pow(max(dot(viewDir, refDir), 0.0), 110.0);',
-      '  float specBroad = pow(max(dot(viewDir, refDir), 0.0), 16.0);',
-      '  vec3 specular = sunColor * (specSharp * 3.2 + specBroad * 0.4);',
-      '  float foam = smoothstep(1.3, 2.2, vWaveHeight);',
-      '  vec3 oceanColor = mix(baseWater + specular, vec3(0.92, 0.96, 0.98), foam * 0.4);',
-      '  float dist = length(vWorldPos.xz);',
-      '  float fog = smoothstep(700.0, 2600.0, dist);',
-      '  gl_FragColor = vec4(mix(oceanColor, skyHorColor, fog), 1.0);',
-      '}'
-    ].join('\n')
+  // Tropical flowering bougainvillea & roadside shrubbery on median
+  var shrubMat1 = new THREE.MeshStandardMaterial({ color: srgb(0x1e3a1f), roughness: 0.9 });
+  var shrubMat2 = new THREE.MeshStandardMaterial({ color: srgb(0xbe185d), roughness: 0.85 }); // Flowering pink bougainvillea
+  for (var sb = -120; sb <= 120; sb += 9) {
+    var shrub = new THREE.Mesh(new THREE.SphereGeometry(0.55 + Math.random() * 0.25, 8, 8), (sb % 18 === 0) ? shrubMat2 : shrubMat1);
+    shrub.scale.set(1.4, 0.7, 0.9);
+    shrub.position.set(sb + (Math.random() - 0.5) * 2, -4.8, -22);
+    bengaluruGroup.add(shrub);
+  }
+
+  // Dashed White Lane Markings
+  var laneLineMat = new THREE.MeshBasicMaterial({ color: 0xe2e8f0 });
+  [-26, -24, -20, -18].forEach(function (lz) {
+    for (var lx = -140; lx < 140; lx += 8) {
+      var dash = new THREE.Mesh(new THREE.PlaneGeometry(4.5, 0.18), laneLineMat);
+      dash.rotation.x = -Math.PI / 2;
+      dash.position.set(lx, -5.0, lz);
+      bengaluruGroup.add(dash);
+    }
   });
 
-  var oceanMesh = new THREE.Mesh(oceanGeo, oceanMat);
-  oceanMesh.rotation.x = -Math.PI / 2;
-  oceanMesh.position.set(0, -6.6, -1450);
-  scene.add(oceanMesh);
+  /* Procedural Lit Office Windows Texture for Bengaluru Tech Parks */
+  function createTechParkWindowTexture() {
+    var c = document.createElement('canvas');
+    c.width = 512; c.height = 512;
+    var ctx = c.getContext('2d');
+    ctx.fillStyle = '#0f172a';
+    ctx.fillRect(0, 0, 512, 512);
 
-  /* Tropical Coconut Palm Trees along the Beach */
-  var palmMat = new THREE.MeshStandardMaterial({ color: srgb(0x4a3a2d), roughness: 0.9 });
-  var palmFrondMat = new THREE.MeshStandardMaterial({ color: srgb(0x2d6b38), roughness: 0.5, side: THREE.DoubleSide });
+    for (var wy = 8; wy < 512; wy += 20) {
+      for (var wx = 6; wx < 512; wx += 16) {
+        var isLit = Math.random() > 0.35;
+        if (isLit) {
+          var warm = Math.random() > 0.4;
+          ctx.fillStyle = warm ? '#fef08a' : '#7dd3fc';
+          ctx.fillRect(wx, wy, 10, 13);
+        } else {
+          ctx.fillStyle = '#1e293b';
+          ctx.fillRect(wx, wy, 10, 13);
+        }
+      }
+    }
+    var tex = new THREE.CanvasTexture(c);
+    tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+    tex.repeat.set(3, 8);
+    return tex;
+  }
+  var techWindowTex = createTechParkWindowTexture();
 
-  function addPalmTree(x, z, scale) {
-    var palm = new THREE.Group();
-    palm.position.set(x, -6.0, z);
-    palm.scale.setScalar(scale || 1.0);
-    scene.add(palm);
+  /* Bengaluru Tech Skyline (Prestige, Manyata, Electronic City IT Parks) */
+  var bldgMat = new THREE.MeshStandardMaterial({
+    color: srgb(0x1e293b),
+    roughness: 0.4,
+    metalness: 0.6,
+    map: techWindowTex,
+    emissiveMap: techWindowTex,
+    emissive: new THREE.Color(0x000000),
+    emissiveIntensity: 0.0
+  });
+  cityNightMats.push(bldgMat);
 
-    // Curved Trunk
-    var curve = new THREE.QuadraticBezierCurve3(
-      new THREE.Vector3(0, 0, 0),
-      new THREE.Vector3(1.5, 7, 0.5),
-      new THREE.Vector3(2.5, 15, 1.2)
-    );
-    var trunkGeo = new THREE.TubeGeometry(curve, 16, 0.45, 8, false);
-    var trunk = new THREE.Mesh(trunkGeo, palmMat);
-    trunk.castShadow = true;
-    palm.add(trunk);
+  var beaconMat = new THREE.MeshBasicMaterial({ color: 0xef4444 });
 
-    // Arching Fronds
-    for (var f = 0; f < 8; f++) {
-      var frondShape = new THREE.Shape();
-      frondShape.moveTo(0, 0);
-      frondShape.quadraticCurveTo(0.6, 2.5, 0.8, 5.0);
-      frondShape.quadraticCurveTo(0, 6.5, -0.8, 5.0);
-      frondShape.quadraticCurveTo(-0.6, 2.5, 0, 0);
-      var frondGeo = new THREE.ShapeGeometry(frondShape);
-      var frond = new THREE.Mesh(frondGeo, palmFrondMat);
-      var ang = (f / 8) * Math.PI * 2;
-      frond.position.set(2.5, 15, 1.2);
-      frond.rotation.y = ang;
-      frond.rotation.x = 0.55;
-      frond.castShadow = true;
-      palm.add(frond);
+  function addTechBuilding(x, z, w, h, d) {
+    var bGroup = new THREE.Group();
+    bGroup.position.set(x, -5.0 + h / 2, z);
+    bengaluruGroup.add(bGroup);
+
+    var mainB = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), bldgMat);
+    bGroup.add(mainB);
+
+    // Rooftop utility penthouse & communication mast
+    var topH = Math.min(4, h * 0.08);
+    var topBox = new THREE.Mesh(new THREE.BoxGeometry(w * 0.5, topH, d * 0.5), curbMat);
+    topBox.position.y = h / 2 + topH / 2;
+    bGroup.add(topBox);
+
+    var mast = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.22, 10, 8), curbMat);
+    mast.position.y = h / 2 + topH + 5;
+    bGroup.add(mast);
+
+    var beacon = new THREE.Mesh(new THREE.SphereGeometry(0.45, 8, 8), beaconMat);
+    beacon.position.y = h / 2 + topH + 10;
+    bGroup.add(beacon);
+    cityBeacons.push(beacon);
+  }
+
+  // Skyline towers across backdrop
+  addTechBuilding(-125, -160, 36, 75, 34);
+  addTechBuilding(-85, -145, 28, 62, 28);
+  addTechBuilding(-52, -180, 42, 95, 38);
+  addTechBuilding(-20, -150, 32, 68, 30);
+  addTechBuilding(16, -170, 40, 88, 36);
+  addTechBuilding(58, -145, 30, 72, 32);
+  addTechBuilding(92, -165, 38, 82, 34);
+  addTechBuilding(130, -150, 34, 65, 30);
+
+  /* Elevated Expressway / Flyover (Electronic City / Hebbal Elevated Highway) */
+  var flyoverGroup = new THREE.Group();
+  flyoverGroup.position.set(0, 1.85, -34);
+  bengaluruGroup.add(flyoverGroup);
+
+  // Highway Deck
+  var flyDeckMat = new THREE.MeshStandardMaterial({ color: srgb(0x334155), roughness: 0.8, metalness: 0.15 });
+  var flyDeck = new THREE.Mesh(new THREE.BoxGeometry(450, 0.55, 10.5), flyDeckMat);
+  flyoverGroup.add(flyDeck);
+
+  // Parapet Crash Barriers
+  var barrierMat = new THREE.MeshStandardMaterial({ color: srgb(0x64748b), roughness: 0.6 });
+  var barNorth = new THREE.Mesh(new THREE.BoxGeometry(450, 0.95, 0.35), barrierMat);
+  barNorth.position.set(0, 0.55, -5.1);
+  flyoverGroup.add(barNorth);
+
+  var barSouth = new THREE.Mesh(new THREE.BoxGeometry(450, 0.95, 0.35), barrierMat);
+  barSouth.position.set(0, 0.55, 5.1);
+  flyoverGroup.add(barSouth);
+
+  var barMedian = new THREE.Mesh(new THREE.BoxGeometry(450, 0.7, 0.3), barrierMat);
+  barMedian.position.set(0, 0.45, 0);
+  flyoverGroup.add(barMedian);
+
+  // Solid Concrete Support Pillars down to ground level
+  var pillarMat = new THREE.MeshStandardMaterial({ color: srgb(0x475569), roughness: 0.85 });
+  for (var px = -135; px <= 135; px += 30) {
+    var pillar = new THREE.Mesh(new THREE.CylinderGeometry(0.85, 0.95, 6.9, 16), pillarMat);
+    pillar.position.set(px, -3.4, 0);
+    flyoverGroup.add(pillar);
+
+    // Cross beam cap
+    var cap = new THREE.Mesh(new THREE.BoxGeometry(2.4, 0.7, 9.8), pillarMat);
+    cap.position.set(px, -0.4, 0);
+    flyoverGroup.add(cap);
+  }
+
+  // Dual-Head Elevated Highway Streetlights on Flyover Median
+  var flyPoleMat = new THREE.MeshStandardMaterial({ color: srgb(0x1e293b), roughness: 0.4, metalness: 0.8 });
+  var streetLightBulbMat = new THREE.MeshBasicMaterial({ color: 0xfff3c4 });
+
+  for (var sx = -120; sx <= 120; sx += 32) {
+    var pole = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.09, 3.8, 10), flyPoleMat);
+    pole.position.set(sx, 2.0, 0);
+    flyoverGroup.add(pole);
+
+    // Twin curved arms
+    [-2.2, 2.2].forEach(function (oz) {
+      var arm = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 2.4, 8), flyPoleMat);
+      arm.rotation.x = oz > 0 ? 0.7 : -0.7;
+      arm.position.set(sx, 3.6, oz * 0.4);
+      flyoverGroup.add(arm);
+
+      var lampHead = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.12, 0.7), flyPoleMat);
+      lampHead.position.set(sx, 4.3, oz);
+      flyoverGroup.add(lampHead);
+
+      var bulb = new THREE.Mesh(new THREE.PlaneGeometry(0.3, 0.6), streetLightBulbMat);
+      bulb.rotation.x = Math.PI / 2;
+      bulb.position.set(sx, 4.22, oz);
+      flyoverGroup.add(bulb);
+    });
+
+    if (Math.abs(sx) <= 60) {
+      var sLight = new THREE.PointLight(0xffedd5, 0, 18, 2);
+      sLight.position.set(sx, 4.2, 0);
+      flyoverGroup.add(sLight);
+      cityStreetLights.push(sLight);
     }
   }
 
-  addPalmTree(-22, -45, 0.95);
-  addPalmTree(-28, -60, 1.15);
-  addPalmTree(24, -50, 1.05);
-  addPalmTree(32, -70, 1.2);
+  // Highway Overhead Sign Gantry ("ELECTRONIC CITY FLYOVER ↗")
+  var gantryGroup = new THREE.Group();
+  gantryGroup.position.set(8, 0.3, 0);
+  flyoverGroup.add(gantryGroup);
 
-  /* Animated Beach Volleyball Scene with People Playing */
-  var vCourtGroup = new THREE.Group();
-  vCourtGroup.position.set(-6, -6.0, -55);
-  scene.add(vCourtGroup);
+  var gTrussMat = new THREE.MeshStandardMaterial({ color: srgb(0x38413b), roughness: 0.5, metalness: 0.7 });
+  var postL = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 4.2, 8), gTrussMat);
+  postL.position.set(0, 2.2, -4.8);
+  gantryGroup.add(postL);
 
-  // Volleyball Net
-  var poleMat = new THREE.MeshStandardMaterial({ color: srgb(0x38413b), roughness: 0.4, metalness: 0.7 });
-  var poleL = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 3.2, 12), poleMat);
-  poleL.position.set(-5.5, 1.6, 0);
-  vCourtGroup.add(poleL);
+  var postR = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 4.2, 8), gTrussMat);
+  postR.position.set(0, 2.2, 4.8);
+  gantryGroup.add(postR);
 
-  var poleR = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 3.2, 12), poleMat);
-  poleR.position.set(5.5, 1.6, 0);
-  vCourtGroup.add(poleR);
+  var crossTruss = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.35, 9.8), gTrussMat);
+  crossTruss.position.set(0, 4.2, 0);
+  gantryGroup.add(crossTruss);
 
-  var netMat = new THREE.MeshStandardMaterial({
-    color: 0xffffff,
-    transparent: true,
-    opacity: 0.7,
-    roughness: 0.3
+  var signCanvas = document.createElement('canvas');
+  signCanvas.width = 512; signCanvas.height = 128;
+  var sCtx = signCanvas.getContext('2d');
+  sCtx.fillStyle = '#15803d'; // Indian Highway Green
+  sCtx.fillRect(0, 0, 512, 128);
+  sCtx.strokeStyle = '#ffffff';
+  sCtx.lineWidth = 6;
+  sCtx.strokeRect(8, 8, 496, 112);
+  sCtx.fillStyle = '#ffffff';
+  sCtx.font = 'bold 36px "Figtree", sans-serif';
+  sCtx.textAlign = 'center';
+  sCtx.fillText('ELECTRONIC CITY FLYOVER ↗', 256, 56);
+  sCtx.font = '600 24px "JetBrains Mono", monospace';
+  sCtx.fillText('BENGALURU TECH CORRIDOR', 256, 96);
+  var signTex = new THREE.CanvasTexture(signCanvas);
+
+  var signMesh = new THREE.Mesh(new THREE.PlaneGeometry(6.4, 1.6), new THREE.MeshBasicMaterial({ map: signTex }));
+  signMesh.rotation.y = -Math.PI / 2;
+  signMesh.position.set(-0.15, 3.8, 0);
+  gantryGroup.add(signMesh);
+
+  /* Elevated Namma Metro Viaduct & 6-Car Purple/Green Line Train */
+  var metroViaductGroup = new THREE.Group();
+  metroViaductGroup.position.set(0, 4.7, -56);
+  bengaluruGroup.add(metroViaductGroup);
+
+  var viaductDeck = new THREE.Mesh(new THREE.BoxGeometry(450, 0.65, 5.2), flyDeckMat);
+  metroViaductGroup.add(viaductDeck);
+
+  var mBarrier1 = new THREE.Mesh(new THREE.BoxGeometry(450, 0.8, 0.25), barrierMat);
+  mBarrier1.position.set(0, 0.5, -2.5);
+  metroViaductGroup.add(mBarrier1);
+
+  var mBarrier2 = new THREE.Mesh(new THREE.BoxGeometry(450, 0.8, 0.25), barrierMat);
+  mBarrier2.position.set(0, 0.5, 2.5);
+  metroViaductGroup.add(mBarrier2);
+
+  // Viaduct concrete tall columns
+  for (var mx = -130; mx <= 130; mx += 36) {
+    var mCol = new THREE.Mesh(new THREE.CylinderGeometry(0.95, 1.05, 9.8, 16), pillarMat);
+    mCol.position.set(mx, -5.0, 0);
+    metroViaductGroup.add(mCol);
+  }
+
+  // The 6-Car Stainless Steel Namma Metro Train
+  var metroTrain = new THREE.Group();
+  metroTrain.position.set(-40, 0.8, 0);
+  metroViaductGroup.add(metroTrain);
+
+  var trainSteelMat = new THREE.MeshStandardMaterial({
+    color: srgb(0xd1d5db),
+    roughness: 0.28,
+    metalness: 0.85
   });
-  var netMesh = new THREE.Mesh(new THREE.PlaneGeometry(11, 1.1), netMat);
-  netMesh.position.set(0, 2.4, 0);
-  vCourtGroup.add(netMesh);
+  var metroStripeMat = new THREE.MeshBasicMaterial({ color: 0x7e22ce }); // Namma Metro Purple Livery
+  var metroGreenStripe = new THREE.MeshBasicMaterial({ color: 0x16a34a }); // Namma Metro Green Livery
+  var trainWindowMat = new THREE.MeshBasicMaterial({ color: 0xfef08a }); // Lit interior warm passenger glow
+  var trainHeadlightMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
 
-  // Court boundary ribbon
-  var courtLine = new THREE.Mesh(
-    new THREE.PlaneGeometry(12, 16),
-    new THREE.MeshBasicMaterial({ color: 0x0284c7, wireframe: true })
-  );
-  courtLine.rotation.x = -Math.PI / 2;
-  courtLine.position.y = 0.02;
-  vCourtGroup.add(courtLine);
+  function createMetroCoach(cx, isFrontCab) {
+    var cGroup = new THREE.Group();
+    cGroup.position.x = cx;
+    metroTrain.add(cGroup);
 
-  // Volleyball Players (Stylized Beach Athletes in Beachwear)
-  function createVolleyballPlayer(colorHex, x, z, ry) {
-    var p = new THREE.Group();
-    p.position.set(x, 0, z);
-    p.rotation.y = ry;
-    vCourtGroup.add(p);
+    // Coach Body
+    var coachBody = new THREE.Mesh(roundedBox(8.2, 2.3, 2.8, 0.15, 3), trainSteelMat);
+    coachBody.position.y = 0.85;
+    cGroup.add(coachBody);
 
-    var skinMat = new THREE.MeshStandardMaterial({ color: srgb(0xd29d72), roughness: 0.6 });
-    var clothesMat = new THREE.MeshStandardMaterial({ color: srgb(colorHex), roughness: 0.5 });
+    // Iconic Purple & Green horizontal livery cheatlines
+    var purpleStripe = new THREE.Mesh(new THREE.BoxGeometry(8.25, 0.22, 2.85), metroStripeMat);
+    purpleStripe.position.y = 0.45;
+    cGroup.add(purpleStripe);
 
-    // Legs / shorts
-    var shorts = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.26, 0.55, 10), clothesMat);
-    shorts.position.y = 0.8;
-    p.add(shorts);
+    var greenStripe = new THREE.Mesh(new THREE.BoxGeometry(8.25, 0.15, 2.85), metroGreenStripe);
+    greenStripe.position.y = 0.22;
+    cGroup.add(greenStripe);
 
-    // Torso (Jersey)
-    var torso = new THREE.Mesh(new THREE.CylinderGeometry(0.32, 0.28, 0.7, 10), clothesMat);
-    torso.position.y = 1.4;
-    torso.castShadow = true;
-    p.add(torso);
+    // Continuous passenger panoramic window band
+    var winBand = new THREE.Mesh(new THREE.BoxGeometry(7.6, 0.7, 2.88), trainWindowMat);
+    winBand.position.y = 1.15;
+    cGroup.add(winBand);
 
-    // Head
-    var head = new THREE.Mesh(new THREE.SphereGeometry(0.2, 12, 12), skinMat);
-    head.position.y = 1.95;
-    p.add(head);
+    // Front aerodynamic cab nose & headlights if front car
+    if (isFrontCab) {
+      var nose = new THREE.Mesh(new THREE.ConeGeometry(1.4, 1.8, 8), trainSteelMat);
+      nose.rotation.z = -Math.PI / 2;
+      nose.position.set(4.8, 0.85, 0);
+      cGroup.add(nose);
 
-    // Raised Arms
-    [-0.32, 0.32].forEach(function (ax) {
-      var arm = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.07, 0.65, 8), skinMat);
-      arm.position.set(ax, 1.6, 0.2);
-      arm.rotation.x = 0.8;
-      p.add(arm);
+      [-0.8, 0.8].forEach(function (wz) {
+        var hLight = new THREE.Mesh(new THREE.SphereGeometry(0.18, 8, 8), trainHeadlightMat);
+        hLight.position.set(5.1, 0.65, wz);
+        cGroup.add(hLight);
+      });
+    }
+
+    // Undercarriage Bogies / Wheels
+    [-2.6, 2.6].forEach(function (bx) {
+      var bogie = new THREE.Mesh(new THREE.BoxGeometry(1.8, 0.4, 2.4), curbMat);
+      bogie.position.set(bx, -0.15, 0);
+      cGroup.add(bogie);
+    });
+  }
+
+  for (var tc = 0; tc < 6; tc++) {
+    createMetroCoach(tc * 8.6, tc === 5);
+  }
+
+  /* ==========================================================================
+     RUNNING TRAFFIC VEHICLES FACTORY & INSTANCES
+     ========================================================================== */
+
+  var carHeadlightMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+  var carTaillightMat = new THREE.MeshBasicMaterial({ color: 0xef4444 });
+
+  /* 1. Iconic Bengaluru Auto-Rickshaw (Bajaj RE 3-Wheeler) */
+  function createAutoRickshaw(x, z, dir, speed) {
+    var auto = new THREE.Group();
+    auto.position.set(x, -4.95, z);
+    bengaluruGroup.add(auto);
+
+    // Dark green lower passenger chassis
+    var autoGreenMat = new THREE.MeshStandardMaterial({ color: srgb(0x15803d), roughness: 0.45 });
+    var body = new THREE.Mesh(roundedBox(1.9, 0.95, 1.3, 0.08, 3), autoGreenMat);
+    body.position.y = 0.55;
+    auto.add(body);
+
+    // Canary yellow curved canopy roof
+    var autoYellowMat = new THREE.MeshStandardMaterial({ color: srgb(0xfacc15), roughness: 0.35 });
+    var roof = new THREE.Mesh(roundedBox(2.0, 0.65, 1.35, 0.12, 3), autoYellowMat);
+    roof.position.y = 1.32;
+    auto.add(roof);
+
+    // Open side entry cutout
+    var cutMat = new THREE.MeshStandardMaterial({ color: srgb(0x18181b), roughness: 0.9 });
+    var cutout = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.75, 1.38), cutMat);
+    cutout.position.set(0.1, 0.95, 0);
+    auto.add(cutout);
+
+    // 3 Wheels (1 front, 2 rear)
+    var wheelMat = new THREE.MeshStandardMaterial({ color: srgb(0x18181b), roughness: 0.8 });
+    var wF = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.24, 0.18, 12), wheelMat);
+    wF.rotation.x = Math.PI / 2;
+    wF.position.set(dir > 0 ? 0.85 : -0.85, 0.24, 0);
+    auto.add(wF);
+
+    [-0.58, 0.58].forEach(function (wz) {
+      var wR = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.24, 0.18, 12), wheelMat);
+      wR.rotation.x = Math.PI / 2;
+      wR.position.set(dir > 0 ? -0.7 : 0.7, 0.24, wz);
+      auto.add(wR);
     });
 
-    return p;
+    // Circular single front headlight & rear taillights
+    var fHeadlight = new THREE.Mesh(new THREE.SphereGeometry(0.12, 8, 8), carHeadlightMat);
+    fHeadlight.position.set(dir > 0 ? 1.02 : -1.02, 0.72, 0);
+    auto.add(fHeadlight);
+
+    [-0.45, 0.45].forEach(function (tz) {
+      var rTail = new THREE.Mesh(new THREE.SphereGeometry(0.08, 8, 8), carTaillightMat);
+      rTail.position.set(dir > 0 ? -1.0 : 1.0, 0.65, tz);
+      auto.add(rTail);
+    });
+
+    trafficVehicles.push({ mesh: auto, speed: speed, dir: dir, minX: -115, maxX: 115, y: -4.95, z: z });
+    return auto;
   }
 
-  var vPlayer1 = createVolleyballPlayer(0xd95b26, -2.5, 4.5, Math.PI); // Team A Near Net
-  var vPlayer2 = createVolleyballPlayer(0x0284c7, 2.8, 5.5, Math.PI - 0.2); // Team A Back
-  var vPlayer3 = createVolleyballPlayer(0x10b981, -1.8, -4.5, 0); // Team B Near Net
-  var vPlayer4 = createVolleyballPlayer(0xf59e0b, 2.2, -5.8, 0.2); // Team B Back
+  /* 2. Iconic BMTC (Bengaluru Metropolitan Transport Corp) City Bus */
+  function createBMTCBus(x, z, dir, speed, isVolvoVajra) {
+    var bus = new THREE.Group();
+    bus.position.set(x, -4.95, z);
+    bengaluruGroup.add(bus);
 
-  // The Flying Volleyball
-  var vBall = new THREE.Mesh(
-    new THREE.SphereGeometry(0.22, 16, 16),
-    new THREE.MeshStandardMaterial({ color: 0xfff275, roughness: 0.3 })
-  );
-  vBall.castShadow = true;
-  vCourtGroup.add(vBall);
+    var busMat = new THREE.MeshStandardMaterial({
+      color: isVolvoVajra ? srgb(0x0284c7) : srgb(0x1d4ed8), // Turquoise Volvo or Classic BMTC Blue
+      roughness: 0.35,
+      metalness: 0.3
+    });
 
-  // Beach Umbrellas & Loungers
-  function addBeachUmbrella(x, z, col1, col2) {
-    var u = new THREE.Group();
-    u.position.set(x, -5.9, z);
-    scene.add(u);
+    // Lower chassis
+    var busBody = new THREE.Mesh(roundedBox(8.4, 2.2, 2.6, 0.14, 3), busMat);
+    busBody.position.y = 1.35;
+    bus.add(busBody);
 
-    var pole = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 3.2, 8), poleMat);
-    pole.position.y = 1.6;
-    pole.rotation.z = -0.12;
-    u.add(pole);
+    // Cream white roof and upper band for classic BMTC
+    var busRoofMat = new THREE.MeshStandardMaterial({ color: isVolvoVajra ? srgb(0x0369a1) : srgb(0xf8fafc), roughness: 0.5 });
+    var busRoof = new THREE.Mesh(roundedBox(8.4, 0.6, 2.6, 0.12, 3), busRoofMat);
+    busRoof.position.y = 2.65;
+    bus.add(busRoof);
 
-    var canopy = new THREE.Mesh(
-      new THREE.ConeGeometry(2.4, 0.9, 16),
-      new THREE.MeshStandardMaterial({ color: srgb(col1), roughness: 0.4, side: THREE.DoubleSide })
-    );
-    canopy.position.set(-0.2, 3.0, 0);
-    canopy.rotation.z = -0.12;
+    // Tinted window strip
+    var busWinMat = new THREE.MeshStandardMaterial({ color: srgb(0x0f172a), roughness: 0.1, metalness: 0.8 });
+    var busWindows = new THREE.Mesh(new THREE.BoxGeometry(8.1, 0.85, 2.66), busWinMat);
+    busWindows.position.y = 1.95;
+    bus.add(busWindows);
+
+    // Illuminated Amber Destination LED Board ("335E · MAJESTIC" / "365 · ELECTRONIC CITY")
+    var routeMat = new THREE.MeshBasicMaterial({ color: 0xf59e0b });
+    var destBoard = new THREE.Mesh(new THREE.PlaneGeometry(1.6, 0.35), routeMat);
+    destBoard.rotation.y = dir > 0 ? Math.PI / 2 : -Math.PI / 2;
+    destBoard.position.set(dir > 0 ? 4.22 : -4.22, 2.6, 0);
+    bus.add(destBoard);
+
+    // Front headlights and taillights
+    [-0.85, 0.85].forEach(function (wz) {
+      var hl = new THREE.Mesh(new THREE.SphereGeometry(0.18, 8, 8), carHeadlightMat);
+      hl.position.set(dir > 0 ? 4.23 : -4.23, 0.75, wz);
+      bus.add(hl);
+
+      var tl = new THREE.Mesh(new THREE.SphereGeometry(0.15, 8, 8), carTaillightMat);
+      tl.position.set(dir > 0 ? -4.23 : 4.23, 0.85, wz);
+      bus.add(tl);
+    });
+
+    trafficVehicles.push({ mesh: bus, speed: speed, dir: dir, minX: -125, maxX: 125, y: -4.95, z: z });
+    return bus;
+  }
+
+  /* 3. Modern Passenger Cars, SUVs & Airport Taxis */
+  function createCar(x, y, z, dir, speed, colorHex, isFlyover) {
+    var car = new THREE.Group();
+    car.position.set(x, y, z);
+    bengaluruGroup.add(car);
+
+    var carMat = new THREE.MeshStandardMaterial({ color: srgb(colorHex), roughness: 0.3, metalness: 0.5 });
+    var body = new THREE.Mesh(roundedBox(3.8, 0.8, 1.7, 0.1, 3), carMat);
+    body.position.y = 0.52;
+    car.add(body);
+
+    var cabinMat = new THREE.MeshStandardMaterial({ color: srgb(0x090d12), roughness: 0.1, metalness: 0.85 });
+    var cabin = new THREE.Mesh(roundedBox(2.1, 0.65, 1.5, 0.12, 3), cabinMat);
+    cabin.position.set(dir > 0 ? -0.2 : 0.2, 1.15, 0);
+    car.add(cabin);
+
+    // Front headlights and taillights
+    [-0.6, 0.6].forEach(function (wz) {
+      var hl = new THREE.Mesh(new THREE.SphereGeometry(0.12, 8, 8), carHeadlightMat);
+      hl.position.set(dir > 0 ? 1.92 : -1.92, 0.55, wz);
+      car.add(hl);
+
+      var tl = new THREE.Mesh(new THREE.SphereGeometry(0.09, 8, 8), carTaillightMat);
+      tl.position.set(dir > 0 ? -1.92 : 1.92, 0.6, wz);
+      car.add(tl);
+    });
+
+    trafficVehicles.push({ mesh: car, speed: speed, dir: dir, minX: -115, maxX: 115, y: y, z: z });
+    return car;
+  }
+
+  /* Populate Bengaluru Traffic Stream */
+  // Ground Level Auto-Rickshaws
+  createAutoRickshaw(-60, -25.5, 1, 14.5);
+  createAutoRickshaw(-15, -25.8, 1, 15.0);
+  createAutoRickshaw(35, -25.2, 1, 14.2);
+  createAutoRickshaw(75, -25.6, 1, 15.5);
+
+  createAutoRickshaw(55, -18.2, -1, 14.8);
+  createAutoRickshaw(10, -18.6, -1, 15.2);
+  createAutoRickshaw(-35, -18.3, -1, 14.5);
+  createAutoRickshaw(-80, -18.7, -1, 15.0);
+
+  // Ground Level BMTC Buses
+  createBMTCBus(-45, -24.0, 1, 12.0, false); // Classic BMTC Blue Bus
+  createBMTCBus(40, -19.8, -1, 13.0, true);  // Volvo Vajra AC Bus
+
+  // Ground Level Private Cabs & Cars
+  createCar(-85, -4.95, -25.0, 1, 18.0, 0xf8fafc, false); // White Airport Cab
+  createCar(0, -4.95, -24.5, 1, 19.5, 0xef4444, false);   // Red Hatchback
+  createCar(60, -4.95, -24.2, 1, 17.5, 0x94a3b8, false);  // Silver Sedan
+  createCar(85, -4.95, -19.2, -1, 19.0, 0xf8fafc, false); // White Cab
+  createCar(-10, -4.95, -18.8, -1, 18.2, 0x1e3a8a, false); // Navy Blue Sedan
+
+  // Flyover Expressway Traffic (Elevated y = 2.15, z = -34)
+  createCar(-70, 2.15, -36.5, 1, 23.0, 0xffffff, true); // Fast White SUV
+  createCar(-25, 2.15, -36.8, 1, 25.0, 0x334155, true); // Charcoal Luxury Sedan
+  createCar(20, 2.15, -36.2, 1, 22.5, 0xd97706, true);  // Amber Metallic SUV
+  createCar(65, 2.15, -36.6, 1, 24.0, 0x94a3b8, true);  // Silver Sedan
+
+  createCar(75, 2.15, -31.5, -1, 23.5, 0xffffff, true); // White Sedan
+  createCar(30, 2.15, -31.8, -1, 26.0, 0xb91c1c, true); // Crimson Sedan
+  createCar(-15, 2.15, -31.2, -1, 22.0, 0x1e293b, true); // Obsidian SUV
+  createCar(-60, 2.15, -31.6, -1, 24.5, 0x64748b, true); // Grey Sedan
+
+  /* Iconic Bengaluru Rain Trees (Samanea saman) along Roadsides */
+  var treeBarkMat = new THREE.MeshStandardMaterial({ color: srgb(0x3e2c1c), roughness: 0.95 });
+  var rainTreeLeafMat = new THREE.MeshStandardMaterial({ color: srgb(0x194524), roughness: 0.85 });
+
+  function addBengaluruRainTree(x, z, scale) {
+    var tree = new THREE.Group();
+    tree.position.set(x, -5.0, z);
+    tree.scale.setScalar(scale || 1.0);
+    bengaluruGroup.add(tree);
+
+    // Thick branching trunk
+    var trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.65, 4.2, 8), treeBarkMat);
+    trunk.position.y = 2.1;
+    trunk.castShadow = true;
+    tree.add(trunk);
+
+    // Classic wide umbrella canopy typical of Bengaluru boulevards
+    var canopy = new THREE.Mesh(new THREE.SphereGeometry(3.6, 12, 10), rainTreeLeafMat);
+    canopy.scale.set(1.6, 0.65, 1.4);
+    canopy.position.y = 4.8;
     canopy.castShadow = true;
-    u.add(canopy);
-
-    // Reclining Beach Lounger
-    var lounger = new THREE.Mesh(
-      roundedBox(0.9, 0.35, 2.2, 0.04, 3),
-      new THREE.MeshStandardMaterial({ color: srgb(0xfaf3e0), roughness: 0.7 })
-    );
-    lounger.position.set(0.6, 0.2, 0.4);
-    lounger.rotation.y = 0.3;
-    u.add(lounger);
+    tree.add(canopy);
   }
 
-  addBeachUmbrella(12, -42, 0xef4444, 0xffffff);
-  addBeachUmbrella(18, -48, 0x0284c7, 0xffffff);
-
-  // Shoreline Walking Beachgoers
-  var walkerGroup = new THREE.Group();
-  walkerGroup.position.set(2, -6.3, -150);
-  scene.add(walkerGroup);
-
-  var walker1 = createVolleyballPlayer(0xec4899, 0, 0, Math.PI / 2);
-  walker1.scale.setScalar(0.85);
-  walkerGroup.add(walker1);
-
-  var walker2 = createVolleyballPlayer(0x3b82f6, 1.5, 0.5, Math.PI / 2);
-  walker2.scale.setScalar(0.85);
-  walkerGroup.add(walker2);
-
-  // Tiki Torches (Beach lighting at night)
-  function addTikiTorch(x, z) {
-    var torch = new THREE.Group();
-    torch.position.set(x, -6.0, z);
-    scene.add(torch);
-
-    var bamboo = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.05, 2.6, 8), palmMat);
-    bamboo.position.y = 1.3;
-    torch.add(bamboo);
-
-    var flame = new THREE.Mesh(
-      new THREE.ConeGeometry(0.12, 0.35, 12),
-      new THREE.MeshBasicMaterial({ color: 0xff6600 })
-    );
-    flame.position.y = 2.7;
-    torch.add(flame);
-
-    addTikiTorchLight(x, -3.3, z);
-  }
-
-  addTikiTorch(-14, -40);
-  addTikiTorch(4, -40);
-  addTikiTorch(-14, -72);
-  addTikiTorch(4, -72);
-
-  /* Distant Headlands, Lighthouse & Sailboat */
-  var cliffMat = new THREE.MeshStandardMaterial({ color: srgb(0x32463e), roughness: 0.9, metalness: 0.05 });
-  function makeCliff(x, z, scaleX, scaleY, scaleZ) {
-    var cGeo = new THREE.ConeGeometry(scaleX, scaleY, 8);
-    var cMesh = new THREE.Mesh(cGeo, cliffMat);
-    cMesh.position.set(x, -6.0 + scaleY / 2, z);
-    cMesh.scale.set(1.5, 0.5, 1.3);
-    scene.add(cMesh);
-  }
-  makeCliff(-460, -980, 260, 110, 200);
-  makeCliff(540, -1180, 310, 125, 230);
-
-  var lhGroup = new THREE.Group();
-  lhGroup.position.set(-290, 28, -920);
-  scene.add(lhGroup);
-
-  var lhTower = new THREE.Mesh(
-    new THREE.CylinderGeometry(2.8, 4.8, 32, 12),
-    new THREE.MeshStandardMaterial({ color: srgb(0xf4f4f0), roughness: 0.6 })
-  );
-  lhGroup.add(lhTower);
-
-  var lhTop = new THREE.Mesh(
-    new THREE.CylinderGeometry(3.4, 3.4, 4.5, 12),
-    new THREE.MeshStandardMaterial({ color: srgb(0x991b1b), roughness: 0.4 })
-  );
-  lhTop.position.y = 17.5;
-  lhGroup.add(lhTop);
-
-  var lhBeacon = new THREE.PointLight(0xffedd5, 1.8, 450);
-  lhBeacon.position.set(0, 19, 0);
-  lhGroup.add(lhBeacon);
-
-  var beamGeo = new THREE.ConeGeometry(35, 180, 16, 1, true);
-  beamGeo.translate(0, 90, 0);
-  beamGeo.rotateX(Math.PI / 2);
-  var beamMat = new THREE.MeshBasicMaterial({
-    color: 0xffedd5,
-    transparent: true,
-    opacity: 0.22,
-    side: THREE.DoubleSide,
-    depthWrite: false
-  });
-  var lhBeam = new THREE.Mesh(beamGeo, beamMat);
-  lhBeam.position.set(0, 19, 0);
-  lhGroup.add(lhBeam);
-
-  var boatGroup = new THREE.Group();
-  boatGroup.position.set(140, -5.5, -520);
-  scene.add(boatGroup);
-
-  var boatHull = new THREE.Mesh(roundedBox(5.0, 1.4, 14, 0.3, 3), new THREE.MeshStandardMaterial({ color: srgb(0xffffff), roughness: 0.4 }));
-  boatGroup.add(boatHull);
-
-  var mastMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.16, 16, 8), new THREE.MeshStandardMaterial({ color: srgb(0x3a3f42), roughness: 0.5 }));
-  mastMesh.position.set(0, 8, 1);
-  boatGroup.add(mastMesh);
-
-  var sailGeo = new THREE.BufferGeometry();
-  var sailVerts = new Float32Array([0, 1.5, -4.5, 0, 15.5, 0.8, 0, 1.5, 4.5]);
-  sailGeo.setAttribute('position', new THREE.BufferAttribute(sailVerts, 3));
-  sailGeo.computeVertexNormals();
-  var sailMesh = new THREE.Mesh(sailGeo, new THREE.MeshLambertMaterial({ color: 0xffffff, side: THREE.DoubleSide }));
-  boatGroup.add(sailMesh);
+  addBengaluruRainTree(-32, -16, 0.95);
+  addBengaluruRainTree(28, -16, 1.05);
+  addBengaluruRainTree(-75, -29, 1.15);
+  addBengaluruRainTree(70, -29, 1.1);
+  addBengaluruRainTree(-110, -18, 1.25);
+  addBengaluruRainTree(110, -18, 1.2);
 
   /* ==========================================================================
      THE WORKBENCH (DESK) & SCENIC PROPS
@@ -1204,7 +1383,7 @@
   });
 
   // Generous VR Headset Hitbox
-  addHitbox(gVR, 'vr', 0.55, 0.28, 0.42, 0, 0.05, -0.05);
+  addHitbox(gVR, 'vr', 0.65, 0.35, 0.50, 0, 0.06, -0.05);
 
   /* Wall-Mounted VR Stereo Stream Monitor */
   var vrStereoShader = new THREE.ShaderMaterial({
@@ -1257,7 +1436,7 @@
   var tvScreenMesh = new THREE.Mesh(new THREE.PlaneGeometry(0.69, 0.40), vrStereoShader);
   tvScreenMesh.position.z = 0.0145;
   gWallTV.add(tvScreenMesh);
-  addHitbox(gWallTV, 'vr', 0.74, 0.45, 0.1, 0, 0, 0);
+  addHitbox(gWallTV, 'vr', 0.95, 0.60, 0.35, 0, 0, 0.1);
 
   /* --------------------------------------------------------------------------
      2. ULTRAWIDE PC MONITOR & DESKTOP RIG (Group: 'pc')
@@ -1430,7 +1609,7 @@
   monScreenMat.needsUpdate = true;
 
   // Large PC Hitbox encompassing monitor and arm
-  addHitbox(gPC, 'pc', 0.94, 0.56, 0.25, 0, 0, 0);
+  addHitbox(gPC, 'pc', 1.05, 0.65, 0.35, 0, 0, 0.05);
 
   /* Mechanical Keyboard & Mouse */
   var kbGroup = registerPickable(new THREE.Group(), 'pc');
@@ -1527,7 +1706,7 @@
 
   var phoneTargetRot = 0;
   var phoneCurrentRot = 0;
-  addHitbox(gPhone, 'phone', 0.22, 0.26, 0.22, 0, 0.05, 0);
+  addHitbox(gPhone, 'phone', 0.28, 0.32, 0.28, 0, 0.05, 0);
 
   /* --------------------------------------------------------------------------
      4. DEV FIELD NOTEBOOK (Group: 'notes')
@@ -1561,7 +1740,7 @@
   penMesh.position.set(0, 0.018, 0.095);
   gNotes.add(penMesh);
 
-  addHitbox(gNotes, 'notes', 0.32, 0.15, 0.28, 0, 0.05, 0);
+  addHitbox(gNotes, 'notes', 0.36, 0.20, 0.32, 0, 0.05, 0);
 
   /* --------------------------------------------------------------------------
      5. ARTICULATED DESK TASK LAMP (Clickable!)
@@ -1598,7 +1777,7 @@
   lampBulb.position.set(0.22, 0.56, 0.09);
   gLamp.add(lampBulb);
 
-  addHitbox(gLamp, 'lamp', 0.36, 0.72, 0.36, 0.1, 0.35, 0);
+  addHitbox(gLamp, 'lamp', 0.15, 0.14, 0.15, 0, 0.07, 0);
 
   var isLampOn = true;
   function toggleDeskLamp() {
@@ -1856,17 +2035,26 @@
     skyUniforms.sunDir.value.copy(p.sunDir);
     skyUniforms.sunColor.value.setHex(p.sunColor);
 
-    oceanUniforms.sunDir.value.copy(p.sunDir);
-    oceanUniforms.sunColor.value.setHex(p.sunColor);
-    oceanUniforms.waterDeep.value.setHex(p.waterDeep);
-    oceanUniforms.waterShallow.value.setHex(p.waterShallow);
-    oceanUniforms.skyHorColor.value.setHex(p.botSky);
+    // Dynamic Bengaluru City Lights at Sunset & Night
+    if (typeof bldgMat !== 'undefined') {
+      bldgMat.emissive.setHex(p.dusk ? 0xfef08a : (effectiveMode === 'sunset' ? 0xf59e0b : 0x000000));
+      bldgMat.emissiveIntensity = p.dusk ? 1.3 : (effectiveMode === 'sunset' ? 0.65 : 0.0);
+    }
+
+    if (cityStreetLights && cityStreetLights.length) {
+      cityStreetLights.forEach(function (sl) {
+        sl.intensity = p.dusk ? 3.6 : (effectiveMode === 'sunset' ? 1.8 : 0);
+      });
+    }
+
+    if (typeof carHeadlightMat !== 'undefined' && typeof carTaillightMat !== 'undefined') {
+      carHeadlightMat.color.setHex(p.dusk ? 0xffffff : (effectiveMode === 'sunset' ? 0xffeedb : 0xe2e8f0));
+      carTaillightMat.color.setHex(p.dusk ? 0xef4444 : (effectiveMode === 'sunset' ? 0xdc2626 : 0x991b1b));
+    }
 
     deskSpot.intensity = isLampOn ? p.lampIntensity : 0;
     roomCeilLight.intensity = p.ceilIntensity;
     monGlow.intensity = p.monGlowIntensity;
-
-    tikiLights.forEach(function (tl) { tl.intensity = p.tikiIntensity; });
 
     document.body.classList.toggle('dusk', p.dusk);
     document.documentElement.style.setProperty('--wall', '#' + new THREE.Color(p.wallColor).getHexString());
@@ -1923,7 +2111,7 @@
     pc: 'Desktop Rig · 8 Steam AA & PC Games',
     phone: 'Mobile Device · 5M+ Multiplayer & Web3 Games',
     notes: 'Dev Field Journal · Architecture Notes & Case Studies',
-    speakers: 'Studio Monitors · Click to Toggle Ocean Waves Audio',
+    speakers: 'Studio Monitors · Click to Toggle Bengaluru City Ambience',
     lamp: 'Desk Task Lamp · Click to Toggle Light',
     mug: 'Ceramic Mug · Click to Sip Hot Coffee'
   };
@@ -1940,50 +2128,77 @@
     var hits = raycaster.intersectObjects(pickables, true);
     if (!hits || !hits.length) return null;
 
+    var hitKeys = [];
     for (var i = 0; i < hits.length; i++) {
       var cur = hits[i].object;
       while (cur && cur !== scene) {
         if (cur.userData && cur.userData.key) {
-          return cur.userData.key;
+          if (hitKeys.indexOf(cur.userData.key) === -1) {
+            hitKeys.push(cur.userData.key);
+          }
+          break;
         }
         cur = cur.parent;
       }
     }
-    return null;
+    if (!hitKeys.length) return null;
+
+    // Prioritize primary showcase devices so clicking Wall TV / VR / PC always opens project info
+    var priority = ['vr', 'pc', 'phone', 'notes', 'speakers', 'mug', 'lamp'];
+    for (var p = 0; p < priority.length; p++) {
+      if (hitKeys.indexOf(priority[p]) !== -1) {
+        return priority[p];
+      }
+    }
+    return hitKeys[0];
   }
 
+  var lastInteractTime = 0;
   function triggerInteraction(key) {
     if (!key) return;
+    var now = performance.now();
+    if (now - lastInteractTime < 200) return;
+    lastInteractTime = now;
+
     if (key === 'vr') {
-      if (currentPanel === 'vr' && panel.classList.contains('open')) {
+      currentPanel = 'vr';
+      setView('vr');
+      if (panel.classList.contains('open') && currentPanel === 'vr') {
         var next = (showing.vr + 1) % GROUPS.vr.projects.length;
         showProjectDetail(next);
         showToast('Meta Quest 3: ' + GROUPS.vr.projects[next].name);
       } else {
-        showGroup('vr');
+        showProjectDetail(showing.vr || 0);
+        showToast('Meta Quest 3: ' + GROUPS.vr.projects[showing.vr || 0].name);
       }
     } else if (key === 'pc') {
-      if (currentPanel === 'pc' && panel.classList.contains('open')) {
+      currentPanel = 'pc';
+      setView('pc');
+      if (panel.classList.contains('open') && currentPanel === 'pc') {
         var next = (showing.pc + 1) % GROUPS.pc.projects.length;
         showProjectDetail(next);
         showToast('Steam PC: ' + GROUPS.pc.projects[next].name);
       } else {
-        showGroup('pc');
+        showProjectDetail(showing.pc || 0);
+        showToast('Steam PC: ' + GROUPS.pc.projects[showing.pc || 0].name);
       }
     } else if (key === 'phone') {
-      if (currentPanel === 'phone' && panel.classList.contains('open')) {
+      currentPanel = 'phone';
+      setView('phone');
+      if (panel.classList.contains('open') && currentPanel === 'phone') {
         var next = (showing.phone + 1) % GROUPS.phone.projects.length;
         showProjectDetail(next);
         showToast('Mobile: ' + GROUPS.phone.projects[next].name);
       } else {
-        showGroup('phone');
+        showProjectDetail(showing.phone || 0);
+        showToast('Mobile: ' + GROUPS.phone.projects[showing.phone || 0].name);
       }
     } else if (key === 'notes') {
       showNotes();
     } else if (key === 'lamp') {
       toggleDeskLamp();
     } else if (key === 'speakers') {
-      toggleOceanAudio();
+      toggleCityAudio();
     } else if (key === 'mug') {
       sipCoffee();
     }
@@ -2006,7 +2221,6 @@
     dragDistance = 0;
     dragStart.x = e.clientX;
     dragStart.y = e.clientY;
-    try { cv.setPointerCapture(e.pointerId); } catch (err) {}
   });
 
   window.addEventListener('pointermove', function (e) {
@@ -2033,11 +2247,10 @@
     if (!isPointerDown) return;
     isPointerDown = false;
     cv.classList.remove('grabbing');
-    try { cv.releasePointerCapture(e.pointerId); } catch (err) {}
 
-    var elapsed = performance.now() - downTime;
-    // Deliberate click if moved less than 20px and took less than 650ms
-    if (dragDistance < 20 && elapsed < 650) {
+    var moveDist = Math.hypot(e.clientX - downX, e.clientY - downY);
+    // Deliberate click if mouse moved less than 24px (ignoring minor hand jitter)
+    if (moveDist < 24) {
       var hitKey = getHitKey(e.clientX, e.clientY);
       if (hitKey) {
         triggerInteraction(hitKey);
@@ -2056,7 +2269,8 @@
 
   // Secondary click handler directly on canvas
   cv.addEventListener('click', function (e) {
-    if (dragDistance < 20) {
+    var moveDist = Math.hypot(e.clientX - downX, e.clientY - downY);
+    if (moveDist < 24) {
       var hitKey = getHitKey(e.clientX, e.clientY);
       if (hitKey) {
         triggerInteraction(hitKey);
@@ -2075,7 +2289,7 @@
   });
 
   /* ==========================================================================
-     TOAST NOTIFICATIONS & OCEAN SURF SYNTHESIZER
+     TOAST NOTIFICATIONS & BENGALURU CITY AMBIENT SYNTHESIZER
      ========================================================================== */
 
   var toastEl = document.getElementById('toast');
@@ -2091,16 +2305,22 @@
   }
 
   var audioCtx = null, audioGain = null, isAudioPlaying = false;
-  function toggleOceanAudio() {
+  function toggleCityAudio() {
     try {
       if (!audioCtx) {
         var AudioContextClass = window.AudioContext || window.webkitAudioContext;
         audioCtx = new AudioContextClass();
-        var bufferSize = audioCtx.sampleRate * 2.5;
+        var bufferSize = audioCtx.sampleRate * 3.0;
         var noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
         var output = noiseBuffer.getChannelData(0);
+        // Soft pink noise algorithm for gentle urban hum
+        var b0 = 0, b1 = 0, b2 = 0;
         for (var i = 0; i < bufferSize; i++) {
-          output[i] = Math.random() * 2 - 1;
+          var white = Math.random() * 2 - 1;
+          b0 = 0.99765 * b0 + white * 0.0555179;
+          b1 = 0.96300 * b1 + white * 0.0750759;
+          b2 = 0.57000 * b2 + white * 0.1538520;
+          output[i] = (b0 + b1 + b2 + white * 0.1) * 0.22;
         }
         var whiteNoise = audioCtx.createBufferSource();
         whiteNoise.buffer = noiseBuffer;
@@ -2108,14 +2328,7 @@
 
         var filter = audioCtx.createBiquadFilter();
         filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(320, audioCtx.currentTime);
-
-        var lfo = audioCtx.createOscillator();
-        lfo.frequency.setValueAtTime(0.12, audioCtx.currentTime);
-        var lfoGain = audioCtx.createGain();
-        lfoGain.gain.setValueAtTime(240, audioCtx.currentTime);
-        lfo.connect(lfoGain);
-        lfoGain.connect(filter.frequency);
+        filter.frequency.setValueAtTime(260, audioCtx.currentTime);
 
         audioGain = audioCtx.createGain();
         audioGain.gain.setValueAtTime(0, audioCtx.currentTime);
@@ -2125,31 +2338,31 @@
         audioGain.connect(audioCtx.destination);
 
         whiteNoise.start();
-        lfo.start();
       }
 
       if (audioCtx.state === 'suspended') audioCtx.resume();
       isAudioPlaying = !isAudioPlaying;
 
       if (isAudioPlaying) {
-        audioGain.gain.setTargetAtTime(0.25, audioCtx.currentTime, 1.2);
-        showToast('🌊 Ocean Surf: ON');
+        audioGain.gain.setTargetAtTime(0.2, audioCtx.currentTime, 1.0);
+        showToast('🏙️ Bengaluru City Ambience: ON');
       } else {
-        audioGain.gain.setTargetAtTime(0.0, audioCtx.currentTime, 0.6);
-        showToast('🌊 Ocean Surf: OFF');
+        audioGain.gain.setTargetAtTime(0.0, audioCtx.currentTime, 0.5);
+        showToast('🏙️ Bengaluru City Ambience: OFF');
       }
 
       var label = document.getElementById('audio-label');
       var btn = document.getElementById('btn-audio');
-      if (label) label.textContent = 'Ocean Surf: ' + (isAudioPlaying ? 'ON' : 'OFF');
+      if (label) label.textContent = 'City Ambience: ' + (isAudioPlaying ? 'ON' : 'OFF');
       if (btn) btn.classList.toggle('active-audio', isAudioPlaying);
     } catch (err) {
       console.warn('Audio not available:', err);
     }
   }
+  var toggleOceanAudio = toggleCityAudio;
 
   var btnAudio = document.getElementById('btn-audio');
-  if (btnAudio) btnAudio.addEventListener('click', toggleOceanAudio);
+  if (btnAudio) btnAudio.addEventListener('click', toggleCityAudio);
 
   /* ==========================================================================
      SLIDING DOCK PANEL CONTROLLER
@@ -2253,9 +2466,18 @@
       p.tags.map(function (t) { return '<span>' + esc(t) + '</span>'; }).join('') +
       '</div>';
 
+    var storeHtml = '';
+    if (p.store) {
+      storeHtml =
+        '<a class="linkbtn steam" href="' + esc(p.store) + '" target="_blank" rel="noopener noreferrer">' +
+        '<i class="fa-brands fa-steam"></i> View on Steam Store ↗' +
+        '</a>';
+    }
+
     pBody.innerHTML =
       '<div class="detail">' +
       '<div class="capture">' + vtag(p.clip) + '</div>' +
+      storeHtml +
       '<p>' + esc(p.blurb) + '</p>' +
       '<p class="dim">' + esc(p.note) + '</p>' +
       teardownHtml +
@@ -2263,6 +2485,7 @@
       '<button class="backbtn" type="button" data-back="group">← All ' + esc(gr.label) + ' Work</button>' +
       '</div>';
 
+    openPanel(false);
     kickPanelVideos();
   }
 
@@ -2476,36 +2699,30 @@
     var dt = clock.getDelta();
     var elapsed = clock.getElapsedTime();
 
-    // Ocean Wave Displacements
-    oceanUniforms.time.value = elapsed;
+    // Animated Running Bengaluru Traffic & Namma Metro Viaduct Update
+    if (typeof trafficVehicles !== 'undefined' && trafficVehicles.length) {
+      for (var vi = 0; vi < trafficVehicles.length; vi++) {
+        var tv = trafficVehicles[vi];
+        tv.mesh.position.x += tv.dir * tv.speed * dt;
+        if (tv.dir > 0 && tv.mesh.position.x > tv.maxX) {
+          tv.mesh.position.x = tv.minX;
+        } else if (tv.dir < 0 && tv.mesh.position.x < tv.minX) {
+          tv.mesh.position.x = tv.maxX;
+        }
+      }
+    }
 
-    // Shoreline Wave Foam Breathing Oscillation
-    foamRibbon.position.z = -165 + Math.sin(elapsed * 1.4) * 3.8;
-    foamMat.opacity = 0.35 + Math.sin(elapsed * 1.4) * 0.2;
+    if (typeof metroTrain !== 'undefined' && metroTrain) {
+      metroTrain.position.x += 16.5 * dt;
+      if (metroTrain.position.x > 140) {
+        metroTrain.position.x = -140;
+      }
+    }
 
-    // Lighthouse Volumetric Sweeping Beam
-    lhBeam.rotation.z = -elapsed * 0.75;
-    lhBeacon.intensity = 1.0 + Math.sin(elapsed * 3.5) * 0.6;
-
-    // Sailboat Wave Rocking
-    boatGroup.rotation.z = Math.sin(elapsed * 1.4) * 0.05;
-    boatGroup.position.y = -5.5 + Math.sin(elapsed * 1.6) * 0.25;
-
-    // Animated Beach Volleyball Match
-    var vT = (elapsed * 1.6) % 2.0;
-    var ballX = -1.0 + Math.sin(vT * Math.PI) * 2.8;
-    var ballZ = Math.cos(vT * Math.PI) * 5.2;
-    var ballY = 2.4 + Math.sin(vT * Math.PI) * 2.6; // High parabolic arc over net
-    vBall.position.set(ballX, ballY, ballZ);
-
-    // Volleyball Players Jump & Set Reactions
-    vPlayer1.position.y = Math.max(0, Math.sin(vT * Math.PI * 2) * 0.45);
-    vPlayer3.position.y = Math.max(0, -Math.sin(vT * Math.PI * 2) * 0.45);
-
-    // Shoreline Walkers
-    walkerGroup.position.x = ((elapsed * 1.5) % 80) - 40;
-    walker1.children[0].rotation.x = Math.sin(elapsed * 3.0) * 0.35;
-    walker2.children[0].rotation.x = -Math.sin(elapsed * 3.0) * 0.35;
+    if (typeof cityBeacons !== 'undefined' && cityBeacons.length) {
+      var bPulse = Math.sin(elapsed * 3.2) > 0.15;
+      beaconMat.color.setHex(bPulse ? 0xef4444 : 0x450a0a);
+    }
 
     // Phone rotation interpolation (Portrait <-> Landscape)
     phoneCurrentRot = THREE.MathUtils.lerp(phoneCurrentRot, phoneTargetRot, dt * 6.0);
