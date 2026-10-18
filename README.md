@@ -1,26 +1,32 @@
 # Deepankar Sehgal · 3D Coastal Workbench Portfolio
 
-An interactive, photorealistic 3D studio portfolio built with **Three.js (WebGL)**, featuring a modern coastal architecture room, an animated ocean vista with dynamic sun and wave shaders, and an interactive developer workbench.
+A high-fidelity, photorealistic 3D developer portfolio built with **Three.js (WebGL)**, featuring a modern coastal architecture room, an animated ocean vista with dynamic Gerstner waves and sun shaders, continuous live project video playback across 3D devices, and an interactive developer workbench.
 
 ## ✨ Highlights & Architecture
 
-- **🌊 Coastal Studio with Panoramic Ocean Vista**:
-  - Custom GLSL water wave and specular glint shader for realistic sea reflections.
-  - Distant rocky headlands, an animated sailboat, and a working lighthouse beacon.
-  - Multi-pane architectural picture window framing the sea.
-- **☀️ Real-Time Lighting Presets**:
+- **🌊 High-Fidelity Coastal Studio & Ocean Vista**:
+  - Real-time **Gerstner wave shader** with multi-frequency ocean swells, surface normals, Fresnel water scatter, and specular sun sparkle.
+  - Distant layered rocky coastal cliffs, animated rocking sailboat, and a lighthouse with a rotating 3D volumetric light beam.
+  - Architectural panoramic picture window with realistic beveled reveals and reflective optical glass.
+- **📺 Continuous Video Streaming Across 3D Devices**:
+  - **Ultrawide Desktop Monitor**: Continuously loops project showreels and gameplay trailers directly in 3D (`THREE.VideoTexture`).
+  - **Wall-Mounted VR Stereo Cast**: Renders live stereo footage through a custom **VR barrel distortion dual-eye shader**.
+  - **Modern Smartphone**: Renders looping mobile project footage and dynamically animates orientation between **portrait and landscape**.
+  - **Panel Video Sync**: When inspecting any project, live video plays simultaneously in both the 3D scene and inside the slide-out specification panel.
+- **🎛️ Rich Scene Interactivity**:
+  - **Clickable Desk Task Lamp**: Physically clicks on/off with directional task lighting and glowing bulb filament.
+  - **Clickable Studio Audio Monitors (Speakers)**: Toggles a pure Web Audio procedural ocean wave surf sound synthesizer with vibrating speaker cones.
+  - **Clickable Ceramic Coffee Mug**: Triggers animated rising steam particles and fresh roast feedback.
+  - **Clickable Dev Field Journal**: Focuses camera on handwritten engineering case studies.
+  - **Clickable VR Headset & Controllers**: Flies camera to inspect 6-DoF hardware and launches VR project suite.
+- **☀️ Dynamic Coastal Lighting Presets**:
   - **Midday (☀️)**: Brilliant azure waters, shimmering sun reflection, airy coastal room.
   - **Sunset (🌅)**: Golden hour horizon, amber wave glints, warm ambient desk lighting.
   - **Night (🌙)**: Starry indigo ocean, moonlit sea path, task desk spotlight, and screen glow.
-- **🎮 Interactive 3D Developer Workbench**:
-  - **Meta Quest 3 VR Headset & Stereo Display**: Explores industrial VR simulations (Simulanis), vocational tool training (Roof Installation VR), driving trainers, and spatial hand-tracking physics.
-  - **Desktop Monitor Rig**: Explores PC and Steam AA titles (*Crimson Tactics: The White Banner*), dual-target VR/PC simulations, and combat AI engines.
-  - **Modern Smartphone on Dock**: Explores high-concurrency multiplayer (*YungAlgo* 5M+ players), turn-based netcode (*Cuban Domino* with Photon Fusion), and mobile casino slot mechanics (*ZVKY Design Studio*).
-  - **Dev Field Journal**: Engineering notes, architecture teardowns (Event Bus, Service Locator, Finite State Machines, and scaling to 5M players).
-- **📱 Responsive & Accessible**:
-  - Frosted glassmorphism HUD and sliding dock panel (`backdrop-filter: blur(24px)`).
-  - Screen-reader accessible navigation fallback (`nav.sr`).
-  - Supports mouse drag, touch controls on mobile, and keyboard shortcuts (`Escape` to close).
+- **🎮 Expanded Project Loadout**:
+  - **9 VR & XR Projects**: *Simulanis Industrial XR Simulator*, *Roof Installation VR*, *VR Driving Simulator*, *CNA Healthcare Clinical Transfer VR*, *Work at Height & Scaffold Safety VR*, *Substation Electrical Safety & Cable Avoidance*, *Stadium Safety & Emergency Egress VR*, *Interactive VR Gameplay & Spatial Physics*, *Irusu VR Cinema*.
+  - **8 PC & Steam AA Projects**: *Crimson Tactics: The White Banner* (Steam AA), *Stadium Safety Desktop Edition*, *Emory Cole: Echoes of the Manor*, *Teleporto: Cosmic Grid Puzzler*, *Vanguard: Tactical Ops & Combat AI*, *Apex Procedural Dungeon Engine*, *Chrono Shift: Time-Dilation Mechanics*, *3D Environment Lighting Showcase*.
+  - **5 Mobile & Web3 Projects**: *YungAlgo Web3 Suite* (5M+ Players), *Cuban Domino Online* (Photon Fusion), *Earth Match: Bakery Decorator*, *ZVKY Casino Slot Game Engine*, *Mobile AR Surface Placement*.
 
 ## 🚀 Local Development & Deployment
 
@@ -31,4 +37,4 @@ npx serve .
 # Or open index.html directly in any modern WebGL-compatible browser
 ```
 
-Deployable to GitHub Pages, Cloudflare Pages, or Vercel.
+Deployable directly to GitHub Pages, Cloudflare Pages, or Vercel.

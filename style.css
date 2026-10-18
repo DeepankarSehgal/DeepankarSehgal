@@ -259,6 +259,45 @@ body.panel-open #env-controls {
   box-shadow: 0 4px 12px rgba(18, 28, 23, 0.12);
 }
 
+.chip.active-audio {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: rgba(16, 185, 129, 0.4);
+  color: #059669;
+}
+
+.chip.active-audio:hover {
+  background: #10b981;
+  color: #ffffff;
+}
+
+/* ================= INTERACTION TOAST ================= */
+#toast {
+  position: fixed;
+  top: 90px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-20px);
+  z-index: 50;
+  background: var(--paper-trans);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 999px;
+  box-shadow: 0 10px 30px rgba(18, 28, 23, 0.12);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
 .chip.highlight {
   background: rgba(2, 132, 199, 0.12);
   border-color: rgba(2, 132, 199, 0.35);
