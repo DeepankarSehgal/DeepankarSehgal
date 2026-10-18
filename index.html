@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Deepankar Sehgal · 3D Coastal Workbench Portfolio</title>
-  <meta name="description" content="Deepankar Sehgal — Senior Unity & XR Developer with 5+ years building industrial VR simulations, Steam AA releases, and high-concurrency multiplayer systems.">
+  <title>Deepankar Sehgal · 3D Portfolio · Senior Unity &amp; XR Developer</title>
+  <meta name="description" content="Deepankar Sehgal — Senior Unity & XR Developer with 5+ years building industrial VR simulations, Steam AA releases, and high-concurrency multiplayer systems in Bengaluru, India.">
   <meta name="theme-color" content="#d9e3dc">
 
   <!-- Typography: Bricolage Grotesque, Figtree, JetBrains Mono -->
@@ -25,7 +25,7 @@
   <!-- Loading Screen -->
   <div id="loader">
     <div class="spinner"></div>
-    <span>Setting up the coastal studio</span>
+    <span>Setting up Deepankar's Studio</span>
   </div>
 
   <!-- Top-Left Branding & Status -->
@@ -35,7 +35,8 @@
     
     <div class="badge-row">
       <span class="status-pill"><span class="status-dot"></span> Available for Roles</span>
-      <span class="time-pill" id="time-label">Coastal Studio · IST</span>
+      <span class="time-pill" id="time-label"><i class="fa-solid fa-location-dot"></i> Bengaluru · --:-- IST</span>
+      <span class="aqi-pill" id="aqi-label"><span class="aqi-dot" id="aqi-dot"></span> AQI Loading...</span>
     </div>
 
     <div class="visitor-pill" id="visitor-label" hidden></div>
@@ -59,7 +60,8 @@
 
   <!-- Bottom-Left Environment Lighting Controls -->
   <div class="hud" id="env-controls" aria-label="Atmospheric Lighting Presets">
-    <button class="env-btn active" data-mode="day" type="button"><i class="fa-solid fa-sun"></i> Midday</button>
+    <button class="env-btn active" data-mode="auto" id="btn-auto-sync" type="button"><i class="fa-solid fa-clock"></i> Live Sync</button>
+    <button class="env-btn" data-mode="day" type="button"><i class="fa-solid fa-sun"></i> Midday</button>
     <button class="env-btn" data-mode="sunset" type="button"><i class="fa-solid fa-cloud-sun"></i> Sunset</button>
     <button class="env-btn" data-mode="night" type="button"><i class="fa-solid fa-moon"></i> Night</button>
   </div>

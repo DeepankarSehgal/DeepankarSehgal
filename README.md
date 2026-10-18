@@ -4,8 +4,9 @@ A high-fidelity, photorealistic 3D developer portfolio built with **Three.js (We
 
 ## ✨ Highlights & Architecture
 
-- **🌊 High-Fidelity Coastal Studio & Ocean Vista**:
+- **🏖️ High-Fidelity Beach Studio & Ocean Vista**:
   - Real-time **Gerstner wave shader** with multi-frequency ocean swells, surface normals, Fresnel water scatter, and specular sun sparkle.
+  - Golden sandy beach shoreline with **animated beach volleyball match, athletes, beach umbrellas, and tropical coconut palm trees**.
   - Distant layered rocky coastal cliffs, animated rocking sailboat, and a lighthouse with a rotating 3D volumetric light beam.
   - Architectural panoramic picture window with realistic beveled reveals and reflective optical glass.
 - **📺 Continuous Video Streaming Across 3D Devices**:

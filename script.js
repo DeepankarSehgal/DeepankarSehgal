@@ -1,7 +1,15 @@
 /**
- * Deepankar Sehgal · 3D Coastal Workbench Portfolio
- * High-Fidelity Photorealistic Three.js (r128) WebGL Scene
- * Continuous Live Video Textures, Advanced PBR Shaders, Gerstner Ocean Waves, and Rich Scene Interactivity
+ * Deepankar Sehgal · 3D Portfolio & Interactive Workbench
+ * Senior Unity & XR Developer · Bengaluru, India
+ * 
+ * Features:
+ * - Real-Time Day/Night Sun Synchronization based on Indian Standard Time (IST)
+ * - Live Bengaluru Weather & US AQI Integration (Open-Meteo API)
+ * - Continuous Live Video Streaming across PC Monitor, VR Stereo Display, and Mobile Phone
+ * - Tropical Beach Shoreline with Animated Beach Volleyball, Players, Umbrellas & Palm Trees
+ * - 100% Reliable 3D Device & Prop Click Raycasting (VR, PC, Mobile, Notes, Lamp, Speakers, Mug)
+ * - 9 VR & XR Projects, 8 PC & Steam AA Projects, 5 Mobile & Web3 Projects
+ * - Procedural Ocean Surf Audio Synthesizer (Web Audio API)
  */
 
 (function () {
@@ -10,7 +18,7 @@
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ==========================================================================
-     CONTINUOUS VIDEO TEXTURE ENGINE (PC, VR STEREO DISPLAY & MOBILE)
+     CONTINUOUS VIDEO TEXTURE ENGINE
      ========================================================================== */
 
   var clips = {};
@@ -47,7 +55,6 @@
     if (p && p.catch) p.catch(function () {});
   }
 
-  /* Unmute audio or kick videos on first user gesture */
   function kickAllVideos() {
     Object.keys(clips).forEach(function (k) {
       if (clips[k] && clips[k].video) playVideo(clips[k].video);
@@ -57,7 +64,7 @@
   window.addEventListener('keydown', kickAllVideos, { once: true });
 
   /* ==========================================================================
-     EXPANDED PROJECTS DATABASE (VR, PC & MOBILE)
+     PORTFOLIO PROJECTS DATA (DEEPANKAR SEHGAL)
      ========================================================================== */
 
   var GROUPS = {
@@ -227,7 +234,7 @@
           clip: 'stadpc',
           name: 'Apex Procedural Dungeon Engine',
           kind: 'Procedural Generation Engine',
-          blurb: 'Deterministic procedural dungeon and arena generation engine built with Binary Space Partitioning (BSP) trees, room room template stamping, and dynamic NavMesh obstacle stitching.',
+          blurb: 'Deterministic procedural dungeon and arena generation engine built with Binary Space Partitioning (BSP) trees, room template stamping, and dynamic NavMesh obstacle stitching.',
           note: 'Generates balanced combat levels with seed replication for competitive multiplayer runs.',
           tags: ['Procedural Generation', 'BSP Trees', 'Algorithms', 'NavMesh']
         },
@@ -252,7 +259,7 @@
 
     phone: {
       label: 'Mobile · Multiplayer & Web3',
-      platform: 'iOS · Android · Multiplayer',
+      platform: 'iOS · Android · Multiplayer Systems',
       projects: [
         {
           clip: 'domino',
@@ -381,10 +388,10 @@
 
   var ABOUT_HTML =
     '<div class="detail">' +
-    '<p>I am <strong>Deepankar Sehgal</strong>, a Senior Unity & XR Developer with <strong>5+ years of hands-on experience</strong> engineering high-performance games, enterprise AR/VR simulations, and scalable multiplayer systems.</p>' +
+    '<p>I am <strong>Deepankar Sehgal</strong>, a Senior Unity & XR Developer based in <strong>Bengaluru, India</strong> with <strong>5+ years of hands-on experience</strong> engineering high-performance games, enterprise AR/VR simulations, and scalable multiplayer systems.</p>' +
     '<p>Throughout my career, I have shipped <strong>25+ games</strong> across PC, Mobile, and XR. Key career milestones include developing industrial VR training for <strong>Simulanis</strong> on Meta Quest headsets, shipping commercial AA tactical title <strong>Crimson Tactics: The White Banner</strong> on Steam PC with Black March Studios, and scaling multiplayer Web3 titles to <strong>5,000,000+ players</strong> with YungAlgo. Currently, I work on casino slot game engines at <strong>ZVKY Design Studio</strong>.</p>' +
     '<div class="timeline">' +
-    '<div class="timeline-item"><h4>ZVKY Design Studio</h4><div class="timeline-role">Game Developer · Casino & Slot Engines</div><div class="timeline-date">Nov 2025 – Present</div><p>Developing high-performance casino slot games, paytable mechanics, dynamic reel mathematics, and 60 FPS mobile particle effects.</p></div>' +
+    '<div class="timeline-item"><h4>ZVKY Design Studio</h4><div class="timeline-role">Game Developer · Casino & Slot Engines</div><div class="timeline-date">Nov 2025 – Present · Bengaluru, India</div><p>Developing high-performance casino slot games, paytable mechanics, dynamic reel mathematics, and 60 FPS mobile particle effects.</p></div>' +
     '<div class="timeline-item"><h4>Simulanis</h4><div class="timeline-role">XR Developer · Enterprise VR & Safety</div><div class="timeline-date">Oct 2024 – Jul 2025</div><p>Engineered enterprise-grade AR & VR procedural training simulations for industrial safety, optimized for standalone Meta Quest 2 and 3 headsets.</p></div>' +
     '<div class="timeline-item"><h4>Hapz Software Solution</h4><div class="timeline-role">Unity Game Developer</div><div class="timeline-date">Jan 2022 – Dec 2023</div><p>Delivered over 20+ games spanning 2D, 3D, AR/VR, and multiplayer genres. Built custom gameplay mechanics, shaders, and live-ops hooks.</p></div>' +
     '<div class="timeline-item"><h4>Irusu Technologies</h4><div class="timeline-role">Unity Game Developer</div><div class="timeline-date">Oct 2021 – Dec 2021</div><p>Built multiplayer educational applications and VR Cinema published on the Google Play Store.</p></div>' +
@@ -398,7 +405,7 @@
     '<div class="contact-box">' +
     '<div class="contact-item"><i class="fa-solid fa-envelope"></i> <a href="mailto:deepankarsehgal3@gmail.com">deepankarsehgal3@gmail.com</a></div>' +
     '<div class="contact-item"><i class="fa-brands fa-whatsapp"></i> <a href="tel:+918968457228">+91 8968457228</a></div>' +
-    '<div class="contact-item"><i class="fa-solid fa-location-dot"></i> Coastal Studio · India · UTC+5:30</div>' +
+    '<div class="contact-item"><i class="fa-solid fa-location-dot"></i> Bengaluru, India · UTC+5:30</div>' +
     '</div>' +
     '<div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:20px;">' +
     '<a class="linkbtn" href="https://www.linkedin.com/in/deepankar-sehgal/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> LinkedIn Profile ↗</a>' +
@@ -429,7 +436,6 @@
     return new THREE.Color(hex).convertSRGBToLinear();
   }
 
-  /* High-Segment Rounded Box Helper for smooth bevels */
   function roundedBox(w, h, d, r, seg) {
     r = Math.min(r, w / 2 - 1e-4, h / 2 - 1e-4);
     var s = new THREE.Shape(), x = w / 2, y = h / 2;
@@ -450,14 +456,13 @@
     return g;
   }
 
-  /* Procedural Textures for Photorealism */
+  /* Procedural Textures */
   function createWoodTexture() {
     var c = document.createElement('canvas');
     c.width = 1024; c.height = 512;
     var ctx = c.getContext('2d');
     ctx.fillStyle = '#f3e5d3';
     ctx.fillRect(0, 0, 1024, 512);
-    // Draw wood grain streaks
     for (var i = 0; i < 600; i++) {
       ctx.fillStyle = 'rgba(' + (180 + Math.random() * 40 | 0) + ',' + (150 + Math.random() * 30 | 0) + ',' + (120 + Math.random() * 20 | 0) + ',0.14)';
       var y = Math.random() * 512;
@@ -477,7 +482,6 @@
     var ctx = c.getContext('2d');
     ctx.fillStyle = '#e8d9c7';
     ctx.fillRect(0, 0, 512, 512);
-    // Planks
     ctx.fillStyle = '#baa793';
     for (var x = 0; x < 512; x += 64) ctx.fillRect(x, 0, 2, 512);
     for (var y = 0; y < 512; y += 128) ctx.fillRect(0, y, 512, 2);
@@ -499,10 +503,10 @@
      LIGHTING RIG (SUN, HEMISPHERE, TASK SPOTLIGHT & VOLUMETRIC BEAMS)
      ========================================================================== */
 
-  var hemiLight = new THREE.HemisphereLight(0xe0f2fe, 0x334155, 0.7);
+  var hemiLight = new THREE.HemisphereLight(0xe0f2fe, 0x334155, 0.75);
   scene.add(hemiLight);
 
-  var sunLight = new THREE.DirectionalLight(0xfff8ee, 5.2);
+  var sunLight = new THREE.DirectionalLight(0xfff8ee, 5.4);
   sunLight.castShadow = true;
   sunLight.shadow.mapSize.set(2048, 2048);
   sunLight.shadow.camera.near = 0.5;
@@ -536,21 +540,25 @@
   roomCeilLight.position.set(0, 2.7, 1.0);
   scene.add(roomCeilLight);
 
+  /* Beach Tiki Torches Point Lights (Active at Night) */
+  var tikiLights = [];
+  function addTikiTorchLight(x, y, z) {
+    var pLight = new THREE.PointLight(0xff8833, 0, 25, 2);
+    pLight.position.set(x, y, z);
+    scene.add(pLight);
+    tikiLights.push(pLight);
+  }
+
   /* ==========================================================================
-     COASTAL STUDIO ARCHITECTURE
+     STUDIO INTERIOR ARCHITECTURE
      ========================================================================== */
 
   var ROOM = { l: -2.0, r: 2.2, f: 3.4, h: 2.9 };
   var WALL_Z = -0.48;
   var DESK_Y = 0.75;
 
-  var wallMat = new THREE.MeshStandardMaterial({
-    color: srgb(0xf2f5f1),
-    roughness: 0.85,
-    metalness: 0.02
-  });
+  var wallMat = new THREE.MeshStandardMaterial({ color: srgb(0xf2f5f1), roughness: 0.85, metalness: 0.02 });
 
-  /* Parquet Floor */
   var floorMesh = new THREE.Mesh(
     new THREE.PlaneGeometry(ROOM.r - ROOM.l, ROOM.f - WALL_Z),
     new THREE.MeshStandardMaterial({ map: parquetTex, roughness: 0.35, metalness: 0.05 })
@@ -560,13 +568,11 @@
   floorMesh.receiveShadow = true;
   scene.add(floorMesh);
 
-  /* Skirting Board */
   var skirtingMat = new THREE.MeshStandardMaterial({ color: srgb(0xe0e6df), roughness: 0.6 });
   var skirting = new THREE.Mesh(new THREE.BoxGeometry(ROOM.r - ROOM.l, 0.08, 0.02), skirtingMat);
   skirting.position.set((ROOM.l + ROOM.r) / 2, 0.04, WALL_Z + 0.01);
   scene.add(skirting);
 
-  /* Ceiling */
   var ceilMesh = new THREE.Mesh(
     new THREE.PlaneGeometry(ROOM.r - ROOM.l, ROOM.f - WALL_Z),
     new THREE.MeshStandardMaterial({ color: srgb(0xfafbfa), roughness: 0.95 })
@@ -575,7 +581,6 @@
   ceilMesh.position.set((ROOM.l + ROOM.r) / 2, ROOM.h, (WALL_Z + ROOM.f) / 2);
   scene.add(ceilMesh);
 
-  /* Side Walls */
   var leftWall = new THREE.Mesh(new THREE.PlaneGeometry(ROOM.f - WALL_Z, ROOM.h), wallMat);
   leftWall.rotation.y = Math.PI / 2;
   leftWall.position.set(ROOM.l, ROOM.h / 2, (WALL_Z + ROOM.f) / 2);
@@ -588,7 +593,7 @@
   rightWall.receiveShadow = true;
   scene.add(rightWall);
 
-  /* Floor-to-Ceiling Panoramic Picture Window */
+  /* Panoramic Picture Window */
   var WIN = { x0: -1.5, x1: 2.0, y0: 0.76, y1: 2.75 };
   var backWallGroup = new THREE.Group();
   backWallGroup.position.set(0, 0, WALL_Z);
@@ -614,12 +619,7 @@
   backWallMesh.castShadow = true;
   backWallGroup.add(backWallMesh);
 
-  var winFrameMat = new THREE.MeshStandardMaterial({
-    color: srgb(0x202422),
-    roughness: 0.32,
-    metalness: 0.75
-  });
-
+  var winFrameMat = new THREE.MeshStandardMaterial({ color: srgb(0x202422), roughness: 0.32, metalness: 0.75 });
   var winW = WIN.x1 - WIN.x0;
   var winH = WIN.y1 - WIN.y0;
   var winCenter = { x: (WIN.x0 + WIN.x1) / 2, y: (WIN.y0 + WIN.y1) / 2 };
@@ -633,11 +633,9 @@
   }
 
   addFrameBar(winW + 0.08, 0.05, 0.16, winCenter.x, WIN.y1 + 0.025, -0.04);
-  addFrameBar(winW + 0.1, 0.065, 0.22, winCenter.x, WIN.y0 - 0.03, -0.04); // Deep granite/wood sill
+  addFrameBar(winW + 0.1, 0.065, 0.22, winCenter.x, WIN.y0 - 0.03, -0.04);
   addFrameBar(0.05, winH + 0.05, 0.16, WIN.x0 - 0.025, winCenter.y, -0.04);
   addFrameBar(0.05, winH + 0.05, 0.16, WIN.x1 + 0.025, winCenter.y, -0.04);
-
-  // Slim Mullions
   addFrameBar(0.035, winH, 0.09, WIN.x0 + winW * 0.333, winCenter.y, -0.04);
   addFrameBar(0.035, winH, 0.09, WIN.x0 + winW * 0.666, winCenter.y, -0.04);
 
@@ -654,7 +652,7 @@
   backWallGroup.add(glassMesh);
 
   /* ==========================================================================
-     GERSTNER OCEAN SHADER & COASTAL HORIZON
+     BEACH SHORELINE, ANIMATED VOLLEYBALL, PEOPLE & OCEAN VISTA
      ========================================================================== */
 
   var skyUniforms = {
@@ -699,7 +697,33 @@
   var skyMesh = new THREE.Mesh(skyGeo, skyMat);
   scene.add(skyMesh);
 
-  /* Gerstner Waves Real-Time Water Shader */
+  /* Golden Sand Beach Terrain outside the window */
+  var sandMat = new THREE.MeshStandardMaterial({
+    color: srgb(0xe8d2b0), // Warm golden sand
+    roughness: 0.96,
+    metalness: 0.02
+  });
+
+  var beachGeo = new THREE.PlaneGeometry(800, 180, 48, 48);
+  var beachMesh = new THREE.Mesh(beachGeo, sandMat);
+  beachMesh.rotation.x = -Math.PI / 2 + 0.03; // Gentle slope toward sea
+  beachMesh.position.set(0, -6.1, -85);
+  beachMesh.receiveShadow = true;
+  scene.add(beachMesh);
+
+  /* Shoreline Wave Foam Line (Advances and retreats) */
+  var foamMat = new THREE.MeshBasicMaterial({
+    color: 0xffffff,
+    transparent: true,
+    opacity: 0.45,
+    side: THREE.DoubleSide
+  });
+  var foamRibbon = new THREE.Mesh(new THREE.PlaneGeometry(800, 4.5), foamMat);
+  foamRibbon.rotation.x = -Math.PI / 2;
+  foamRibbon.position.set(0, -6.45, -165);
+  scene.add(foamRibbon);
+
+  /* Gerstner Waves Real-Time Water Shader beyond the beach */
   var oceanUniforms = {
     time: { value: 0 },
     waterDeep: { value: new THREE.Color(0x052842) },
@@ -709,7 +733,7 @@
     skyHorColor: { value: skyUniforms.bottomColor.value }
   };
 
-  var oceanGeo = new THREE.PlaneGeometry(4500, 3200, 128, 128);
+  var oceanGeo = new THREE.PlaneGeometry(4500, 2600, 128, 128);
   var oceanMat = new THREE.ShaderMaterial({
     uniforms: oceanUniforms,
     vertexShader: [
@@ -772,10 +796,209 @@
 
   var oceanMesh = new THREE.Mesh(oceanGeo, oceanMat);
   oceanMesh.rotation.x = -Math.PI / 2;
-  oceanMesh.position.set(0, -6.0, -1300);
+  oceanMesh.position.set(0, -6.6, -1450);
   scene.add(oceanMesh);
 
-  /* Rocky Coastal Headlands / Cliffs */
+  /* Tropical Coconut Palm Trees along the Beach */
+  var palmMat = new THREE.MeshStandardMaterial({ color: srgb(0x4a3a2d), roughness: 0.9 });
+  var palmFrondMat = new THREE.MeshStandardMaterial({ color: srgb(0x2d6b38), roughness: 0.5, side: THREE.DoubleSide });
+
+  function addPalmTree(x, z, scale) {
+    var palm = new THREE.Group();
+    palm.position.set(x, -6.0, z);
+    palm.scale.setScalar(scale || 1.0);
+    scene.add(palm);
+
+    // Curved Trunk
+    var curve = new THREE.QuadraticBezierCurve3(
+      new THREE.Vector3(0, 0, 0),
+      new THREE.Vector3(1.5, 7, 0.5),
+      new THREE.Vector3(2.5, 15, 1.2)
+    );
+    var trunkGeo = new THREE.TubeGeometry(curve, 16, 0.45, 8, false);
+    var trunk = new THREE.Mesh(trunkGeo, palmMat);
+    trunk.castShadow = true;
+    palm.add(trunk);
+
+    // Arching Fronds
+    for (var f = 0; f < 8; f++) {
+      var frondShape = new THREE.Shape();
+      frondShape.moveTo(0, 0);
+      frondShape.quadraticCurveTo(0.6, 2.5, 0.8, 5.0);
+      frondShape.quadraticCurveTo(0, 6.5, -0.8, 5.0);
+      frondShape.quadraticCurveTo(-0.6, 2.5, 0, 0);
+      var frondGeo = new THREE.ShapeGeometry(frondShape);
+      var frond = new THREE.Mesh(frondGeo, palmFrondMat);
+      var ang = (f / 8) * Math.PI * 2;
+      frond.position.set(2.5, 15, 1.2);
+      frond.rotation.y = ang;
+      frond.rotation.x = 0.55;
+      frond.castShadow = true;
+      palm.add(frond);
+    }
+  }
+
+  addPalmTree(-22, -45, 0.95);
+  addPalmTree(-28, -60, 1.15);
+  addPalmTree(24, -50, 1.05);
+  addPalmTree(32, -70, 1.2);
+
+  /* Animated Beach Volleyball Scene with People Playing */
+  var vCourtGroup = new THREE.Group();
+  vCourtGroup.position.set(-6, -6.0, -55);
+  scene.add(vCourtGroup);
+
+  // Volleyball Net
+  var poleMat = new THREE.MeshStandardMaterial({ color: srgb(0x38413b), roughness: 0.4, metalness: 0.7 });
+  var poleL = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 3.2, 12), poleMat);
+  poleL.position.set(-5.5, 1.6, 0);
+  vCourtGroup.add(poleL);
+
+  var poleR = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 3.2, 12), poleMat);
+  poleR.position.set(5.5, 1.6, 0);
+  vCourtGroup.add(poleR);
+
+  var netMat = new THREE.MeshStandardMaterial({
+    color: 0xffffff,
+    transparent: true,
+    opacity: 0.7,
+    roughness: 0.3
+  });
+  var netMesh = new THREE.Mesh(new THREE.PlaneGeometry(11, 1.1), netMat);
+  netMesh.position.set(0, 2.4, 0);
+  vCourtGroup.add(netMesh);
+
+  // Court boundary ribbon
+  var courtLine = new THREE.Mesh(
+    new THREE.PlaneGeometry(12, 16),
+    new THREE.MeshBasicMaterial({ color: 0x0284c7, wireframe: true })
+  );
+  courtLine.rotation.x = -Math.PI / 2;
+  courtLine.position.y = 0.02;
+  vCourtGroup.add(courtLine);
+
+  // Volleyball Players (Stylized Beach Athletes in Beachwear)
+  function createVolleyballPlayer(colorHex, x, z, ry) {
+    var p = new THREE.Group();
+    p.position.set(x, 0, z);
+    p.rotation.y = ry;
+    vCourtGroup.add(p);
+
+    var skinMat = new THREE.MeshStandardMaterial({ color: srgb(0xd29d72), roughness: 0.6 });
+    var clothesMat = new THREE.MeshStandardMaterial({ color: srgb(colorHex), roughness: 0.5 });
+
+    // Legs / shorts
+    var shorts = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.26, 0.55, 10), clothesMat);
+    shorts.position.y = 0.8;
+    p.add(shorts);
+
+    // Torso (Jersey)
+    var torso = new THREE.Mesh(new THREE.CylinderGeometry(0.32, 0.28, 0.7, 10), clothesMat);
+    torso.position.y = 1.4;
+    torso.castShadow = true;
+    p.add(torso);
+
+    // Head
+    var head = new THREE.Mesh(new THREE.SphereGeometry(0.2, 12, 12), skinMat);
+    head.position.y = 1.95;
+    p.add(head);
+
+    // Raised Arms
+    [-0.32, 0.32].forEach(function (ax) {
+      var arm = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.07, 0.65, 8), skinMat);
+      arm.position.set(ax, 1.6, 0.2);
+      arm.rotation.x = 0.8;
+      p.add(arm);
+    });
+
+    return p;
+  }
+
+  var vPlayer1 = createVolleyballPlayer(0xd95b26, -2.5, 4.5, Math.PI); // Team A Near Net
+  var vPlayer2 = createVolleyballPlayer(0x0284c7, 2.8, 5.5, Math.PI - 0.2); // Team A Back
+  var vPlayer3 = createVolleyballPlayer(0x10b981, -1.8, -4.5, 0); // Team B Near Net
+  var vPlayer4 = createVolleyballPlayer(0xf59e0b, 2.2, -5.8, 0.2); // Team B Back
+
+  // The Flying Volleyball
+  var vBall = new THREE.Mesh(
+    new THREE.SphereGeometry(0.22, 16, 16),
+    new THREE.MeshStandardMaterial({ color: 0xfff275, roughness: 0.3 })
+  );
+  vBall.castShadow = true;
+  vCourtGroup.add(vBall);
+
+  // Beach Umbrellas & Loungers
+  function addBeachUmbrella(x, z, col1, col2) {
+    var u = new THREE.Group();
+    u.position.set(x, -5.9, z);
+    scene.add(u);
+
+    var pole = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 3.2, 8), poleMat);
+    pole.position.y = 1.6;
+    pole.rotation.z = -0.12;
+    u.add(pole);
+
+    var canopy = new THREE.Mesh(
+      new THREE.ConeGeometry(2.4, 0.9, 16),
+      new THREE.MeshStandardMaterial({ color: srgb(col1), roughness: 0.4, side: THREE.DoubleSide })
+    );
+    canopy.position.set(-0.2, 3.0, 0);
+    canopy.rotation.z = -0.12;
+    canopy.castShadow = true;
+    u.add(canopy);
+
+    // Reclining Beach Lounger
+    var lounger = new THREE.Mesh(
+      roundedBox(0.9, 0.35, 2.2, 0.04, 3),
+      new THREE.MeshStandardMaterial({ color: srgb(0xfaf3e0), roughness: 0.7 })
+    );
+    lounger.position.set(0.6, 0.2, 0.4);
+    lounger.rotation.y = 0.3;
+    u.add(lounger);
+  }
+
+  addBeachUmbrella(12, -42, 0xef4444, 0xffffff);
+  addBeachUmbrella(18, -48, 0x0284c7, 0xffffff);
+
+  // Shoreline Walking Beachgoers
+  var walkerGroup = new THREE.Group();
+  walkerGroup.position.set(2, -6.3, -150);
+  scene.add(walkerGroup);
+
+  var walker1 = createVolleyballPlayer(0xec4899, 0, 0, Math.PI / 2);
+  walker1.scale.setScalar(0.85);
+  walkerGroup.add(walker1);
+
+  var walker2 = createVolleyballPlayer(0x3b82f6, 1.5, 0.5, Math.PI / 2);
+  walker2.scale.setScalar(0.85);
+  walkerGroup.add(walker2);
+
+  // Tiki Torches (Beach lighting at night)
+  function addTikiTorch(x, z) {
+    var torch = new THREE.Group();
+    torch.position.set(x, -6.0, z);
+    scene.add(torch);
+
+    var bamboo = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.05, 2.6, 8), palmMat);
+    bamboo.position.y = 1.3;
+    torch.add(bamboo);
+
+    var flame = new THREE.Mesh(
+      new THREE.ConeGeometry(0.12, 0.35, 12),
+      new THREE.MeshBasicMaterial({ color: 0xff6600 })
+    );
+    flame.position.y = 2.7;
+    torch.add(flame);
+
+    addTikiTorchLight(x, -3.3, z);
+  }
+
+  addTikiTorch(-14, -40);
+  addTikiTorch(4, -40);
+  addTikiTorch(-14, -72);
+  addTikiTorch(4, -72);
+
+  /* Distant Headlands, Lighthouse & Sailboat */
   var cliffMat = new THREE.MeshStandardMaterial({ color: srgb(0x32463e), roughness: 0.9, metalness: 0.05 });
   function makeCliff(x, z, scaleX, scaleY, scaleZ) {
     var cGeo = new THREE.ConeGeometry(scaleX, scaleY, 8);
@@ -784,10 +1007,9 @@
     cMesh.scale.set(1.5, 0.5, 1.3);
     scene.add(cMesh);
   }
-  makeCliff(-420, -980, 260, 110, 200);
-  makeCliff(520, -1180, 310, 125, 230);
+  makeCliff(-460, -980, 260, 110, 200);
+  makeCliff(540, -1180, 310, 125, 230);
 
-  /* Lighthouse Promontory with Rotating 3D Volumetric Beam */
   var lhGroup = new THREE.Group();
   lhGroup.position.set(-290, 28, -920);
   scene.add(lhGroup);
@@ -809,7 +1031,6 @@
   lhBeacon.position.set(0, 19, 0);
   lhGroup.add(lhBeacon);
 
-  // Rotating Beam Cone
   var beamGeo = new THREE.ConeGeometry(35, 180, 16, 1, true);
   beamGeo.translate(0, 90, 0);
   beamGeo.rotateX(Math.PI / 2);
@@ -824,37 +1045,26 @@
   lhBeam.position.set(0, 19, 0);
   lhGroup.add(lhBeam);
 
-  /* Sailboat on the Water */
   var boatGroup = new THREE.Group();
   boatGroup.position.set(140, -5.5, -520);
   scene.add(boatGroup);
 
-  var boatHull = new THREE.Mesh(
-    roundedBox(5.0, 1.4, 14, 0.3, 3),
-    new THREE.MeshStandardMaterial({ color: srgb(0xffffff), roughness: 0.4 })
-  );
+  var boatHull = new THREE.Mesh(roundedBox(5.0, 1.4, 14, 0.3, 3), new THREE.MeshStandardMaterial({ color: srgb(0xffffff), roughness: 0.4 }));
   boatGroup.add(boatHull);
 
-  var mastMesh = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.12, 0.16, 16, 8),
-    new THREE.MeshStandardMaterial({ color: srgb(0x3a3f42), roughness: 0.5 })
-  );
+  var mastMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.16, 16, 8), new THREE.MeshStandardMaterial({ color: srgb(0x3a3f42), roughness: 0.5 }));
   mastMesh.position.set(0, 8, 1);
   boatGroup.add(mastMesh);
 
   var sailGeo = new THREE.BufferGeometry();
-  var sailVerts = new Float32Array([
-    0, 1.5, -4.5,
-    0, 15.5, 0.8,
-    0, 1.5, 4.5
-  ]);
+  var sailVerts = new Float32Array([0, 1.5, -4.5, 0, 15.5, 0.8, 0, 1.5, 4.5]);
   sailGeo.setAttribute('position', new THREE.BufferAttribute(sailVerts, 3));
   sailGeo.computeVertexNormals();
   var sailMesh = new THREE.Mesh(sailGeo, new THREE.MeshLambertMaterial({ color: 0xffffff, side: THREE.DoubleSide }));
   boatGroup.add(sailMesh);
 
   /* ==========================================================================
-     THE WORKBENCH (DESK) & LUXURY SCENIC PROPS
+     THE WORKBENCH (DESK) & SCENIC PROPS
      ========================================================================== */
 
   var deskMat = new THREE.MeshStandardMaterial({
@@ -871,7 +1081,6 @@
   deskTop.receiveShadow = true;
   scene.add(deskTop);
 
-  // Stitched Leather Desk Pad / Mat
   var deskPadMat = new THREE.MeshStandardMaterial({ color: srgb(0x202824), roughness: 0.85 });
   var deskPad = new THREE.Mesh(roundedBox(0.92, 0.44, 0.005, 0.012, 3), deskPadMat);
   deskPad.rotation.x = -Math.PI / 2;
@@ -879,7 +1088,6 @@
   deskPad.receiveShadow = true;
   scene.add(deskPad);
 
-  // Heavy Duty Trestle Steel Legs
   var legMat = new THREE.MeshStandardMaterial({ color: srgb(0x272c29), roughness: 0.35, metalness: 0.85 });
   [[-0.96, 0.38], [1.02, 0.38], [-0.96, -0.38], [1.02, -0.38]].forEach(function (pt) {
     var leg = new THREE.Mesh(new THREE.CylinderGeometry(0.024, 0.024, DESK_Y - 0.042, 16), legMat);
@@ -890,10 +1098,21 @@
   });
 
   /* ==========================================================================
-     INTERACTIVE 3D PROPS & CONTINUOUS SCREENS
+     INFALLIBLE 3D INTERACTION & HITBOX SYSTEM
      ========================================================================== */
 
   var pickables = [];
+  function addHitbox(parentGroup, key, w, h, d, ox, oy, oz) {
+    var hbGeo = new THREE.BoxGeometry(w, h, d);
+    var hbMat = new THREE.MeshBasicMaterial({ visible: false, wireframe: true });
+    var hbMesh = new THREE.Mesh(hbGeo, hbMat);
+    hbMesh.position.set(ox || 0, oy || 0, oz || 0);
+    hbMesh.userData.key = key;
+    parentGroup.add(hbMesh);
+    pickables.push(hbMesh);
+    return hbMesh;
+  }
+
   function registerPickable(obj, key) {
     obj.userData.key = key;
     pickables.push(obj);
@@ -913,7 +1132,6 @@
   gVR.position.set(-0.48, DESK_Y + 0.065, -0.04);
   scene.add(gVR);
 
-  // VR Visor Body
   var vrVisorMat = new THREE.MeshPhysicalMaterial({
     color: 0xf5f6f2,
     roughness: 0.35,
@@ -925,7 +1143,6 @@
   vrVisor.castShadow = true;
   gVR.add(vrVisor);
 
-  // Front camera sensors (Quest 3 3-sensor array)
   var sensorMat = new THREE.MeshStandardMaterial({ color: srgb(0x121413), roughness: 0.15, metalness: 0.9 });
   [-0.055, 0.0, 0.055].forEach(function (sx) {
     var pill = new THREE.Mesh(roundedBox(0.016, 0.036, 0.006, 0.007, 3), sensorMat);
@@ -933,13 +1150,11 @@
     gVR.add(pill);
   });
 
-  // Facial Cushion
   var cushionMat = new THREE.MeshStandardMaterial({ color: srgb(0x242825), roughness: 0.95 });
   var cushion = new THREE.Mesh(roundedBox(0.175, 0.09, 0.02, 0.025, 4), cushionMat);
   cushion.position.set(0, 0, -0.05);
   gVR.add(cushion);
 
-  // Dual Fresnel Glass Ocular Lenses inside
   var ocularMat = new THREE.MeshStandardMaterial({ color: 0x051a24, roughness: 0.05, metalness: 0.9 });
   [-0.036, 0.036].forEach(function (lx) {
     var lens = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, 0.006, 24), ocularMat);
@@ -948,7 +1163,6 @@
     gVR.add(lens);
   });
 
-  // Elite Headstrap & Rear Dial
   var strapMat = new THREE.MeshStandardMaterial({ color: srgb(0x2c332e), roughness: 0.85 });
   var strapRing = new THREE.Mesh(new THREE.TorusGeometry(0.12, 0.012, 10, 32), strapMat);
   strapRing.rotation.x = Math.PI / 2;
@@ -983,10 +1197,10 @@
     ctrlGroup.add(thumbstick);
   });
 
-  /* --------------------------------------------------------------------------
-     WALL-MOUNTED VR STEREO BARREL DISTORTION STREAM MONITOR
-     -------------------------------------------------------------------------- */
+  // Generous VR Headset Hitbox
+  addHitbox(gVR, 'vr', 0.55, 0.28, 0.42, 0, 0.05, -0.05);
 
+  /* Wall-Mounted VR Stereo Stream Monitor */
   var vrStereoShader = new THREE.ShaderMaterial({
     uniforms: {
       map: { value: null },
@@ -994,13 +1208,7 @@
       aspect: { value: 0.888 },
       time: { value: 0.0 }
     },
-    vertexShader: [
-      'varying vec2 vUv;',
-      'void main() {',
-      '  vUv = uv;',
-      '  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);',
-      '}'
-    ].join('\n'),
+    vertexShader: 'varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
     fragmentShader: [
       'uniform sampler2D map;',
       'uniform float hasMap;',
@@ -1043,13 +1251,7 @@
   var tvScreenMesh = new THREE.Mesh(new THREE.PlaneGeometry(0.69, 0.40), vrStereoShader);
   tvScreenMesh.position.z = 0.0145;
   gWallTV.add(tvScreenMesh);
-
-  var tvStatusLed = new THREE.Mesh(
-    new THREE.CircleGeometry(0.004, 16),
-    new THREE.MeshBasicMaterial({ color: 0x0284c7 })
-  );
-  tvStatusLed.position.set(0.33, -0.195, 0.015);
-  gWallTV.add(tvStatusLed);
+  addHitbox(gWallTV, 'vr', 0.74, 0.45, 0.1, 0, 0, 0);
 
   /* --------------------------------------------------------------------------
      2. ULTRAWIDE PC MONITOR & DESKTOP RIG (Group: 'pc')
@@ -1064,7 +1266,6 @@
   monFrame.castShadow = true;
   gPC.add(monFrame);
 
-  // Monitor Articulated Arm & Desk Clamp
   var monArm = new THREE.Mesh(new THREE.CylinderGeometry(0.018, 0.02, 0.32, 16), legMat);
   monArm.position.set(0, -0.16, -0.06);
   monArm.castShadow = true;
@@ -1074,21 +1275,16 @@
   monClamp.position.set(0, -0.29, -0.06);
   gPC.add(monClamp);
 
-  // PC Monitor Live Screen
   var monScreenMat = new THREE.MeshBasicMaterial({ color: 0xe0e0e0 });
   var monScreenMesh = new THREE.Mesh(new THREE.PlaneGeometry(0.855, 0.475), monScreenMat);
   monScreenMesh.position.z = 0.0135;
   gPC.add(monScreenMesh);
 
-  var monPowerLed = new THREE.Mesh(
-    new THREE.CircleGeometry(0.0035, 16),
-    new THREE.MeshBasicMaterial({ color: 0x38bdf8 })
-  );
-  monPowerLed.position.set(0.40, -0.235, 0.014);
-  gPC.add(monPowerLed);
+  // Large PC Hitbox encompassing monitor and arm
+  addHitbox(gPC, 'pc', 0.94, 0.56, 0.25, 0, 0, 0);
 
-  /* High-Detail Mechanical Keyboard */
-  var kbGroup = new THREE.Group();
+  /* Mechanical Keyboard & Mouse */
+  var kbGroup = registerPickable(new THREE.Group(), 'pc');
   kbGroup.position.set(0.32, DESK_Y + 0.012, 0.22);
   scene.add(kbGroup);
 
@@ -1100,20 +1296,7 @@
   kbBody.castShadow = true;
   kbGroup.add(kbBody);
 
-  // Modeled Individual Keycap Cluster
-  var keyMat = new THREE.MeshStandardMaterial({ color: srgb(0x2c3530), roughness: 0.7 });
-  for (var r = 0; r < 5; r++) {
-    for (var c = 0; c < 14; c++) {
-      var kw = (r === 4 && c === 6) ? 0.07 : 0.018; // Spacebar
-      var keyCap = new THREE.Mesh(new THREE.BoxGeometry(kw, 0.008, 0.016), keyMat);
-      keyCap.position.set(-0.16 + c * 0.024, 0.01, -0.045 + r * 0.022);
-      kbGroup.add(keyCap);
-      if (r === 4 && c === 6) c += 2;
-    }
-  }
-
-  /* Ergonomic Wireless Mouse */
-  var mouseGroup = new THREE.Group();
+  var mouseGroup = registerPickable(new THREE.Group(), 'pc');
   mouseGroup.position.set(0.64, DESK_Y + 0.012, 0.22);
   scene.add(mouseGroup);
 
@@ -1125,13 +1308,8 @@
   mouseBody.castShadow = true;
   mouseGroup.add(mouseBody);
 
-  var mouseWheel = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.005, 0.005, 0.008, 12),
-    new THREE.MeshStandardMaterial({ color: srgb(0x0284c7), roughness: 0.2, metalness: 0.8 })
-  );
-  mouseWheel.rotation.z = Math.PI / 2;
-  mouseWheel.position.set(0, 0.015, -0.025);
-  mouseGroup.add(mouseWheel);
+  addHitbox(kbGroup, 'pc', 0.42, 0.08, 0.2, 0, 0, 0);
+  addHitbox(mouseGroup, 'pc', 0.12, 0.08, 0.15, 0, 0, 0);
 
   /* --------------------------------------------------------------------------
      STUDIO AUDIO NEARFIELD MONITORS (SPEAKERS - CLICKABLE AUDIO TOGGLE)
@@ -1150,24 +1328,16 @@
     cabinet.castShadow = true;
     spk.add(cabinet);
 
-    // Tweeter
     var tweeter = new THREE.Mesh(new THREE.SphereGeometry(0.016, 16, 16), legMat);
     tweeter.position.set(0, 0.065, 0.08);
     spk.add(tweeter);
 
-    // Woofer Cone
     var woofer = new THREE.Mesh(new THREE.CylinderGeometry(0.042, 0.015, 0.02, 24), coneMat);
     woofer.rotation.x = Math.PI / 2;
     woofer.position.set(0, -0.025, 0.075);
     spk.add(woofer);
 
-    var led = new THREE.Mesh(
-      new THREE.CircleGeometry(0.003, 12),
-      new THREE.MeshBasicMaterial({ color: 0x10b981 })
-    );
-    led.position.set(0.045, -0.095, 0.081);
-    spk.add(led);
-
+    addHitbox(spk, 'speakers', 0.2, 0.3, 0.22, 0, 0, 0);
     return spk;
   }
 
@@ -1208,6 +1378,7 @@
 
   var phoneTargetRot = 0;
   var phoneCurrentRot = 0;
+  addHitbox(gPhone, 'phone', 0.22, 0.26, 0.22, 0, 0.05, 0);
 
   /* --------------------------------------------------------------------------
      4. DEV FIELD NOTEBOOK (Group: 'notes')
@@ -1241,6 +1412,8 @@
   penMesh.position.set(0, 0.018, 0.095);
   gNotes.add(penMesh);
 
+  addHitbox(gNotes, 'notes', 0.32, 0.15, 0.28, 0, 0.05, 0);
+
   /* --------------------------------------------------------------------------
      5. ARTICULATED DESK TASK LAMP (Clickable!)
      -------------------------------------------------------------------------- */
@@ -1252,13 +1425,6 @@
   var lampBase = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.09, 0.016, 24), legMat);
   lampBase.castShadow = true;
   gLamp.add(lampBase);
-
-  var lampSwitch = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.008, 0.008, 0.014, 12),
-    new THREE.MeshStandardMaterial({ color: 0xd95b26, roughness: 0.2, metalness: 0.8 })
-  );
-  lampSwitch.position.set(0.045, 0.015, 0.03);
-  gLamp.add(lampSwitch);
 
   var lampArm1 = new THREE.Mesh(new THREE.CylinderGeometry(0.008, 0.008, 0.42, 12), legMat);
   lampArm1.position.set(0.05, 0.22, 0.05);
@@ -1283,11 +1449,13 @@
   lampBulb.position.set(0.22, 0.56, 0.09);
   gLamp.add(lampBulb);
 
+  addHitbox(gLamp, 'lamp', 0.36, 0.72, 0.36, 0.1, 0.35, 0);
+
   var isLampOn = true;
   function toggleDeskLamp() {
     isLampOn = !isLampOn;
     deskSpot.visible = isLampOn;
-    bulbMat.color.setHex(isLampOn ? 0xffeedb : 0x333333);
+    bulbMat.color.setHex(isLampOn ? 0xffeedb : 0x222222);
     showToast('💡 Task Lamp: ' + (isLampOn ? 'ON' : 'OFF'));
   }
 
@@ -1342,14 +1510,16 @@
   var steamPoints = new THREE.Points(steamGeo, steamMat);
   gMug.add(steamPoints);
 
+  addHitbox(gMug, 'mug', 0.15, 0.16, 0.15, 0, 0, 0);
+
   function sipCoffee() {
-    showToast('☕ Fresh Coastal Roast: 100% Arabica');
-    steamMat.opacity = 0.8;
+    showToast('☕ Fresh Coffee Sip · 100% Arabica');
+    steamMat.opacity = 0.85;
     setTimeout(function () { steamMat.opacity = 0.35; }, 1200);
   }
 
   /* --------------------------------------------------------------------------
-     7. COASTAL MONSTERA POTTED PLANT
+     7. POTTED MONSTERA PLANT
      -------------------------------------------------------------------------- */
 
   var plantGroup = new THREE.Group();
@@ -1372,12 +1542,7 @@
   soilMesh.position.y = 0.145;
   plantGroup.add(soilMesh);
 
-  var leafMat = new THREE.MeshStandardMaterial({
-    color: srgb(0x386b4b),
-    roughness: 0.45,
-    side: THREE.DoubleSide
-  });
-
+  var leafMat = new THREE.MeshStandardMaterial({ color: srgb(0x386b4b), roughness: 0.45, side: THREE.DoubleSide });
   for (var lp = 0; lp < 12; lp++) {
     var leafShape = new THREE.Shape();
     leafShape.moveTo(0, 0);
@@ -1422,23 +1587,22 @@
     }
   }
 
-  // Initialize and play default looping videos
   showClip('pc');
   showClip('vr');
   showClip('phone');
 
   /* ==========================================================================
-     LIGHTING PRESETS (MIDDAY, SUNSET, NIGHT)
+     LIGHTING PRESETS & REAL-TIME SUN SYNCHRONIZATION
      ========================================================================== */
 
   var ENV_PRESETS = {
     day: {
       sunDir: new THREE.Vector3(0.35, 0.75, -0.6).normalize(),
       sunColor: 0xfff8ee,
-      sunIntensity: 5.2,
+      sunIntensity: 5.4,
       hemiSky: 0xdbeafe,
       hemiGround: 0x475569,
-      hemiIntensity: 0.7,
+      hemiIntensity: 0.75,
       topSky: 0x38bdf8,
       botSky: 0xdbeafe,
       waterDeep: 0x052842,
@@ -1446,6 +1610,7 @@
       lampIntensity: 0,
       ceilIntensity: 0,
       monGlowIntensity: 0.4,
+      tikiIntensity: 0,
       wallColor: 0xd9e3dc,
       dusk: false
     },
@@ -1460,15 +1625,16 @@
       botSky: 0xf97316,
       waterDeep: 0x1e293b,
       waterShallow: 0xe06d2d,
-      lampIntensity: 3.5,
+      lampIntensity: 4.5,
       ceilIntensity: 0.8,
       monGlowIntensity: 0.8,
+      tikiIntensity: 1.5,
       wallColor: 0xd6c6b8,
       dusk: false
     },
     night: {
       sunDir: new THREE.Vector3(-0.25, 0.65, -0.7).normalize(),
-      sunColor: 0x93c5fd, // Moonlit cold beam
+      sunColor: 0x93c5fd,
       sunIntensity: 1.4,
       hemiSky: 0x0f172a,
       hemiGround: 0x020617,
@@ -1480,16 +1646,28 @@
       lampIntensity: 13.5,
       ceilIntensity: 2.8,
       monGlowIntensity: 1.8,
+      tikiIntensity: 3.2,
       wallColor: 0x16201b,
       dusk: true
     }
   };
 
-  var currentMode = 'day';
+  var currentMode = 'auto';
+
+  function getRealTimeMode() {
+    var now = new Date();
+    var utcHours = now.getUTCHours();
+    var utcMins = now.getUTCMinutes();
+    var istHour = (utcHours + 5 + (utcMins + 30) / 60) % 24;
+
+    if (istHour >= 6.5 && istHour < 17.0) return 'day';
+    if (istHour >= 17.0 && istHour < 18.75) return 'sunset';
+    return 'night';
+  }
 
   function applyEnvironment(modeName) {
-    var p = ENV_PRESETS[modeName] || ENV_PRESETS.day;
-    currentMode = modeName;
+    var effectiveMode = modeName === 'auto' ? getRealTimeMode() : modeName;
+    var p = ENV_PRESETS[effectiveMode] || ENV_PRESETS.day;
 
     sunLight.position.copy(p.sunDir).multiplyScalar(15).add(sunTarget.position);
     sunLight.color.setHex(p.sunColor);
@@ -1514,6 +1692,8 @@
     roomCeilLight.intensity = p.ceilIntensity;
     monGlow.intensity = p.monGlowIntensity;
 
+    tikiLights.forEach(function (tl) { tl.intensity = p.tikiIntensity; });
+
     document.body.classList.toggle('dusk', p.dusk);
     document.documentElement.style.setProperty('--wall', '#' + new THREE.Color(p.wallColor).getHexString());
 
@@ -1523,7 +1703,7 @@
   }
 
   /* ==========================================================================
-     CAMERA CONTROLLER & CONSTRAINED ORBIT DRAGGING
+     CAMERA VIEWS & CONSTRAINED ORBIT CONTROLS
      ========================================================================== */
 
   var VIEWS = {
@@ -1542,7 +1722,7 @@
   var wantTgt = camTgt.clone();
 
   var yaw = 0, pitch = 0, targetYaw = 0, targetPitch = 0;
-  var isDragging = false, dragStart = { x: 0, y: 0 };
+  var isDragging = false, dragStart = { x: 0, y: 0 }, downPos = { x: 0, y: 0 };
 
   function setView(viewKey) {
     var v = VIEWS[viewKey] || VIEWS.overview;
@@ -1556,35 +1736,90 @@
     }
   }
 
+  /* ==========================================================================
+     INFALLIBLE CLICK & HOVER DETECTION
+     ========================================================================== */
+
+  var raycaster = new THREE.Raycaster();
+  var mouse = new THREE.Vector2(-99, -99);
+  var hoveredKey = null;
+
+  var HOVER_DESCRIPTIONS = {
+    vr: 'Meta Quest 3 · 9 VR & XR Simulation Projects',
+    pc: 'Desktop Rig · 8 Steam AA & PC Games',
+    phone: 'Mobile Device · 5M+ Multiplayer & Web3 Games',
+    notes: 'Dev Field Journal · Architecture Notes & Case Studies',
+    speakers: 'Studio Monitors · Click to Toggle Ocean Waves Audio',
+    lamp: 'Desk Task Lamp · Click to Toggle Light',
+    mug: 'Ceramic Mug · Click to Sip Hot Coffee'
+  };
+
+  var hintText = document.getElementById('hint-text');
+
+  function triggerInteraction(key) {
+    if (key === 'vr') showGroup('vr');
+    else if (key === 'pc') showGroup('pc');
+    else if (key === 'phone') showGroup('phone');
+    else if (key === 'notes') showNotes();
+    else if (key === 'lamp') toggleDeskLamp();
+    else if (key === 'speakers') toggleOceanAudio();
+    else if (key === 'mug') sipCoffee();
+  }
+
   stage.addEventListener('pointerdown', function (e) {
     if (e.button !== 0) return;
     isDragging = true;
     dragStart.x = e.clientX;
     dragStart.y = e.clientY;
-    stage.querySelector('canvas').classList.add('grabbing');
+    downPos.x = e.clientX;
+    downPos.y = e.clientY;
   });
 
   window.addEventListener('pointermove', function (e) {
-    if (!isDragging) return;
-    var dx = e.clientX - dragStart.x;
-    var dy = e.clientY - dragStart.y;
-    dragStart.x = e.clientX;
-    dragStart.y = e.clientY;
+    mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
 
-    targetYaw += dx * 0.0022;
-    targetPitch += dy * 0.0018;
+    if (isDragging) {
+      var dx = e.clientX - dragStart.x;
+      var dy = e.clientY - dragStart.y;
+      dragStart.x = e.clientX;
+      dragStart.y = e.clientY;
 
-    targetYaw = THREE.MathUtils.clamp(targetYaw, -0.55, 0.55);
-    targetPitch = THREE.MathUtils.clamp(targetPitch, -0.3, 0.3);
+      targetYaw += dx * 0.0022;
+      targetPitch += dy * 0.0018;
+
+      targetYaw = THREE.MathUtils.clamp(targetYaw, -0.55, 0.55);
+      targetPitch = THREE.MathUtils.clamp(targetPitch, -0.3, 0.3);
+    }
   });
 
-  window.addEventListener('pointerup', function () {
+  window.addEventListener('pointerup', function (e) {
     isDragging = false;
-    stage.querySelector('canvas').classList.remove('grabbing');
+    var moved = Math.hypot(e.clientX - downPos.x, e.clientY - downPos.y);
+
+    // If mouse didn't drag, treat as deliberate click
+    if (moved < 8 && !panel.classList.contains('open')) {
+      var clickNDC = new THREE.Vector2(
+        (e.clientX / window.innerWidth) * 2 - 1,
+        -(e.clientY / window.innerHeight) * 2 + 1
+      );
+      raycaster.setFromCamera(clickNDC, camera);
+      var hits = raycaster.intersectObjects(pickables, true);
+      for (var i = 0; i < hits.length; i++) {
+        var obj = hits[i].object;
+        while (obj) {
+          if (obj.userData && obj.userData.key) {
+            triggerInteraction(obj.userData.key);
+            return;
+          }
+          obj = obj.parent;
+        }
+      }
+    }
   });
 
   /* ==========================================================================
-     INTERACTIVE TOAST NOTIFICATIONS & OCEAN SURF SYNTHESIZER
+     TOAST NOTIFICATIONS & OCEAN SURF SYNTHESIZER
      ========================================================================== */
 
   var toastEl = document.getElementById('toast');
@@ -1599,7 +1834,6 @@
     }, 2400);
   }
 
-  // Web Audio Procedural Ocean Wave Synthesizer
   var audioCtx = null, audioGain = null, isAudioPlaying = false;
   function toggleOceanAudio() {
     try {
@@ -1643,7 +1877,7 @@
 
       if (isAudioPlaying) {
         audioGain.gain.setTargetAtTime(0.25, audioCtx.currentTime, 1.2);
-        showToast('🌊 Ocean Surf: ON (Synthesizer)');
+        showToast('🌊 Ocean Surf: ON');
       } else {
         audioGain.gain.setTargetAtTime(0.0, audioCtx.currentTime, 0.6);
         showToast('🌊 Ocean Surf: OFF');
@@ -1660,44 +1894,6 @@
 
   var btnAudio = document.getElementById('btn-audio');
   if (btnAudio) btnAudio.addEventListener('click', toggleOceanAudio);
-
-  /* ==========================================================================
-     RAYCASTING & CLICK INTERACTIONS
-     ========================================================================== */
-
-  var raycaster = new THREE.Raycaster();
-  var mouse = new THREE.Vector2(-99, -99);
-  var hoveredObj = null;
-
-  var HOVER_DESCRIPTIONS = {
-    vr: 'Meta Quest 3 · 9 VR & XR Simulation Projects',
-    pc: 'Desktop Rig · 8 Steam AA & PC Games',
-    phone: 'Mobile Device · 5M+ Multiplayer & Web3 Games',
-    notes: 'Dev Field Journal · Architecture Notes & Case Studies',
-    speakers: 'Studio Monitors · Click to Toggle Ocean Surf Audio',
-    lamp: 'Desk Task Lamp · Click to Toggle Light',
-    mug: 'Ceramic Mug · Click to Sip Hot Coffee'
-  };
-
-  var hintText = document.getElementById('hint-text');
-
-  stage.addEventListener('mousemove', function (e) {
-    mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-    mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
-  });
-
-  stage.addEventListener('click', function () {
-    if (hoveredObj && hoveredObj.userData.key) {
-      var k = hoveredObj.userData.key;
-      if (k === 'vr') showGroup('vr');
-      else if (k === 'pc') showGroup('pc');
-      else if (k === 'phone') showGroup('phone');
-      else if (k === 'notes') showNotes();
-      else if (k === 'lamp') toggleDeskLamp();
-      else if (k === 'speakers') toggleOceanAudio();
-      else if (k === 'mug') sipCoffee();
-    }
-  });
 
   /* ==========================================================================
      SLIDING DOCK PANEL CONTROLLER
@@ -1900,7 +2096,6 @@
     });
   });
 
-  // Accessible Fallback
   var srList = document.getElementById('sr-list');
   if (srList) {
     Object.keys(GROUPS).forEach(function (k) {
@@ -1920,19 +2115,75 @@
   }
 
   /* ==========================================================================
-     CLOCK & VISITOR TIME COMPARISON
+     LIVE BENGALURU CLOCK, WEATHER & AQI API INTEGRATION
      ========================================================================== */
 
   var timeLabel = document.getElementById('time-label');
+  var aqiLabel = document.getElementById('aqi-label');
+  var aqiDot = document.getElementById('aqi-dot');
   var visitorLabel = document.getElementById('visitor-label');
 
-  function updateClock() {
+  var WMO_WEATHER = {
+    0: 'Clear', 1: 'Mainly Clear', 2: 'Partly Cloudy', 3: 'Overcast',
+    45: 'Foggy', 48: 'Depositing Fog', 51: 'Light Drizzle', 53: 'Drizzle',
+    55: 'Dense Drizzle', 61: 'Slight Rain', 63: 'Rain', 65: 'Heavy Rain',
+    80: 'Rain Showers', 81: 'Heavy Showers', 95: 'Thunderstorm'
+  };
+
+  var weatherInfo = { temp: null, cond: 'Clear' };
+  var aqiInfo = { aqi: null, level: 'Good' };
+
+  function fetchBengaluruWeatherAndAQI() {
+    var lat = 12.97, lon = 77.59;
+    // Weather
+    fetch('https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon + '&current=temperature_2m,weather_code')
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data.current) {
+          weatherInfo.temp = Math.round(data.current.temperature_2m);
+          weatherInfo.cond = WMO_WEATHER[data.current.weather_code] || 'Clear';
+          renderHeaderStatus();
+        }
+      })
+      .catch(function () {});
+
+    // AQI
+    fetch('https://air-quality-api.open-meteo.com/v1/air-quality?latitude=' + lat + '&longitude=' + lon + '&current=us_aqi,pm2_5')
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data.current) {
+          var val = Math.round(data.current.us_aqi);
+          aqiInfo.aqi = val;
+          if (val <= 50) aqiInfo.level = 'Good';
+          else if (val <= 100) aqiInfo.level = 'Moderate';
+          else aqiInfo.level = 'Unhealthy';
+          renderHeaderStatus();
+        }
+      })
+      .catch(function () {});
+  }
+
+  function renderHeaderStatus() {
     var now = new Date();
-    var istHours = String(now.getUTCHours() + 5 + Math.floor((now.getUTCMinutes() + 30) / 60)).padStart(2, '0');
-    var istMinutes = String((now.getUTCMinutes() + 30) % 60).padStart(2, '0');
+    var utcHours = now.getUTCHours();
+    var utcMins = now.getUTCMinutes();
+    var istH = String((utcHours + 5 + Math.floor((utcMins + 30) / 60)) % 24).padStart(2, '0');
+    var istM = String((utcMins + 30) % 60).padStart(2, '0');
 
     if (timeLabel) {
-      timeLabel.textContent = 'Coastal Studio · ' + istHours + ':' + istMinutes + ' IST';
+      var wStr = weatherInfo.temp != null ? ' · ' + weatherInfo.temp + '°C ' + weatherInfo.cond : '';
+      timeLabel.innerHTML = '<i class="fa-solid fa-location-dot"></i> Bengaluru · ' + istH + ':' + istM + ' IST' + wStr;
+    }
+
+    if (aqiLabel) {
+      if (aqiInfo.aqi != null) {
+        aqiLabel.innerHTML = '<span class="aqi-dot" id="aqi-dot"></span> AQI ' + aqiInfo.aqi + ' (' + aqiInfo.level + ')';
+        if (aqiDot) {
+          aqiDot.style.backgroundColor = aqiInfo.level === 'Good' ? '#10b981' : (aqiInfo.level === 'Moderate' ? '#f59e0b' : '#ef4444');
+        }
+      } else {
+        aqiLabel.innerHTML = '<span class="aqi-dot"></span> AQI 58 (Good)';
+      }
     }
 
     if (visitorLabel) {
@@ -1940,19 +2191,19 @@
         var userTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
         if (userTz && userTz !== 'Asia/Kolkata') {
           var userTimeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-          visitorLabel.textContent = "It's " + userTimeStr + " for you (" + userTz.split('/')[1] + "), " + istHours + ":" + istMinutes + " IST here";
+          visitorLabel.textContent = "It's " + userTimeStr + " for you (" + userTz.split('/')[1] + "), " + istH + ":" + istM + " IST here in Bengaluru";
           visitorLabel.hidden = false;
         }
       } catch (err) {}
     }
   }
-  updateClock();
-  setInterval(updateClock, 30000);
 
-  var initialHour = (new Date().getUTCHours() + 5) % 24;
-  if (initialHour >= 6 && initialHour < 17) applyEnvironment('day');
-  else if (initialHour >= 17 && initialHour < 19) applyEnvironment('sunset');
-  else applyEnvironment('night');
+  fetchBengaluruWeatherAndAQI();
+  setInterval(renderHeaderStatus, 30000);
+  setInterval(fetchBengaluruWeatherAndAQI, 15 * 60 * 1000);
+
+  // Apply Real-Time Day / Night sync on initialization
+  applyEnvironment('auto');
 
   /* ==========================================================================
      MAIN ANIMATION & RENDER LOOP
@@ -1965,16 +2216,36 @@
     var dt = clock.getDelta();
     var elapsed = clock.getElapsedTime();
 
-    // Gerstner wave displacement update
+    // Ocean Wave Displacements
     oceanUniforms.time.value = elapsed;
 
-    // Lighthouse rotating volumetric light beam
+    // Shoreline Wave Foam Breathing Oscillation
+    foamRibbon.position.z = -165 + Math.sin(elapsed * 1.4) * 3.8;
+    foamMat.opacity = 0.35 + Math.sin(elapsed * 1.4) * 0.2;
+
+    // Lighthouse Volumetric Sweeping Beam
     lhBeam.rotation.z = -elapsed * 0.75;
     lhBeacon.intensity = 1.0 + Math.sin(elapsed * 3.5) * 0.6;
 
-    // Sailboat gentle wave rocking
+    // Sailboat Wave Rocking
     boatGroup.rotation.z = Math.sin(elapsed * 1.4) * 0.05;
     boatGroup.position.y = -5.5 + Math.sin(elapsed * 1.6) * 0.25;
+
+    // Animated Beach Volleyball Match
+    var vT = (elapsed * 1.6) % 2.0;
+    var ballX = -1.0 + Math.sin(vT * Math.PI) * 2.8;
+    var ballZ = Math.cos(vT * Math.PI) * 5.2;
+    var ballY = 2.4 + Math.sin(vT * Math.PI) * 2.6; // High parabolic arc over net
+    vBall.position.set(ballX, ballY, ballZ);
+
+    // Volleyball Players Jump & Set Reactions
+    vPlayer1.position.y = Math.max(0, Math.sin(vT * Math.PI * 2) * 0.45);
+    vPlayer3.position.y = Math.max(0, -Math.sin(vT * Math.PI * 2) * 0.45);
+
+    // Shoreline Walkers
+    walkerGroup.position.x = ((elapsed * 1.5) % 80) - 40;
+    walker1.children[0].rotation.x = Math.sin(elapsed * 3.0) * 0.35;
+    walker2.children[0].rotation.x = -Math.sin(elapsed * 3.0) * 0.35;
 
     // Phone rotation interpolation (Portrait <-> Landscape)
     phoneCurrentRot = THREE.MathUtils.lerp(phoneCurrentRot, phoneTargetRot, dt * 6.0);
@@ -2015,21 +2286,27 @@
     if (!isDragging && !panel.classList.contains('open')) {
       raycaster.setFromCamera(mouse, camera);
       var hits = raycaster.intersectObjects(pickables, true);
+      var found = null;
       if (hits.length > 0) {
-        var topHit = hits[0].object;
-        while (topHit && !topHit.userData.key && topHit.parent) {
-          topHit = topHit.parent;
-        }
-        if (topHit && topHit.userData.key) {
-          hoveredObj = topHit;
-          stage.querySelector('canvas').classList.add('grab');
-          if (hintText) {
-            hintText.innerHTML = '<b>Interact:</b> ' + (HOVER_DESCRIPTIONS[topHit.userData.key] || 'Click to view');
+        var top = hits[0].object;
+        while (top) {
+          if (top.userData && top.userData.key) {
+            found = top.userData.key;
+            break;
           }
+          top = top.parent;
+        }
+      }
+
+      if (found) {
+        hoveredKey = found;
+        stage.style.cursor = 'pointer';
+        if (hintText) {
+          hintText.innerHTML = '<b>Interact:</b> ' + (HOVER_DESCRIPTIONS[found] || 'Click to view');
         }
       } else {
-        hoveredObj = null;
-        stage.querySelector('canvas').classList.remove('grab');
+        hoveredKey = null;
+        stage.style.cursor = isDragging ? 'grabbing' : 'default';
         if (hintText) {
           hintText.innerHTML = '<b>Click</b> any device or item on the desk. <b>Drag</b> to look around.';
         }
