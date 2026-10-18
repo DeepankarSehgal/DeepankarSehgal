@@ -409,6 +409,81 @@ body.panel-open #env-controls {
   color: var(--accent);
   font-weight: 600;
 }
+/* ================= FLOATING 3D DEVICE PILLS ================= */
+#device-pills {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 12;
+  overflow: hidden;
+}
+
+.device-pill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--paper-trans);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--line);
+  box-shadow: 0 4px 18px rgba(18, 28, 23, 0.14), 0 1px 3px rgba(0, 0, 0, 0.06);
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+  pointer-events: auto;
+  user-select: none;
+  white-space: nowrap;
+  transition: transform 0.08s ease-out, background 0.2s, box-shadow 0.2s, opacity 0.3s, border-color 0.2s;
+  will-change: transform;
+}
+
+.device-pill:hover {
+  background: #ffffff;
+  color: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 6px 24px rgba(2, 132, 199, 0.3);
+  transform: scale(1.06) !important;
+}
+
+.device-pill .pill-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 6px rgba(2, 132, 199, 0.8);
+  animation: pulsePillDot 2s infinite ease-in-out;
+}
+
+@keyframes pulsePillDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.75); }
+}
+
+body.panel-open .device-pill {
+  opacity: 0.2;
+}
+body.panel-open .device-pill:hover {
+  opacity: 1;
+}
+
+body.dusk .device-pill {
+  background: rgba(18, 28, 23, 0.88);
+  color: #f7faf8;
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+}
+body.dusk .device-pill:hover {
+  background: #1e293b;
+  color: #38bdf8;
+  border-color: #38bdf8;
+}
 
 /* ================= SLIDING DOCK PANEL ================= */
 #panel {

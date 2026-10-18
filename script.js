@@ -174,7 +174,7 @@
       platform: 'Windows PC · AA Title Releases',
       projects: [
         {
-          clip: 'trailer',
+          clip: 'stadpc',
           name: 'Crimson Tactics: The White Banner',
           kind: 'AA Turn-Based Tactical RPG',
           blurb: 'A commercial AA tactical turn-based RPG released on Steam PC by Black March Studios. Features a grid battle system, elevation-based tactical advantages, complex spell mechanics, and responsive enemy AI.',
@@ -223,7 +223,7 @@
           tags: ['Puzzle Mechanics', 'Undo/Redo Stack', 'Steam Release', 'Level Design']
         },
         {
-          clip: 'trailer',
+          clip: 'drive',
           name: 'Vanguard: Tactical Ops & Combat AI Engine',
           kind: 'Gameplay Systems Engine',
           blurb: 'Dynamic first-person and third-person weapon handling mechanics featuring procedurally calculated recoil patterns, ballistics projectile simulation, and hierarchical state-machine enemy combatants.',
@@ -1104,7 +1104,12 @@
   var pickables = [];
   function addHitbox(parentGroup, key, w, h, d, ox, oy, oz) {
     var hbGeo = new THREE.BoxGeometry(w, h, d);
-    var hbMat = new THREE.MeshBasicMaterial({ visible: false, wireframe: true });
+    var hbMat = new THREE.MeshBasicMaterial({
+      transparent: true,
+      opacity: 0.0,
+      depthWrite: false,
+      visible: true
+    });
     var hbMesh = new THREE.Mesh(hbGeo, hbMat);
     hbMesh.position.set(ox || 0, oy || 0, oz || 0);
     hbMesh.userData.key = key;
@@ -1115,9 +1120,10 @@
 
   function registerPickable(obj, key) {
     obj.userData.key = key;
-    pickables.push(obj);
+    if (pickables.indexOf(obj) === -1) pickables.push(obj);
     obj.traverse(function (child) {
-      if (child.isMesh) child.userData.key = key;
+      child.userData.key = key;
+      if (child.isMesh && pickables.indexOf(child) === -1) pickables.push(child);
     });
     return obj;
   }
@@ -1275,10 +1281,153 @@
   monClamp.position.set(0, -0.29, -0.06);
   gPC.add(monClamp);
 
-  var monScreenMat = new THREE.MeshBasicMaterial({ color: 0xe0e0e0 });
+  var monScreenMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
   var monScreenMesh = new THREE.Mesh(new THREE.PlaneGeometry(0.855, 0.475), monScreenMat);
   monScreenMesh.position.z = 0.0135;
   gPC.add(monScreenMesh);
+
+  /* Procedural High-Tech Studio Dashboard for Deepankar Sehgal */
+  var devScreenCanvas = document.createElement('canvas');
+  devScreenCanvas.width = 1024;
+  devScreenCanvas.height = 576;
+  var devScreenCtx = devScreenCanvas.getContext('2d');
+  var devScreenTex = new THREE.CanvasTexture(devScreenCanvas);
+  devScreenTex.encoding = THREE.sRGBEncoding;
+
+  function renderDevDashboard(time) {
+    var ctx = devScreenCtx;
+    var w = 1024, h = 576;
+
+    // Dark sleek obsidian background
+    var grad = ctx.createLinearGradient(0, 0, w, h);
+    grad.addColorStop(0, '#0a1015');
+    grad.addColorStop(0.5, '#060a0d');
+    grad.addColorStop(1, '#0c141c');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, w, h);
+
+    // Subtle dev tech grid
+    ctx.strokeStyle = 'rgba(2, 132, 199, 0.07)';
+    ctx.lineWidth = 1;
+    for (var x = 0; x < w; x += 32) {
+      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+    }
+    for (var y = 0; y < h; y += 32) {
+      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
+    }
+
+    // Top IDE Title Bar
+    ctx.fillStyle = 'rgba(15, 23, 42, 0.95)';
+    ctx.fillRect(0, 0, w, 46);
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+    ctx.beginPath(); ctx.moveTo(0, 46); ctx.lineTo(w, 46); ctx.stroke();
+
+    // Mac/Linux style window controls
+    var dots = ['#ef4444', '#f59e0b', '#10b981'];
+    for (var i = 0; i < 3; i++) {
+      ctx.beginPath();
+      ctx.arc(26 + i * 20, 23, 6, 0, Math.PI * 2);
+      ctx.fillStyle = dots[i];
+      ctx.fill();
+    }
+
+    // Breadcrumb title
+    ctx.font = '600 14px "JetBrains Mono", monospace';
+    ctx.fillStyle = '#94a3b8';
+    ctx.fillText('DeepankarSehgal.unity · Senior Unity & XR Architect', 100, 28);
+
+    // Live status in header
+    var pulse = Math.sin((time || 0) * 3.5) * 0.5 + 0.5;
+    ctx.beginPath();
+    ctx.arc(830, 23, 5, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(16, 185, 129, ' + (0.5 + 0.5 * pulse) + ')';
+    ctx.fill();
+    ctx.fillStyle = '#34d399';
+    ctx.font = '600 13px "JetBrains Mono", monospace';
+    ctx.fillText('● ONLINE · BENGALURU IST', 844, 28);
+
+    // Center Hero
+    ctx.textAlign = 'center';
+
+    // Role Label
+    ctx.font = '700 16px "JetBrains Mono", monospace';
+    ctx.fillStyle = '#38bdf8';
+    ctx.fillText('SENIOR UNITY & XR DEVELOPER · 5+ YRS EXPERIENCE', w / 2, 126);
+
+    // Main Name: DEEPANKAR SEHGAL
+    ctx.font = '800 52px "Bricolage Grotesque", sans-serif';
+    ctx.fillStyle = '#ffffff';
+    ctx.shadowColor = 'rgba(56, 189, 248, 0.6)';
+    ctx.shadowBlur = 24;
+    ctx.fillText('DEEPANKAR SEHGAL', w / 2, 188);
+    ctx.shadowBlur = 0;
+
+    // Subtitle
+    ctx.font = '500 18px "Figtree", sans-serif';
+    ctx.fillStyle = '#cbd5e1';
+    ctx.fillText('Steam AA Releases · Industrial VR Simulations · High-Concurrency Multiplayer Systems', w / 2, 226);
+
+    // Accent line
+    ctx.strokeStyle = 'rgba(56, 189, 248, 0.35)';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(w / 2 - 280, 252);
+    ctx.lineTo(w / 2 + 280, 252);
+    ctx.stroke();
+
+    // Badges Row
+    var bItems = [
+      '★ 25+ Shipped Titles',
+      '★ Steam AA: Crimson Tactics',
+      '★ Meta Quest 3 VR',
+      '★ 5M+ Multiplayer (YungAlgo)'
+    ];
+    ctx.font = '600 13.5px "JetBrains Mono", monospace';
+    var bStart = (w - (bItems.length * 210)) / 2 + 105;
+    bItems.forEach(function (b, bi) {
+      var bx = bStart + bi * 210;
+      ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+      ctx.beginPath();
+      if (ctx.roundRect) ctx.roundRect(bx - 96, 275, 192, 36, 8);
+      else ctx.rect(bx - 96, 275, 192, 36);
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(56, 189, 248, 0.45)';
+      ctx.stroke();
+      ctx.fillStyle = '#38bdf8';
+      ctx.fillText(b, bx, 298);
+    });
+
+    // Tech Stack Line
+    ctx.font = '500 14px "JetBrains Mono", monospace';
+    ctx.fillStyle = '#94a3b8';
+    ctx.fillText('Unity URP/HDRP · C# Engine Systems · Photon Netcode · NavMesh AI · Steamworks SDK', w / 2, 355);
+
+    // Call to Action Glowing Button
+    var ctaGlow = 0.82 + 0.18 * Math.sin((time || 0) * 4);
+    ctx.fillStyle = 'rgba(2, 132, 199, ' + ctaGlow + ')';
+    ctx.beginPath();
+    if (ctx.roundRect) ctx.roundRect(w / 2 - 290, 400, 580, 54, 12);
+    else ctx.rect(w / 2 - 290, 400, 580, 54);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+    ctx.stroke();
+
+    ctx.font = '700 17px "Figtree", sans-serif';
+    ctx.fillStyle = '#ffffff';
+    ctx.fillText('▶ CLICK MONITOR OR VR HEADSET TO EXPLORE CASE STUDIES', w / 2, 434);
+
+    // Bottom telemetry footer
+    ctx.font = '500 12.5px "JetBrains Mono", monospace';
+    ctx.fillStyle = '#64748b';
+    ctx.fillText('LOCATION: BENGALURU, INDIA · STATUS: AVAILABLE FOR SENIOR & LEAD ROLES', w / 2, 492);
+
+    ctx.textAlign = 'left';
+    devScreenTex.needsUpdate = true;
+  }
+
+  renderDevDashboard(0);
+  monScreenMat.map = devScreenTex;
+  monScreenMat.needsUpdate = true;
 
   // Large PC Hitbox encompassing monitor and arm
   addHitbox(gPC, 'pc', 0.94, 0.56, 0.25, 0, 0, 0);
@@ -1559,6 +1708,31 @@
     plantGroup.add(leafM);
   }
 
+  /* Tag all pickable groups and children meshes recursively */
+  function tagPickableTree(grp, key) {
+    if (!grp) return;
+    grp.userData.key = key;
+    if (pickables.indexOf(grp) === -1) pickables.push(grp);
+    grp.traverse(function (child) {
+      child.userData.key = key;
+      if (child.isMesh && pickables.indexOf(child) === -1) {
+        pickables.push(child);
+      }
+    });
+  }
+
+  tagPickableTree(gVR, 'vr');
+  tagPickableTree(gWallTV, 'vr');
+  tagPickableTree(gPC, 'pc');
+  tagPickableTree(kbGroup, 'pc');
+  tagPickableTree(mouseGroup, 'pc');
+  tagPickableTree(gPhone, 'phone');
+  tagPickableTree(gNotes, 'notes');
+  tagPickableTree(gLamp, 'lamp');
+  tagPickableTree(gMug, 'mug');
+  tagPickableTree(spkLeft, 'speakers');
+  tagPickableTree(spkRight, 'speakers');
+
   /* ==========================================================================
      CONTINUOUS VIDEO SYNCHRONIZATION
      ========================================================================== */
@@ -1566,7 +1740,7 @@
   function showClip(groupKey) {
     if (groupKey === 'pc') {
       var p = GROUPS.pc.projects[showing.pc];
-      var c = clip(p ? p.clip : 'trailer');
+      var c = clip(p ? p.clip : 'stadpc');
       monScreenMat.map = c.tex;
       monScreenMat.needsUpdate = true;
       playVideo(c.video);
@@ -1587,7 +1761,7 @@
     }
   }
 
-  showClip('pc');
+  // VR & Phone play background video loops; PC monitor displays custom Dev Dashboard at start!
   showClip('vr');
   showClip('phone');
 
@@ -1756,66 +1930,148 @@
 
   var hintText = document.getElementById('hint-text');
 
-  function triggerInteraction(key) {
-    if (key === 'vr') showGroup('vr');
-    else if (key === 'pc') showGroup('pc');
-    else if (key === 'phone') showGroup('phone');
-    else if (key === 'notes') showNotes();
-    else if (key === 'lamp') toggleDeskLamp();
-    else if (key === 'speakers') toggleOceanAudio();
-    else if (key === 'mug') sipCoffee();
+  function getHitKey(clientX, clientY) {
+    var rect = renderer.domElement.getBoundingClientRect();
+    var x = ((clientX - rect.left) / rect.width) * 2 - 1;
+    var y = -((clientY - rect.top) / rect.height) * 2 + 1;
+
+    camera.updateMatrixWorld(true);
+    raycaster.setFromCamera({ x: x, y: y }, camera);
+    var hits = raycaster.intersectObjects(pickables, true);
+    if (!hits || !hits.length) return null;
+
+    for (var i = 0; i < hits.length; i++) {
+      var cur = hits[i].object;
+      while (cur && cur !== scene) {
+        if (cur.userData && cur.userData.key) {
+          return cur.userData.key;
+        }
+        cur = cur.parent;
+      }
+    }
+    return null;
   }
 
-  stage.addEventListener('pointerdown', function (e) {
+  function triggerInteraction(key) {
+    if (!key) return;
+    if (key === 'vr') {
+      if (currentPanel === 'vr' && panel.classList.contains('open')) {
+        var next = (showing.vr + 1) % GROUPS.vr.projects.length;
+        showProjectDetail(next);
+        showToast('Meta Quest 3: ' + GROUPS.vr.projects[next].name);
+      } else {
+        showGroup('vr');
+      }
+    } else if (key === 'pc') {
+      if (currentPanel === 'pc' && panel.classList.contains('open')) {
+        var next = (showing.pc + 1) % GROUPS.pc.projects.length;
+        showProjectDetail(next);
+        showToast('Steam PC: ' + GROUPS.pc.projects[next].name);
+      } else {
+        showGroup('pc');
+      }
+    } else if (key === 'phone') {
+      if (currentPanel === 'phone' && panel.classList.contains('open')) {
+        var next = (showing.phone + 1) % GROUPS.phone.projects.length;
+        showProjectDetail(next);
+        showToast('Mobile: ' + GROUPS.phone.projects[next].name);
+      } else {
+        showGroup('phone');
+      }
+    } else if (key === 'notes') {
+      showNotes();
+    } else if (key === 'lamp') {
+      toggleDeskLamp();
+    } else if (key === 'speakers') {
+      toggleOceanAudio();
+    } else if (key === 'mug') {
+      sipCoffee();
+    }
+  }
+
+  var cv = renderer.domElement;
+  cv.classList.add('grab');
+
+  var isPointerDown = false;
+  var downX = 0, downY = 0;
+  var downTime = 0;
+  var dragDistance = 0;
+
+  cv.addEventListener('pointerdown', function (e) {
     if (e.button !== 0) return;
-    isDragging = true;
+    isPointerDown = true;
+    downX = e.clientX;
+    downY = e.clientY;
+    downTime = performance.now();
+    dragDistance = 0;
     dragStart.x = e.clientX;
     dragStart.y = e.clientY;
-    downPos.x = e.clientX;
-    downPos.y = e.clientY;
+    try { cv.setPointerCapture(e.pointerId); } catch (err) {}
   });
 
   window.addEventListener('pointermove', function (e) {
-    mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-    mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    var rect = renderer.domElement.getBoundingClientRect();
+    mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
 
-    if (isDragging) {
+    if (isPointerDown) {
       var dx = e.clientX - dragStart.x;
       var dy = e.clientY - dragStart.y;
+      dragDistance += Math.hypot(dx, dy);
       dragStart.x = e.clientX;
       dragStart.y = e.clientY;
 
-      targetYaw += dx * 0.0022;
-      targetPitch += dy * 0.0018;
-
-      targetYaw = THREE.MathUtils.clamp(targetYaw, -0.55, 0.55);
-      targetPitch = THREE.MathUtils.clamp(targetPitch, -0.3, 0.3);
+      if (dragDistance > 6) {
+        cv.classList.add('grabbing');
+        targetYaw = THREE.MathUtils.clamp(targetYaw + dx * 0.0022, -0.55, 0.55);
+        targetPitch = THREE.MathUtils.clamp(targetPitch + dy * 0.0018, -0.30, 0.30);
+      }
     }
   });
 
-  window.addEventListener('pointerup', function (e) {
-    isDragging = false;
-    var moved = Math.hypot(e.clientX - downPos.x, e.clientY - downPos.y);
+  function onPointerRelease(e) {
+    if (!isPointerDown) return;
+    isPointerDown = false;
+    cv.classList.remove('grabbing');
+    try { cv.releasePointerCapture(e.pointerId); } catch (err) {}
 
-    // If mouse didn't drag, treat as deliberate click
-    if (moved < 8 && !panel.classList.contains('open')) {
-      var clickNDC = new THREE.Vector2(
-        (e.clientX / window.innerWidth) * 2 - 1,
-        -(e.clientY / window.innerHeight) * 2 + 1
-      );
-      raycaster.setFromCamera(clickNDC, camera);
-      var hits = raycaster.intersectObjects(pickables, true);
-      for (var i = 0; i < hits.length; i++) {
-        var obj = hits[i].object;
-        while (obj) {
-          if (obj.userData && obj.userData.key) {
-            triggerInteraction(obj.userData.key);
-            return;
-          }
-          obj = obj.parent;
-        }
+    var elapsed = performance.now() - downTime;
+    // Deliberate click if moved less than 20px and took less than 650ms
+    if (dragDistance < 20 && elapsed < 650) {
+      var hitKey = getHitKey(e.clientX, e.clientY);
+      if (hitKey) {
+        triggerInteraction(hitKey);
+      } else if (panel.classList.contains('open')) {
+        // If clicked outside on 3D room background while panel is open, close the panel
+        closePanel();
       }
     }
+  }
+
+  cv.addEventListener('pointerup', onPointerRelease);
+  cv.addEventListener('pointercancel', function () {
+    isPointerDown = false;
+    cv.classList.remove('grabbing');
+  });
+
+  // Secondary click handler directly on canvas
+  cv.addEventListener('click', function (e) {
+    if (dragDistance < 20) {
+      var hitKey = getHitKey(e.clientX, e.clientY);
+      if (hitKey) {
+        triggerInteraction(hitKey);
+      }
+    }
+  });
+
+  // Floating 3D Device Pills Click Handlers
+  document.querySelectorAll('.device-pill').forEach(function (pill) {
+    pill.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      var key = pill.getAttribute('data-key');
+      if (key) triggerInteraction(key);
+    });
   });
 
   /* ==========================================================================
@@ -1940,6 +2196,10 @@
     currentPanel = null;
     setView('overview');
     hint.style.opacity = '1';
+    if (monScreenMat) {
+      monScreenMat.map = devScreenTex;
+      monScreenMat.needsUpdate = true;
+    }
     pBody.querySelectorAll('video').forEach(function (v) { v.pause(); });
   }
 
@@ -2282,19 +2542,58 @@
     camera.rotation.y += yaw;
     camera.rotation.x += pitch;
 
+    camera.updateMatrixWorld(true);
+
+    // Pulse dev dashboard screen
+    if (monScreenMat && monScreenMat.map === devScreenTex) {
+      renderDevDashboard(elapsed);
+    }
+
+    // Update floating 3D device pills in screen space
+    var pillVR = document.getElementById('pill-vr');
+    var pillPC = document.getElementById('pill-pc');
+    var pillPhone = document.getElementById('pill-phone');
+    var pillNotes = document.getElementById('pill-notes');
+
+    var pList = [
+      { el: pillVR, pos: new THREE.Vector3(-0.48, DESK_Y + 0.28, -0.04) },
+      { el: pillPC, pos: new THREE.Vector3(0.35, DESK_Y + 0.58, -0.03) },
+      { el: pillPhone, pos: new THREE.Vector3(0.72, DESK_Y + 0.24, 0.02) },
+      { el: pillNotes, pos: new THREE.Vector3(-0.06, DESK_Y + 0.16, 0.24) }
+    ];
+
+    var halfW = window.innerWidth * 0.5;
+    var halfH = window.innerHeight * 0.5;
+
+    pList.forEach(function (item) {
+      if (!item.el) return;
+      var p3d = item.pos.clone().project(camera);
+      if (p3d.z > 1.0) {
+        item.el.style.display = 'none';
+      } else {
+        item.el.style.display = 'inline-flex';
+        var sx = (p3d.x * halfW) + halfW;
+        var sy = (-(p3d.y * halfH)) + halfH;
+        item.el.style.transform = 'translate(' + sx.toFixed(1) + 'px, ' + sy.toFixed(1) + 'px) translate(-50%, -100%)';
+      }
+    });
+
     // Raycast hover updates
-    if (!isDragging && !panel.classList.contains('open')) {
+    if (!isPointerDown && !panel.classList.contains('open')) {
       raycaster.setFromCamera(mouse, camera);
       var hits = raycaster.intersectObjects(pickables, true);
       var found = null;
       if (hits.length > 0) {
-        var top = hits[0].object;
-        while (top) {
-          if (top.userData && top.userData.key) {
-            found = top.userData.key;
-            break;
+        for (var hi = 0; hi < hits.length; hi++) {
+          var top = hits[hi].object;
+          while (top && top !== scene) {
+            if (top.userData && top.userData.key) {
+              found = top.userData.key;
+              break;
+            }
+            top = top.parent;
           }
-          top = top.parent;
+          if (found) break;
         }
       }
 
@@ -2306,7 +2605,7 @@
         }
       } else {
         hoveredKey = null;
-        stage.style.cursor = isDragging ? 'grabbing' : 'default';
+        stage.style.cursor = isPointerDown ? 'grabbing' : 'default';
         if (hintText) {
           hintText.innerHTML = '<b>Click</b> any device or item on the desk. <b>Drag</b> to look around.';
         }
