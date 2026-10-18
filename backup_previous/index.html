@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deepankar Sehgal · Game Catalog & Portfolio</title>
+  <meta name="description" content="Every game, XR system, and simulation Deepankar Sehgal has built, ranked. 11+ shipped titles across Unity, AR/VR, Multiplayer, Web3, and Mobile/PC.">
+  <meta name="theme-color" content="#101014">
+  
+  <!-- Google Fonts: Kanit (300, 400, 500, 600, 900) & Inter & Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Kanit:ital,wght@0,300;0,400;0,500;0,600;0,800;0,900;1,900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nasty-theme">
+
+  <!-- CANVAS REVEAL EFFECT BACKGROUND -->
+  <canvas id="canvas-reveal"></canvas>
+
+  <!-- NASTY STYLE NAVBAR -->
+  <header class="nasty-navbar">
+    <div class="nav-container">
+      <a href="#" class="brand-logo">
+        <span class="logo-bold">DEEPANKAR</span> <span class="logo-accent">· GAME CATALOG</span>
+      </a>
+
+      <nav class="nav-menu">
+        <a href="#showcase" class="nav-link" data-sound="hover"><i class="fa-solid fa-trophy"></i> Ranked Games</a>
+        <a href="#experience" class="nav-link" data-sound="hover"><i class="fa-solid fa-briefcase"></i> Experience Tiers</a>
+        <a href="#skills" class="nav-link" data-sound="hover"><i class="fa-solid fa-microchip"></i> Tech Loadout</a>
+        <a href="#about" class="nav-link" data-sound="hover"><i class="fa-solid fa-user"></i> Dev Bio</a>
+        <a href="#contact" class="nav-link" data-sound="hover"><i class="fa-solid fa-paper-plane"></i> Comms</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- AUDIO EQUALIZER TOGGLE -->
+        <button id="audio-viz-btn" class="nasty-btn audio-btn" title="Toggle Ambient Audio & SFX" data-sound="click">
+          <div class="eq-bars" id="eq-bars">
+            <span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span>
+          </div>
+          <span id="audio-btn-text">AUDIO ON</span>
+        </button>
+
+        <!-- THEME TOGGLE (DARK/LIGHT) -->
+        <button id="theme-toggle-btn" class="nasty-btn theme-btn" title="Toggle Theme" data-sound="click">
+          <i class="fa-solid fa-moon" id="theme-icon"></i>
+        </button>
+
+        <!-- ARCADE MINI-GAME BUTTON -->
+        <button id="arcade-launch-btn" class="nasty-btn arcade-btn" data-sound="click">
+          <i class="fa-solid fa-gamepad"></i> Mini-Game
+        </button>
+
+        <!-- RESUME BUTTON -->
+        <a href="assets/Deepankar_UnityDeveloper_CV.pdf" target="_blank" class="nasty-btn primary-btn" data-sound="click">
+          Resume <i class="fa-solid fa-arrow-down-long icon-small"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CATALOG WRAPPER -->
+  <main class="catalog-content">
+
+    <!-- HERO & CREATOR PROFILE SECTION -->
+    <section class="hero-section">
+      <div class="hero-wrapper">
+        <div class="creator-badge">
+          <span class="status-dot"></span> GAMING CREATOR &amp; SENIOR UNITY DEVELOPER
+        </div>
+
+        <h1 class="hero-title">
+          EVERY GAME &amp; XR SYSTEM <span class="title-highlight">DEEPANKAR</span> HAS BUILT, RANKED.
+        </h1>
+
+        <p class="hero-subtitle">
+          5+ Years of hands-on game development experience. 25+ shipped titles spanning AR/VR Enterprise Simulations, Photon Multiplayer, Web3 platforms, and Slot Games.
+        </p>
+
+        <!-- STAT PILL BADGES -->
+        <div class="stat-pills">
+          <div class="pill">
+            <span class="pill-value">5+ Yrs</span>
+            <span class="pill-label">Experience</span>
+          </div>
+          <div class="pill">
+            <span class="pill-value">25+ Games</span>
+            <span class="pill-label">Shipped</span>
+          </div>
+          <div class="pill">
+            <span class="pill-value">5M+ Players</span>
+            <span class="pill-label">Web3 Campaign</span>
+          </div>
+          <div class="pill">
+            <span class="pill-value">AA Title</span>
+            <span class="pill-label">Steam Release</span>
+          </div>
+        </div>
+
+        <!-- SEARCH & FILTER BAR SECTION -->
+        <div class="search-filter-box">
+          <div class="search-input-wrapper">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="text" id="game-search-input" placeholder="Search games by name, engine, or platform (e.g. 'VR', 'PUN2', 'Steam')..." autocomplete="off">
+            <button id="clear-search-btn" class="clear-search hidden">&times;</button>
+          </div>
+
+          <!-- FILTER PILLS -->
+          <div class="filter-pills">
+            <button class="filter-pill active" data-filter="all" data-sound="click">All Games (11)</button>
+            <button class="filter-pill" data-filter="xr" data-sound="click"><i class="fa-solid fa-vr-cardboard"></i> AR / VR &amp; XR</button>
+            <button class="filter-pill" data-filter="multiplayer" data-sound="click"><i class="fa-solid fa-network-wired"></i> Multiplayer</button>
+            <button class="filter-pill" data-filter="web3" data-sound="click"><i class="fa-brands fa-ethereum"></i> Web3</button>
+            <button class="filter-pill" data-filter="steam" data-sound="click"><i class="fa-brands fa-steam"></i> Steam &amp; PC</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- RANKED GAME SHOWCASE GRID -->
+    <section id="showcase" class="section reveal">
+      <div class="section-header-row">
+        <div>
+          <h2 class="section-kanit-title"><i class="fa-solid fa-trophy"></i> RANKED GAME SHOWCASE</h2>
+          <p class="section-subtext">Click any project card to launch full video demo &amp; technical specs.</p>
+        </div>
+        <div class="catalog-count-badge" id="catalog-count-text">Showing 11 of 11 Games</div>
+      </div>
+
+      <div class="project-grid" id="project-grid">
+
+        <!-- GAME CARD 1 -->
+        <article class="game-card" data-category="xr" data-keywords="vr simulation environment gameplay system virtual reality oculus" data-id="1" data-sound="hover">
+          <div class="card-thumb-box">
+            <span class="rank-badge rank-top1">#01 TOP RANK</span>
+            <span class="score-tag"><i class="fa-solid fa-star"></i> 9.9 / 10</span>
+            <img src="assets/xr_simulation_thumb_1785661051268.jpg" alt="Interactive VR Gameplay System" class="card-img" loading="lazy">
+            <div class="thumb-overlay">
+              <span class="play-btn-circle"><i class="fa-solid fa-play"></i></span>
+              <span class="overlay-text">INSPECT GAME</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="tag-badge xr-badge">VR SIMULATION</span>
+              <span class="platform-chip">UNITY3D • OCULUS</span>
+            </div>
+            <h3 class="card-title">Interactive VR Environment &amp; Gameplay</h3>
+            <p class="card-snippet">Immersive Virtual Reality environment navigation, physics interactions, and spatial UI.</p>
+            <div class="card-footer-tags">
+              <span>VR Physics</span><span>Spatial UI</span><span>Unity C#</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- GAME CARD 2 -->
+        <article class="game-card" data-category="steam mobile" data-keywords="crimson tactics black march studios steam pc aa title turn-based tactics" data-id="2" data-sound="hover">
+          <div class="card-thumb-box">
+            <span class="rank-badge rank-gold">#02 AA STEAM RELEASE</span>
+            <span class="score-tag"><i class="fa-solid fa-star"></i> 9.8 / 10</span>
+            <img src="https://img.youtube.com/vi/jB3Dg2dtQW0/hqdefault.jpg" alt="Crimson Tactics Steam AA Title" class="card-img" loading="lazy">
+            <div class="thumb-overlay">
+              <span class="play-btn-circle"><i class="fa-solid fa-play"></i></span>
+              <span class="overlay-text">INSPECT GAME</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="tag-badge steam-badge">AA STEAM TITLE</span>
+              <span class="platform-chip">PC • STEAM</span>
+            </div>
+            <h3 class="card-title">Crimson Tactics: White Banner</h3>
+            <p class="card-snippet">AA turn-based tactical RPG mechanics, combat spell AI, and PC Steam release.</p>
+            <div class="card-footer-tags">
+              <span>Steam PC</span><span>Tactical AI</span><span>AA Release</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- GAME CARD 3 -->
+        <article class="game-card" data-category="web3 multiplayer" data-keywords="yungalgo 5M players linea park photon pun2 playfab nft solana thirdweb" data-id="3" data-sound="hover">
+          <div class="card-thumb-box">
+            <span class="rank-badge rank-purple">#03 5M+ PLAYERS</span>
+            <span class="score-tag"><i class="fa-solid fa-star"></i> 9.7 / 10</span>
+            <img src="assets/web3_game_thumb_1785661093835.jpg" alt="YungAlgo Web3 5M Players" class="card-img" loading="lazy">
+            <div class="thumb-overlay">
+              <span class="play-btn-circle"><i class="fa-solid fa-play"></i></span>
+              <span class="overlay-text">INSPECT GAME</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="tag-badge web3-badge">WEB3 &amp; MULTIPLAYER</span>
+              <span class="platform-chip">PUN2 • PLAYFAB</span>
+            </div>
+            <h3 class="card-title">YungAlgo Web3 Multiplayer Suite</h3>
+            <p class="card-snippet">5 shippable titles scaling to 5,000,000+ users on Linea Park with Photon PUN2 &amp; PlayFab.</p>
+            <div class="card-footer-tags">
+              <span>5M Users</span><span>Solana/Linea</span><span>Photon PUN2</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- GAME CARD 4 -->
+        <article class="game-card" data-category="xr" data-keywords="simulanis xr developer oculus quest 2 3 vr ar enterprise training" data-id="4" data-sound="hover">
+          <div class="card-thumb-box">
+            <span class="rank-badge">#04 ENTERPRISE XR</span>
+            <span class="score-tag"><i class="fa-solid fa-star"></i> 9.6 / 10</span>
+            <img src="assets/xr_simulation_thumb_1785661051268.jpg" alt="Simulanis Enterprise XR Training" class="card-img" loading="lazy">
+            <div class="thumb-overlay">
+              <span class="play-btn-circle"><i class="fa-solid fa-play"></i></span>
+              <span class="overlay-text">INSPECT GAME</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="tag-badge xr-badge">AR / VR</span>
+              <span class="platform-chip">META QUEST 2/3</span>
+            </div>
+            <h3 class="card-title">Simulanis Industrial XR Simulator</h3>
+            <p class="card-snippet">Enterprise safety and procedural VR training simulations built with XR Interaction Toolkit.</p>
+            <div class="card-footer-tags">
+              <span>Meta Quest</span><span>XR Toolkit</span><span>VR Physics</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- GAME CARD 5 -->
+        <article class="game-card" data-category="xr" data-keywords="xr interaction physics spatial tracking hand tracking vr oculus" data-id="5" data-sound="hover">
+          <div class="card-thumb-box">
+            <span class="rank-badge">#05 VR PHYSICS</span>
+            <span class="score-tag"><i class="fa-solid fa-star"></i> 9.5 / 10</span>
+            <img src="https://img.youtube.com/vi/dj_jWsqDBSA/hqdefault.jpg" alt="XR Interaction Physics Demo" class="card-img" loading="lazy">
+            <div class="thumb-overlay">
+              <span class="play-btn-circle"><i class="fa-solid fa-play"></i></span>
+              <span class="overlay-text">INSPECT GAME</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="tag-badge xr-badge">AR / VR</span>
+              <span class="platform-chip">OCULUS QUEST</span>
+            </div>
+            <h3 class="card-title">XR Interaction &amp; Spatial Physics</h3>
+            <p class="card-snippet">Spatial hand-tracking, tactile object grabbing, curved canvas menus, and physics interactions.</p>
+            <div class="card-footer-tags">
+              <span>Spatial Tracking</span><span>VR Grabbing</span><span>Oculus SDK</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- GAME CARD 6 -->
+        <article class="game-card" data-category="multiplayer" data-keywords="multiplayer systems demo photon pun2 matchmaking lobby sync" data-id="6" data-sound="hover">
+          <div class="card-thumb-box">
+            <span class="rank-badge">#06 MULTIPLAYER</span>
+            <span class="score-tag"><i class="fa-solid fa-star"></i> 9.4 / 10</span>
+            <img src="https://img.youtube.com/vi/-VInUgHpBTk/hqdefault.jpg" alt="Multiplayer Systems Demo" class="card-img" loading="lazy">
+            <div class="thumb-overlay">
+              <span class="play-btn-circle"><i class="fa-solid fa-play"></i></span>
+              <span class="overlay-text">INSPECT GAME</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="tag-badge multiplayer-badge">PHOTON PUN2</span>
+              <span class="platform-chip">REALTIME NETWORKING</span>
+            </div>
+            <h3 class="card-title">Photon PUN2 Multiplayer Engine</h3>
+            <p class="card-snippet">Real-time room matchmaking, synchronized transform movement, and lag compensation.</p>
+            <div class="card-footer-tags">
+              <span>Matchmaking</span><span>State Sync</span><span>Multiplayer</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- GAME CARD 7 -->
+        <article class="game-card" data-category="mobile" data-keywords="unity project demo mobile webgl performance 60fps lighting graphics" data-id="7" data-sound="hover">
+          <div class="card-thumb-box">
+            <span class="rank-badge">#07 GRAPHICS &amp; LIGHTING</span>
+            <span class="score-tag"><i class="fa-solid fa-star"></i> 9.4 / 10</span>
+            <img src="https://img.youtube.com/vi/mf6ibnYrnAU/hqdefault.jpg" alt="Unity Environment Showcase" class="card-img" loading="lazy">
+            <div class="thumb-overlay">
+              <span class="play-btn-circle"><i class="fa-solid fa-play"></i></span>
+              <span class="overlay-text">INSPECT GAME</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="tag-badge">MOBILE &amp; PC</span>
+              <span class="platform-chip">HIGH FPS</span>
+            </div>
+            <h3 class="card-title">3D Environment Lighting Showcase</h3>
+            <p class="card-snippet">3D environment rendering, baked lighting, particle systems, and sound effects.</p>
+            <div class="card-footer-tags">
+              <span>Lighting</span><span>Optimization</span><span>Particles</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- GAME CARD 8 -->
+        <article class="game-card" data-category="mobile" data-keywords="combat ai behaviour trees weapon mechanics enemy FSM" data-id="8" data-sound="hover">
+          <div class="card-thumb-box">
+            <span class="rank-badge">#08 COMBAT AI</span>
+            <span class="score-tag"><i class="fa-solid fa-star"></i> 9.3 / 10</span>
+            <img src="https://img.youtube.com/vi/jrj3QT4mOyM/hqdefault.jpg" alt="Combat AI Demo" class="card-img" loading="lazy">
+            <div class="thumb-overlay">
+              <span class="play-btn-circle"><i class="fa-solid fa-play"></i></span>
+              <span class="overlay-text">INSPECT GAME</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="tag-badge">AI SYSTEMS</span>
+              <span class="platform-chip">GAMEPLAY LOGIC</span>
+            </div>
+            <h3 class="card-title">Enemy AI &amp; Combat Mechanics</h3>
+            <p class="card-snippet">Enemy AI state machines, weapon recoil algorithms, and responsive hit reaction mechanics.</p>
+            <div class="card-footer-tags">
+              <span>Enemy AI</span><span>FSM State</span><span>Weapon System</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- GAME CARD 9 -->
+        <article class="game-card" data-category="xr" data-keywords="ar foundation augmented reality plane detection 3d placement" data-id="9" data-sound="hover">
+          <div class="card-thumb-box">
+            <span class="rank-badge">#09 AR FOUNDATION</span>
+            <span class="score-tag"><i class="fa-solid fa-star"></i> 9.3 / 10</span>
+            <img src="assets/ar_experience_thumb_1785661079833.jpg" alt="AR Foundation Experience" class="card-img" loading="lazy">
+            <div class="thumb-overlay">
+              <span class="play-btn-circle"><i class="fa-solid fa-play"></i></span>
+              <span class="overlay-text">INSPECT GAME</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="tag-badge xr-badge">AR FOUNDATION</span>
+              <span class="platform-chip">MOBILE AR</span>
+            </div>
+            <h3 class="card-title">Mobile AR Plane Detection</h3>
+            <p class="card-snippet">Augmented reality surface detection, raycasting, and interactive 3D model placement.</p>
+            <div class="card-footer-tags">
+              <span>AR Core/Kit</span><span>Raycasting</span><span>Plane Tracking</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- GAME CARD 10 -->
+        <article class="game-card" data-category="xr" data-keywords="vr cinema drive-in irusu human anatomy pro google play 360 video" data-id="10" data-sound="hover">
+          <div class="card-thumb-box">
+            <span class="rank-badge">#10 VR CINEMA</span>
+            <span class="score-tag"><i class="fa-solid fa-star"></i> 9.2 / 10</span>
+            <img src="assets/irusu_vr_cinema_thumb.jpg" alt="Irusu VR Cinema & Educational App" class="card-img" loading="lazy">
+            <div class="thumb-overlay">
+              <span class="play-btn-circle"><i class="fa-solid fa-play"></i></span>
+              <span class="overlay-text">INSPECT GAME</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="tag-badge xr-badge">VR CINEMA</span>
+              <span class="platform-chip">GOOGLE PLAY STORE</span>
+            </div>
+            <h3 class="card-title">Irusu VR Cinema &amp; Educational App</h3>
+            <p class="card-snippet">360° video playback, drive-in theater modes, and multiplayer anatomy education app on Play Store.</p>
+            <div class="card-footer-tags">
+              <span>360° Video</span><span>Google Play</span><span>VR Theater</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- GAME CARD 11 -->
+        <article class="game-card" data-category="xr" data-keywords="vr interaction demo curved UI menu eye tracking diegetic menu" data-id="11" data-sound="hover">
+          <div class="card-thumb-box">
+            <span class="rank-badge">#11 VR CURVED UI</span>
+            <span class="score-tag"><i class="fa-solid fa-star"></i> 9.1 / 10</span>
+            <img src="assets/curved_vr_ui_thumb.jpg" alt="VR Curved UI & Interaction" class="card-img" loading="lazy">
+            <div class="thumb-overlay">
+              <span class="play-btn-circle"><i class="fa-solid fa-play"></i></span>
+              <span class="overlay-text">INSPECT GAME</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="tag-badge xr-badge">VR UI CANVAS</span>
+              <span class="platform-chip">CURVED CANVAS</span>
+            </div>
+            <h3 class="card-title">Curved VR UI &amp; Eye Selection</h3>
+            <p class="card-snippet">Diegetic VR user interfaces, curved canvas rendering, and gaze/pointer menu selection.</p>
+            <div class="card-footer-tags">
+              <span>Curved Canvas</span><span>Diegetic UI</span><span>VR Pointer</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- CAREER EXPERIENCE TIER LIST SECTION -->
+    <section id="experience" class="section reveal">
+      <div class="section-header">
+        <h2 class="section-kanit-title"><i class="fa-solid fa-layer-group"></i> CAREER EXPERIENCE TIERS</h2>
+        <p class="section-subtext">Deepankar's studio experience categorized by impact tier.</p>
+      </div>
+
+      <div class="tier-container">
+
+        <!-- S-TIER -->
+        <div class="tier-group s-tier">
+          <div class="tier-badge-side">S-TIER</div>
+          <div class="tier-cards">
+
+            <!-- ZVKY -->
+            <div class="exp-card current-tier">
+              <div class="tier-card-header">
+                <div>
+                  <h3 class="company-name">ZVKY Design Studio</h3>
+                  <div class="role-title">Unity Game Developer</div>
+                </div>
+                <span class="date-badge"><i class="fa-regular fa-calendar"></i> Apr 2026 – Present</span>
+              </div>
+              <ul class="tier-bullets">
+                <li>Architecting and developing engaging casino &amp; slot game mechanics in Unity.</li>
+                <li>Engineering reel spinning algorithms, paylines, bonus mini-games, and dynamic reward animations.</li>
+                <li>Optimizing Mobile and WebGL performance for high-frame-rate slot game releases.</li>
+              </ul>
+              <div class="tech-tags">
+                <span>Slot Games</span><span>Casino Engine</span><span>Unity3D</span><span>C#</span><span>WebGL</span>
+              </div>
+            </div>
+
+            <!-- YUNGALGO -->
+            <div class="exp-card highlight-purple">
+              <div class="tier-card-header">
+                <div>
+                  <h3 class="company-name">YungAlgo</h3>
+                  <div class="role-title">Senior Unity Game Developer</div>
+                </div>
+                <span class="date-badge"><i class="fa-regular fa-calendar"></i> Jan 2024 – Sep 2024</span>
+              </div>
+              <ul class="tier-bullets">
+                <li>Single-handedly built and launched <strong>5 full-featured games</strong> from scratch to production.</li>
+                <li>Integrated Web3 &amp; NFT SDKs (Thirdweb, Linea, Solana) for decentralized in-game assets.</li>
+                <li>Achieved viral scaling with <strong>5,000,000+ active users</strong> in 2–3 days during Linea Park.</li>
+              </ul>
+              <div class="tech-tags">
+                <span>5M Players</span><span>Photon PUN2</span><span>PlayFab</span><span>Solana/Linea</span>
+              </div>
+            </div>
+
+            <!-- BLACK MARCH -->
+            <div class="exp-card highlight-gold">
+              <div class="tier-card-header">
+                <div>
+                  <h3 class="company-name">Black March Studios</h3>
+                  <div class="role-title">Unity Game Developer (AA Title)</div>
+                </div>
+                <span class="date-badge"><i class="fa-regular fa-calendar"></i> Jul 2021 – Sep 2021</span>
+              </div>
+              <p class="subtitle-text"><em>Worked on AA Title: <strong>Crimson Tactics: The Rise of The White Banner</strong></em></p>
+              <ul class="tier-bullets">
+                <li>Programmed turn-based tactical gameplay mechanics, unit AI logic, and camera flow.</li>
+                <li>Released on PC Steam platform with positive player feedback.</li>
+              </ul>
+              <div class="exp-action-row">
+                <a href="https://store.steampowered.com/app/1480810/CrimsonTacticsTheRiseofTheWhite_Banner/" target="_blank" class="store-link steam">
+                  <i class="fa-brands fa-steam"></i> View Crimson Tactics on Steam <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- A-TIER -->
+        <div class="tier-group a-tier">
+          <div class="tier-badge-side">A-TIER</div>
+          <div class="tier-cards">
+
+            <!-- INSBYTECH -->
+            <div class="exp-card">
+              <div class="tier-card-header">
+                <div>
+                  <h3 class="company-name">Insbytech Solutions</h3>
+                  <div class="role-title">Sr. Unity Game Developer</div>
+                </div>
+                <span class="date-badge"><i class="fa-regular fa-calendar"></i> Aug 2025 – Nov 2025</span>
+              </div>
+              <ul class="tier-bullets">
+                <li>Converted complex client requirements into engaging, high-performance Unity gameplay experiences.</li>
+                <li>Optimized Mobile, VR &amp; WebGL deployment pipelines for 60+ FPS stability.</li>
+              </ul>
+            </div>
+
+            <!-- SIMULANIS -->
+            <div class="exp-card">
+              <div class="tier-card-header">
+                <div>
+                  <h3 class="company-name">Simulanis</h3>
+                  <div class="role-title">XR Developer</div>
+                </div>
+                <span class="date-badge"><i class="fa-regular fa-calendar"></i> Oct 2024 – Jul 2025</span>
+              </div>
+              <ul class="tier-bullets">
+                <li>Led development for enterprise-grade AR &amp; VR training simulations for industrial safety.</li>
+                <li>Optimized XR applications targeting Meta Oculus Quest 2/3 and Android platforms.</li>
+              </ul>
+            </div>
+
+            <!-- HAPZ -->
+            <div class="exp-card">
+              <div class="tier-card-header">
+                <div>
+                  <h3 class="company-name">Hapz Software Solution Pvt. Ltd.</h3>
+                  <div class="role-title">Unity Game Developer</div>
+                </div>
+                <span class="date-badge"><i class="fa-regular fa-calendar"></i> Jan 2022 – Dec 2023</span>
+              </div>
+              <ul class="tier-bullets">
+                <li>Developed and delivered over <strong>20+ games</strong> spanning 2D, 3D, AR/VR, and MMORPG genres.</li>
+              </ul>
+            </div>
+
+            <!-- IRUSU -->
+            <div class="exp-card">
+              <div class="tier-card-header">
+                <div>
+                  <h3 class="company-name">Irusu Technology Pvt. Ltd.</h3>
+                  <div class="role-title">Unity Game Developer</div>
+                </div>
+                <span class="date-badge"><i class="fa-regular fa-calendar"></i> Oct 2021 – Dec 2021</span>
+              </div>
+              <ul class="tier-bullets">
+                <li>Engineered multiplayer educational app &amp; VR Cinema app published on Google Play Store.</li>
+              </ul>
+              <div class="exp-action-row">
+                <a href="https://play.google.com/store/apps/details?id=com.lrusu.HumanAnatomyPro" target="_blank" class="store-link playstore">
+                  <i class="fa-brands fa-google-play"></i> View Play Store App <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SKILLS LOADOUT SECTION -->
+    <section id="skills" class="section reveal">
+      <div class="section-header-row">
+        <div>
+          <h2 class="section-kanit-title"><i class="fa-solid fa-microchip"></i> TECH LOADOUT &amp; SKILLS</h2>
+          <p class="section-subtext">Production-proven engines, frameworks, and live-ops tech.</p>
+        </div>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-card" data-sound="hover">
+          <div class="skill-icon"><i class="fa-brands fa-unity"></i></div>
+          <div class="skill-name">Unity 3D</div>
+          <div class="skill-level">Expert</div>
+        </div>
+
+        <div class="skill-card" data-sound="hover">
+          <div class="skill-icon"><i class="fa-solid fa-code"></i></div>
+          <div class="skill-name">C# Programming</div>
+          <div class="skill-level">Advanced</div>
+        </div>
+
+        <div class="skill-card" data-sound="hover">
+          <div class="skill-icon"><i class="fa-solid fa-vr-cardboard"></i></div>
+          <div class="skill-name">XR Interaction Toolkit</div>
+          <div class="skill-level">Specialist</div>
+        </div>
+
+        <div class="skill-card" data-sound="hover">
+          <div class="skill-icon"><i class="fa-solid fa-glasses"></i></div>
+          <div class="skill-name">AR / VR (Oculus / Quest)</div>
+          <div class="skill-level">Expert</div>
+        </div>
+
+        <div class="skill-card" data-sound="hover">
+          <div class="skill-icon"><i class="fa-solid fa-wifi"></i></div>
+          <div class="skill-name">Photon (PUN2)</div>
+          <div class="skill-level">Multiplayer</div>
+        </div>
+
+        <div class="skill-card" data-sound="hover">
+          <div class="skill-icon"><i class="fa-solid fa-dice"></i></div>
+          <div class="skill-name">Slot Games &amp; Casino</div>
+          <div class="skill-level">Active Role</div>
+        </div>
+
+        <div class="skill-card" data-sound="hover">
+          <div class="skill-icon"><i class="fa-solid fa-server"></i></div>
+          <div class="skill-name">PlayFab Backend</div>
+          <div class="skill-level">Live Ops</div>
+        </div>
+
+        <div class="skill-card" data-sound="hover">
+          <div class="skill-icon"><i class="fa-solid fa-fire"></i></div>
+          <div class="skill-name">Firebase</div>
+          <div class="skill-level">Backend</div>
+        </div>
+
+        <div class="skill-card" data-sound="hover">
+          <div class="skill-icon"><i class="fa-brands fa-ethereum"></i></div>
+          <div class="skill-name">Web3 (Solana/Linea)</div>
+          <div class="skill-level">Blockchain</div>
+        </div>
+
+        <div class="skill-card" data-sound="hover">
+          <div class="skill-icon"><i class="fa-brands fa-git-alt"></i></div>
+          <div class="skill-name">Git &amp; Version Control</div>
+          <div class="skill-level">Workflow</div>
+        </div>
+
+        <div class="skill-card" data-sound="hover">
+          <div class="skill-icon"><i class="fa-solid fa-bolt"></i></div>
+          <div class="skill-name">Optimization &amp; Profiling</div>
+          <div class="skill-level">High FPS</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEV BIO & INTERACTIVE CONSOLE -->
+    <section id="about" class="section reveal">
+      <div class="about-grid">
+        <div class="about-card">
+          <h3 class="card-kanit-title"><i class="fa-solid fa-terminal"></i> DEV PROFILE</h3>
+          <p class="bio-text">
+            Results-driven <strong>Senior Unity &amp; XR Developer with 5+ years of hands-on experience</strong> architecting, developing, and deploying high-performance games, slot machine mechanics, and immersive AR/VR applications.
+          </p>
+          <p class="bio-text">
+            Currently working at <strong>ZVKY Design Studio</strong> building casino slot game titles. Proven track record across <strong>25+ shipped titles</strong>, scaling to <strong>5M+ active players</strong> on Linea Park with YungAlgo, and releasing AA title <em>Crimson Tactics</em> on Steam.
+          </p>
+
+          <div class="spec-chips">
+            <span class="chip"><i class="fa-solid fa-vr-cardboard"></i> AR/VR Enterprise</span>
+            <span class="chip"><i class="fa-solid fa-dice"></i> Slot Games Engine</span>
+            <span class="chip"><i class="fa-solid fa-network-wired"></i> Photon PUN2 &amp; PlayFab</span>
+            <span class="chip"><i class="fa-brands fa-ethereum"></i> Web3 Integration</span>
+          </div>
+        </div>
+
+        <!-- INTERACTIVE CONSOLE -->
+        <div class="terminal-card">
+          <div class="terminal-bar">
+            <span><i class="fa-solid fa-terminal"></i> INTERACTIVE CONSOLE</span>
+            <span class="term-status">● ONLINE</span>
+          </div>
+          <div class="terminal-content">
+            <div class="term-output" id="term-output">
+              <p class="term-line">System initialized. Type <span class="highlight">help</span> or click command chips below:</p>
+            </div>
+            <div class="term-input-row">
+              <span class="term-prompt">DEEPANKAR.DEV &gt;</span>
+              <input type="text" id="term-input" placeholder="Type command e.g. 'help', 'projects', 'play'..." autocomplete="off">
+            </div>
+            <div class="term-quick-chips">
+              <button class="term-chip" data-cmd="skills" data-sound="click">/skills</button>
+              <button class="term-chip" data-cmd="projects" data-sound="click">/showcase</button>
+              <button class="term-chip" data-cmd="quests" data-sound="click">/experience</button>
+              <button class="term-chip" data-cmd="play" data-sound="click">/play-arcade</button>
+              <button class="term-chip" data-cmd="cv" data-sound="click">/download-cv</button>
+              <button class="term-chip" data-cmd="clear" data-sound="click">/clear</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="section reveal">
+      <div class="section-header-row">
+        <div>
+          <h2 class="section-kanit-title"><i class="fa-solid fa-paper-plane"></i> ESTABLISH COMMS</h2>
+          <p class="section-subtext">Open for contract positions, lead game developer roles, and consulting.</p>
+        </div>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-card">
+          <h3 class="card-kanit-title">Direct Channels</h3>
+          
+          <div class="channel-row">
+            <div class="channel-icon"><i class="fa-solid fa-envelope"></i></div>
+            <div class="channel-info">
+              <span class="channel-label">EMAIL ADDRESS</span>
+              <span class="channel-value" id="email-text">deepankarsehgal3@gmail.com</span>
+            </div>
+            <button class="copy-btn" id="copy-email-btn" data-sound="click">
+              <i class="fa-solid fa-copy"></i> <span id="copy-status">Copy</span>
+            </button>
+          </div>
+
+          <div class="channel-row">
+            <div class="channel-icon"><i class="fa-solid fa-phone"></i></div>
+            <div class="channel-info">
+              <span class="channel-label">PHONE / WHATSAPP</span>
+              <a href="tel:8968457228" class="channel-value">+91 8968457228</a>
+            </div>
+          </div>
+
+          <div class="channel-row">
+            <div class="channel-icon"><i class="fa-brands fa-linkedin-in"></i></div>
+            <div class="channel-info">
+              <span class="channel-label">LINKEDIN PROFILE</span>
+              <a href="https://www.linkedin.com/in/deepankar-sehgal/" target="_blank" class="channel-value">
+                linkedin.com/in/deepankar-sehgal <i class="fa-solid fa-arrow-up-right-from-square icon-small"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="channel-row">
+            <div class="channel-icon"><i class="fa-solid fa-file-pdf"></i></div>
+            <div class="channel-info">
+              <span class="channel-label">CURRICULUM VITAE</span>
+              <a href="assets/Deepankar_UnityDeveloper_CV.pdf" target="_blank" class="channel-value">
+                Download PDF Resume <i class="fa-solid fa-download icon-small"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <h3 class="card-kanit-title">Transmit Signal</h3>
+          <form id="contact-form" onsubmit="event.preventDefault(); handleFormSubmit();">
+            <div class="form-group">
+              <label>YOUR NAME</label>
+              <input type="text" id="form-name" required placeholder="Enter your callsign or name..." class="nasty-input">
+            </div>
+            <div class="form-group">
+              <label>SENDER EMAIL</label>
+              <input type="email" id="form-email" required placeholder="Enter your email..." class="nasty-input">
+            </div>
+            <div class="form-group">
+              <label>TRANSMISSION DETAILS</label>
+              <textarea id="form-message" required rows="4" placeholder="Enter message or game project details..." class="nasty-input"></textarea>
+            </div>
+            <button type="submit" class="nasty-btn primary-btn full-width" data-sound="click">
+              <i class="fa-solid fa-paper-plane"></i> Transmit Message
+            </button>
+            <div id="form-response" class="form-response"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- NASTY RICH GAME DETAIL MODAL -->
+  <div id="gameDetailModal" class="modal">
+    <div class="modal-content detail-modal-content">
+      <button class="close-btn close-detail" data-sound="click">&times;</button>
+      
+      <div class="modal-banner-box">
+        <span class="modal-rank-badge" id="m-rank">#01 TOP RANK</span>
+        <span class="modal-score-badge" id="m-score"><i class="fa-solid fa-star"></i> 9.8 / 10</span>
+        <div class="modal-media-frame">
+          <iframe id="m-video-iframe" allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <div class="modal-body-info">
+        <div class="modal-header-meta">
+          <span class="tag-badge" id="m-tag">VR SIMULATION</span>
+          <span class="platform-chip" id="m-platform">UNITY3D • OCULUS</span>
+        </div>
+        <h2 class="modal-game-title" id="m-title">Game Title</h2>
+        <p class="modal-game-desc" id="m-desc">Detailed game description and technical specs...</p>
+
+        <div class="modal-specs-box">
+          <h4><i class="fa-solid fa-microchip"></i> Key Technical Specs &amp; Mechanics:</h4>
+          <ul id="m-specs-list" class="modal-specs-list">
+            <li>High-performance C# code architecture</li>
+            <li>Optimized frame rates for VR &amp; Mobile</li>
+          </ul>
+        </div>
+
+        <div class="modal-actions-row" id="m-actions-row">
+          <a href="#" id="m-store-btn" target="_blank" class="nasty-btn primary-btn hidden">
+            <i class="fa-solid fa-up-right-from-square"></i> Open Store Link
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MULTI-GAME ARCADE HUB MODAL -->
+  <div id="arcadeModal" class="modal">
+    <div class="modal-content arcade-modal-content">
+      <button class="close-btn" id="close-arcade" data-sound="click">&times;</button>
+      
+      <div class="arcade-header">
+        <h2 class="arcade-title"><i class="fa-solid fa-gamepad"></i> MINI-GAME HUB</h2>
+        <div class="arcade-scores">
+          <div>SCORE: <span id="game-score">0</span></div>
+          <div>HIGH SCORE: <span id="game-highscore">0</span></div>
+        </div>
+      </div>
+
+      <!-- GAME SELECTOR BAR -->
+      <div class="game-select-bar">
+        <button class="game-tab-btn active" data-game="defender" data-sound="click">
+          <i class="fa-solid fa-crosshairs"></i> 1. Cyber Defender
+        </button>
+        <button class="game-tab-btn" data-game="dodger" data-sound="click">
+          <i class="fa-solid fa-bolt"></i> 2. Neon Dodger
+        </button>
+        <button class="game-tab-btn" data-game="memory" data-sound="click">
+          <i class="fa-solid fa-cubes"></i> 3. Memory Core
+        </button>
+      </div>
+
+      <div class="canvas-wrapper">
+        <canvas id="arcade-canvas" width="700" height="400"></canvas>
+        <div id="memory-game-board" class="memory-board hidden"></div>
+
+        <div id="game-over-overlay" class="game-overlay hidden">
+          <h2 id="game-over-title">GAME OVER</h2>
+          <p>FINAL SCORE: <span id="final-score">0</span></p>
+          <button id="restart-game-btn" class="nasty-btn primary-btn" data-sound="click">
+            <i class="fa-solid fa-rotate-right"></i> Play Again
+          </button>
+        </div>
+
+        <div id="game-start-overlay" class="game-overlay">
+          <h2 id="game-start-title">Cyber Defender</h2>
+          <p id="game-start-desc">Click / tap incoming bug nodes before they reach the bottom!</p>
+          <button id="start-game-btn" class="nasty-btn primary-btn" data-sound="click">
+            <i class="fa-solid fa-play"></i> Start Game
+          </button>
+        </div>
+      </div>
+
+      <div class="arcade-controls-hint">
+        <span id="game-hint-text"><i class="fa-solid fa-mouse"></i> Aim &amp; click to shoot</span>
+        <span><i class="fa-solid fa-volume-high"></i> Synthesized Audio</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NASTY STYLE FOOTER -->
+  <footer class="nasty-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <span class="logo-bold">DEEPANKAR SEHGAL</span>
+        <p class="footer-desc">Senior Unity &amp; XR Game Developer with 5+ years of experience across AR/VR, Multiplayer, and Slot Games.</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/deepankar-sehgal/" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+        <a href="https://store.steampowered.com/app/1480810/CrimsonTacticsTheRiseofTheWhite_Banner/" target="_blank"><i class="fa-brands fa-steam"></i> Steam</a>
+        <a href="https://play.google.com/store/apps/details?id=com.lrusu.HumanAnatomyPro" target="_blank"><i class="fa-brands fa-google-play"></i> Play Store</a>
+        <a href="assets/Deepankar_UnityDeveloper_CV.pdf" target="_blank"><i class="fa-solid fa-file-pdf"></i> Resume PDF</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© DEEPANKAR SEHGAL · GAME CATALOG &amp; PORTFOLIO · INSPIRED BY NASTY2X.IN</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
